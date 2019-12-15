@@ -8,6 +8,7 @@ gem 'devise', '~> 4.2'
 gem 'figaro', '~> 1.1', '>= 1.1.1'
 gem 'kaminari', '~> 1.1', '>= 1.1.1'
 gem 'omniauth-google-oauth2', '~> 0.8.0'
+gem 'acts_as_list', '~> 1.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.1'

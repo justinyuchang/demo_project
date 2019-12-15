@@ -1,0 +1,21 @@
+<% if @card.errors.any? %>
+<ul>
+  <% @card.errors.full_messages.each do |msg| %>
+  <li><%= msg %></li>
+  <% end %>
+</ul>
+<% end %>
+
+<%= form_for(card) do |form| %>
+<div>
+  <%= form.label :title %>
+  <%= form.text_field :title %>
+</div>
+<div>
+  <%= form.label :position %>
+  <%= form.number_field :position %>
+</div>
+<div>
+  <%= form.submit %>
+</div>
+<% end %>

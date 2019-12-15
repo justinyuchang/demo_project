@@ -1,0 +1,15 @@
+<div class="container mx-auto">
+
+  <h1 class="text-4xl">Card</h1>
+
+  <%= link_to 'Add card', new_card_path %>
+  <hr>
+
+  <% @cards.each do |card| %>
+  <ul>
+    <li><%= link_to card.title, list_path(card) %></li>
+    <%= link_to 'Edit', edit_card_path(card) %>
+    <%= link_to 'Delete', card_path(card), method: 'delete', data: {confirm:'Sure?'} %>
+  </ul>
+  <% end %>
+</div>
