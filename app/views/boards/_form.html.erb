@@ -1,0 +1,9 @@
+<%= form_for(board) do |f| %>
+  <%= f.label :title, "標題" %>
+  <%= f.text_field :title %> <br />
+
+  <%= f.label :visibility, "狀態" %>
+  <%= f.text_field :visibility %> <br />
+
+  <%= f.submit %>
+<% end %>
