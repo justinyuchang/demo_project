@@ -9,11 +9,8 @@ gem 'figaro', '~> 1.1', '>= 1.1.1'
 gem 'kaminari', '~> 1.1', '>= 1.1.1'
 gem 'omniauth', '~> 1.9'
 gem 'omniauth-google-oauth2', '~> 0.8.0'
-<<<<<<< HEAD
 gem 'acts_as_list', '~> 1.0'
-=======
 gem 'omniauth-facebook', '~> 5.0'
->>>>>>> add_facebook_and_google_OAuth
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.1'
