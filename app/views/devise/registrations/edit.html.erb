@@ -1,0 +1,49 @@
+<h2>變更<%= resource_name.to_s.humanize %>資料</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="field">
+    <%= f.label :email, "電子信箱" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :password, "新密碼", class: "display_in"%> <i>(密碼不想更改請空白,密碼長度不能小於6)</i>
+    <%= f.password_field :password, autocomplete: "new-password" %>
+    <!-- <% if @minimum_password_length %>
+      <br />
+      <em>密碼長度不能小於<%= @minimum_password_length %> </em>
+    <% end %> -->
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation, "在確認一次密碼" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :current_password, "請輸入舊密碼", class: "display_in" %> <i>(我們需要舊密碼來進行確認)</i>
+    <%= f.password_field :current_password, autocomplete: "current-password" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :user_avatar, "上傳使用者圖片" %>
+    <%= f.file_field :user_avatar %>
+  </div>
+
+  <div class="">
+   
+  </div>
+
+  <div class="actions">
+    <%= f.submit "帳號內容變更", class: "btn"%>
+    <%= button_to "刪除此帳號", registration_path(resource_name), data: { confirm: "你確定要刪掉?" }, method: :delete %>
+  </div>
+<% end %>
+
+<%= link_to "回上一頁", :back %>
