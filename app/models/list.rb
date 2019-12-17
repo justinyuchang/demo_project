@@ -7,6 +7,7 @@ class List < ApplicationRecord
   
   #ActiveRecord關聯設定
   has_many :cards, -> { order(position: :asc) }, dependent: :destroy 
+  belongs_to :board
 
   #scope
   scope :sorted, -> { order(position: :asc) }
