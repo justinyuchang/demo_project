@@ -7,11 +7,14 @@ class User < ApplicationRecord
   #ActiveRecord關聯設定
   has_many :user_boards
   has_many :boards, through: :user_boards
+
+  has_many :user_cards
+  has_many :cards, through: :user_cards
   
   has_one_attached :user_avatar
 
 
-  #omniauth
+  #omniauth第三方認證
   def self.from_google_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email

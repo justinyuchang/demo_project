@@ -5,6 +5,9 @@ class Card < ApplicationRecord
   #vilidates
   validates :title, presence: true
 
+  has_many :user_cards
+  has_many :users, through: :user_cards
+
   #ActiveRecord關聯設定
   belongs_to :list
 
