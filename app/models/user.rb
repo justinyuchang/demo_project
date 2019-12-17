@@ -5,6 +5,9 @@ class User < ApplicationRecord
                 :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
 
   #ActiveRecord關聯設定
+  has_many :user_boards
+  has_many :boards, through: :user_boards
+  
   has_one_attached :user_avatar
 
 
