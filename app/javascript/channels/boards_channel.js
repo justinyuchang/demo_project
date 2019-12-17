@@ -1,5 +1,5 @@
 import consumer from "./consumer"
 
-$( document ).on('turbolinks:load', function() {
+// $( document ).on('turbolinks:load', function() {
     
-})
+// })
