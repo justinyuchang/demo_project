@@ -1,24 +1,25 @@
 <h1>Board列表</h1>
 
-  <%= link_to "新增Board", new_board_path %>
+<%= link_to "新增Board", new_board_path %>
 
-  <table>
-    <thead>
+<table>
+  <thead>
+    <tr>
+      <td>Board標題</td>
+      <td>狀態</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @boards.each do |board| %>
       <tr>
-        <td>Board標題</td>
-        <td>狀態</td>
-      </tr>
-    </thead>
-    <tbody>
-      <% @boards.each do |board| %>
-      <tr>
-        <td><%= board.title %></td>
+        <td><%= link_to board.title, board_path(board.id) %></td>
         <td><%= board.visibility %></td>
         <td>
           <%= link_to "編輯", edit_board_path(board) %>
           <%= link_to "刪除", board_path(board), method: "delete", data: { confirm: "確認刪除" } %>
         </td>
       </tr>
-      <% end %>
-    </tbody>
-  </table>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to "使用者登出", destroy_user_session_path, method: "delete", data: {confirm: "要登出嘛"}%>

@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
+  #首頁
+  root "boards#index"
+
   resources :boards
   resources :lists
   resources :cards
+
+  #devise使用者登錄
   devise_for :users, controllers: {
     sessions: "users/sessions",
     registrations: "users/registrations",
