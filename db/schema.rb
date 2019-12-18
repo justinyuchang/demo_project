@@ -39,8 +39,10 @@ ActiveRecord::Schema.define(version: 2019_12_18_085803) do
   create_table "board_messages", force: :cascade do |t|
     t.string "message"
     t.bigint "user_id"
+    t.bigint "board_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["board_id"], name: "index_board_messages_on_board_id"
     t.index ["user_id"], name: "index_board_messages_on_user_id"
   end
 
