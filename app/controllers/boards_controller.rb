@@ -1,8 +1,9 @@
 class BoardsController < ApplicationController
+  #devise方法:當前使用者=> current_user
   before_action :find_board, only: [:edit, :update, :destroy, ]
 
   def index
-    @boards = Board.all
+    @boards = current_user.boards.all
   end
 
   def new
@@ -10,10 +11,13 @@ class BoardsController < ApplicationController
   end
 
   def show
+    @lists = List.new()
   end
 
   def create
+    # @board = current_user.boards.build(board_params)
     @board = Board.new(board_params)
+    @board.users = [current_user] 
 
     if @board.save
       # 成功
@@ -38,14 +42,14 @@ class BoardsController < ApplicationController
   end
 
   def destroy
-    @board.destroy if @board
+    current_user.boards.destroy(find_board)
     redirect_to boards_path, notice: "Board已刪除!"
   end
 
 
   private
   def board_params
-    params.require(:board).permit(:title, :visibility, )
+    params.require(:board).permit(:title, :visibility )
   end
 
   def find_board

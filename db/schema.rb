@@ -10,16 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_15_135220) do
+ActiveRecord::Schema.define(version: 2019_12_17_161813) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
   create_table "boards", force: :cascade do |t|
     t.string "title"
     t.string "visibility"
-    t.integer "user_id"
-    t.string "room_id"
     t.string "integer"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -44,28 +63,26 @@ ActiveRecord::Schema.define(version: 2019_12_15_135220) do
     t.boolean "archived"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "board_id"
+    t.index ["board_id"], name: "index_lists_on_board_id"
   end
 
-  add_foreign_key "cards", "lists"
-  create_table "active_storage_attachments", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "record_type", null: false
-    t.bigint "record_id", null: false
-    t.bigint "blob_id", null: false
-    t.datetime "created_at", null: false
-    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
-    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  create_table "user_boards", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "board_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["board_id"], name: "index_user_boards_on_board_id"
+    t.index ["user_id"], name: "index_user_boards_on_user_id"
   end
 
-  create_table "active_storage_blobs", force: :cascade do |t|
-    t.string "key", null: false
-    t.string "filename", null: false
-    t.string "content_type"
-    t.text "metadata"
-    t.bigint "byte_size", null: false
-    t.string "checksum", null: false
-    t.datetime "created_at", null: false
-    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  create_table "user_cards", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "card_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["card_id"], name: "index_user_cards_on_card_id"
+    t.index ["user_id"], name: "index_user_cards_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -87,4 +104,10 @@ ActiveRecord::Schema.define(version: 2019_12_15_135220) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "cards", "lists"
+  add_foreign_key "lists", "boards"
+  add_foreign_key "user_boards", "boards"
+  add_foreign_key "user_boards", "users"
+  add_foreign_key "user_cards", "cards"
+  add_foreign_key "user_cards", "users"
 end
