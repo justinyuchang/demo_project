@@ -1,6 +1,6 @@
 class BoardsController < ApplicationController
   #devise方法:當前使用者=> current_user
-  before_action :find_board, only: [:edit, :update, :destroy, ]
+  before_action :find_board, only: [:edit, :update, :destroy, :show]
 
   def index
     @boards = current_user.boards.all
@@ -12,6 +12,8 @@ class BoardsController < ApplicationController
 
   def show
     @lists = List.new()
+    @board_message = BoardMessage.new(board: @board)
+    @board_messages = @board.board_messages.includes(:user)
   end
 
   def create
@@ -45,7 +47,6 @@ class BoardsController < ApplicationController
     current_user.boards.destroy(find_board)
     redirect_to boards_path, notice: "Board已刪除!"
   end
-
 
   private
   def board_params

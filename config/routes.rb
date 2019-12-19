@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :boards
   resources :lists
   resources :cards
+  resources :board_messages
 
   #devise使用者登錄
   devise_for :users, controllers: {
