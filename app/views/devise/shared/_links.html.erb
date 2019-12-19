@@ -22,12 +22,12 @@
       </div>
       <div>
         <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
-          <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name), class: 'btn btn-light'  %>
+          <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name), class: 'btn btn-light' %>
         <% end %>
       </div>
       <div>
         <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
-          <%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name), class: 'btn btn-light'  %>
+          <%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name), class: 'btn btn-light' %>
         <% end %>
       </div>
       <div>          
@@ -36,11 +36,7 @@
             <%= link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider) , class: 'btn btn-light' %>
           <% end %>
         <% end %>
-      </div>
-      <div>
-        <i class="fab fa-facebook"></i>
-      </div>
-  
+      </div>   
     </div>
   
     <div class="col">

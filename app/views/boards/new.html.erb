@@ -1,6 +1,22 @@
-<h1>新增Board</h1>
+<div class="container">
 
-<%= render "form", board: @board %>
+  <div class="row">
 
-<br />
-<%= link_to '回Board列表', boards_path %>
+    <div class="col">
+    </div>
+
+    <div class="col">
+
+      <h1>新增Board</h1>
+
+      <%= render "form", board: @board %>
+     
+      <%= link_to '回Board列表', boards_path, class: 'btn btn-light' %>
+
+    </div>
+
+    <div class="col">
+    </div>
+
+  </div>
+</div>
