@@ -1,6 +1,13 @@
 class BoardsChannel < ApplicationCable::Channel
-    def subscibed
-        board = Board.find(params[id])
-        stream_from board
-    end
+  def subscribed
+      p '-----------------------------------------------------------------------------'
+      p '-----------------------------------------------------------------------------'
+      p '-----------------------------------------------------------------------------'
+      p '------------------------------------------------------------------------'
+      p "#{params[:board]}"
+      room = Board.find params[:board]
+      stream_for room
+      # or
+      # stream_from "room_#{params[:room]}"
+  end
 end
