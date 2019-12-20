@@ -1,5 +1,6 @@
 <%= render 'shared/navbar' %>
 <h1>show</h1>
+<h2 data-role ="view">122</h2>
 
 <%= link_to "新增List", new_list_path %>
 
@@ -12,9 +13,18 @@
     <% end %>
 </div>
 
-<div>
+<div data-role = "message">
     <% @board_messages.each do |board_message| %>
-        <em>使用者<%= board_message.user.id %></em>
+    <div>
+        <em><%= board_message.user.id %></em>
         <p><%= board_message.message %></p>
+    </div>
     <% end %>
+</div>
+
+<div data-role = "message-template">
+    <div>
+        <em data-role = "message-em"></em>
+        <p data-role = "message-p"></p>
+    </div>
 </div>
