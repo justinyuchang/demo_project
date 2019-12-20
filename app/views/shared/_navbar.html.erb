@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+    <li class="nav-item active">
+      <%= link_to '回Board列表', boards_path , class: 'nav-link' %>
+      <span class="sr-only">(current)</span>
+    </li>
+      <li class="nav-item">
+        
+      </li>
+      <li class="nav-item">
+        
+      </li>
+      <li class="nav-item">
+        
+      </li>      
+    </ul>
+    <div class="nav-item  my-2 my-lg-0">
+      <% if user_signed_in? %>
+        <%= link_to current_user.email, edit_user_registration_path, class: 'btn btn-light' %>       
+      <% end %>     
+      <%= link_to destroy_user_session_path, method: "delete", data: {confirm: "要登出嘛"} , class: 'btn btn-light' do %>
+      <i class="fas fa-sign-out-alt"></i>
+      <% end %>
+      </div>
+  </div>
+</nav>
