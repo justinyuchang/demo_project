@@ -1,12 +1,13 @@
 class BoardsChannel < ApplicationCable::Channel
   def subscribed
-      p '-----------------------------------------------------------------------------'
-      p '-----------------------------------------------------------------------------'
-      p '-----------------------------------------------------------------------------'
-      p '------------------------------------------------------------------------'
-      p "#{params[:board]}"
-      room = Board.find params[:board]
-      stream_for room
+      if params[:board] != nil
+        p "#{params[:board]}-----------------------------------------------"
+        room = Board.find(params[:board])
+        stream_for room
+      else
+        p "#{current_user}-----------------------------------------------"
+        stream_for "board"
+      end
       # or
       # stream_from "room_#{params[:room]}"
   end
