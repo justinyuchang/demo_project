@@ -5,11 +5,15 @@
   <%= link_to 'Add card', new_card_path %>
   <hr>
 
-  <% @cards.each do |card| %>
-  <ul>
-    <li><%= link_to card.title, list_path(card) %></li>
-    <%= link_to 'Edit', edit_card_path(card) %>
-    <%= link_to 'Delete', card_path(card), method: 'delete', data: {confirm:'Sure?'} %>
-  </ul>
-  <% end %>
-</div>
+  <div class="card" style="width: 18rem;">
+    <% @cards.each do |card| %>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><%= link_to card.title, card_path(card) %></li>
+    </ul>
+    <% end %>
+  </div>
+
+
+
+
+
