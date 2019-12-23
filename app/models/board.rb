@@ -11,4 +11,5 @@ class Board < ApplicationRecord
 
   has_many :board_messages, inverse_of: :board
 
+  has_many :search_users
 end

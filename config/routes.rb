@@ -2,7 +2,15 @@ Rails.application.routes.draw do
   #首頁
   root "boards#index"
 
-  resources :boards
+  resources :boards do
+    member  do
+      post :searchuser
+    end
+    collection do
+      put :agree_invite
+      delete :refuse_invite
+    end
+  end
   resources :lists
   resources :cards
   resources :board_messages
