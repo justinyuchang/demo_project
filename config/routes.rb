@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   resources :boards
   resources :lists
 
-  resources :cards 
+  resources :cards do 
+    resources :comments, only: [:create, :destroy]
+  end  
 
   resources :board_messages
 
