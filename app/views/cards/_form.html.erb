@@ -6,16 +6,25 @@
 </ul>
 <% end %>
 
-<%= form_for(card) do |form| %>
+<%= form_for(card) do |f| %>
 <div>
-  <%= form.label :title %>
-  <%= form.text_field :title %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
 </div>
 <div>
-  <%= form.label :position %>
-  <%= form.number_field :position %>
+  <%= f.label :description %>
+  <%= f.text_area :description %>
 </div>
 <div>
-  <%= form.submit %>
+  <%= f.label :tags %>
+  <%= f.text_field :tags %>
+</div>
+<div>
+  <%= f.label :due_date %>
+  <%= f.date_field :due_date %>
+</div>
+
+<div>
+  <%= f.submit%>
 </div>
 <% end %>

@@ -1,1 +1,25 @@
-<h1><%= card.title %></h1>
+<h1><%= @card.title %></h1>
+
+<%= form_for(@card) do |f| %>
+<div>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+</div>
+<div>
+  <%= f.label :description %>
+  <%= f.text_area :description %>
+</div>
+<div>
+  <%= f.label :tags %>
+  <%= f.text_field :tags %>
+</div>
+<div>
+  <%= f.label :due_date %>
+  <%= f.date_field :due_date %>
+</div>
+
+<div>
+  <%= f.submit%>
+</div>
+<% end %>
+
