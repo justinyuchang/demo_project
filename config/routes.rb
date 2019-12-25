@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   # 首頁
   root "boards#index"
 
-  resources :boards do
+  resources :boards, shallow: true do
+    resources :lists
     member  do
       post :searchuser
     end
@@ -11,7 +12,8 @@ Rails.application.routes.draw do
       delete :refuse_invite
     end
   end
-  resources :lists
+
+
 
   resources :cards do 
     resources :comments, only: [:create, :destroy]
