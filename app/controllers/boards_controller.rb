@@ -25,10 +25,10 @@ class BoardsController < ApplicationController
 
     if @board.save
       # 成功
-      redirect_to boards_path, notice: "新增成功!"
+      redirect_to board_path(@board.id), notice: "新增成功!"
     else
       # 失敗
-      render :new
+      render :new, notice: "請填寫標題及狀態"
     end
   end
 
@@ -47,7 +47,7 @@ class BoardsController < ApplicationController
 
   def destroy
     current_user.boards.destroy(find_board)
-    redirect_to boards_path, notice: "Board已刪除!"
+    redirect_to boards_path, notice: "已刪除!"
   end
 
   def searchuser
