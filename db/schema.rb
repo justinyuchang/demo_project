@@ -87,12 +87,26 @@ ActiveRecord::Schema.define(version: 2019_12_23_153919) do
     t.index ["board_id"], name: "index_lists_on_board_id"
   end
 
+  create_table "search_users", force: :cascade do |t|
+    t.string "email"
+    t.string "message"
+    t.boolean "status", default: false
+    t.bigint "user_id", null: false
+    t.bigint "board_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["board_id"], name: "index_search_users_on_board_id"
+    t.index ["user_id"], name: "index_search_users_on_user_id"
+  end
+
   create_table "user_boards", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "board_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "status", default: true
     t.index ["board_id"], name: "index_user_boards_on_board_id"
+    t.index ["status"], name: "index_user_boards_on_status"
     t.index ["user_id"], name: "index_user_boards_on_user_id"
   end
 
@@ -128,6 +142,8 @@ ActiveRecord::Schema.define(version: 2019_12_23_153919) do
   add_foreign_key "comments", "cards"
   add_foreign_key "comments", "users"
   add_foreign_key "lists", "boards"
+  add_foreign_key "search_users", "boards"
+  add_foreign_key "search_users", "users"
   add_foreign_key "user_boards", "boards"
   add_foreign_key "user_boards", "users"
   add_foreign_key "user_cards", "cards"

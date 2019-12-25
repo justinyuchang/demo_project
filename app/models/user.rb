@@ -12,6 +12,8 @@ class User < ApplicationRecord
   has_many :cards, through: :user_cards
 
   has_many :board_message
+
+  has_many :search_users
   
   has_one_attached :user_avatar
 

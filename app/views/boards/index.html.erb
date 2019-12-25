@@ -23,6 +23,17 @@
   <p class="text-center mt-5">   
     <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#createBoard">新增Board ＋</a>
   </p>
+<div>
+    <% @searchuser.each do |msg| %>
+      <%= msg.email %>
+      <%= msg.message %>
+      <%= msg.board_id %>
+      
+      <%= link_to "同意", agree_invite_boards_path(id: msg.id, agree: true), method: "put", remote: true %>
+      <%= link_to "不同意", refuse_invite_boards_path(id: msg.id), method: "delete", remote: true %>      
+      <% end %>
+
+    
 </div>
 
 <div class="modal fade" id="createBoard" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"

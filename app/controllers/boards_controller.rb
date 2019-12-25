@@ -1,9 +1,11 @@
 class BoardsController < ApplicationController
   #devise方法:當前使用者=> current_user
-  before_action :find_board, only: [:edit, :update, :destroy, :show]
+  before_action :find_board, only: [:edit, :update, :destroy, :show, :searchuser]
+  before_action :search_params, only: [:searchuser]
 
   def index
     @boards = current_user.boards.all
+    @searchuser = current_user.search_users.all
   end
 
   def new
@@ -48,9 +50,27 @@ class BoardsController < ApplicationController
     redirect_to boards_path, notice: "已刪除!"
   end
 
+  def searchuser
+    if @user = User.find_by(email: @email)
+      SearchUser.create(user: @user,
+                                              board: @board,
+                                              email: @email, 
+                                              message: @message)
+    else
+      render :template => "shared/_navbarboard"
+    end
+  end
+
+  
+
   private
   def board_params
     params.require(:board).permit(:title, :visibility )
+  end
+
+  def search_params
+    @email = params.dig(:search, :email)
+    @message = params.dig(:search, :message)
   end
 
   def find_board
