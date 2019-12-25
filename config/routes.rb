@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  #首頁
+  # 首頁
   root "boards#index"
 
   resources :boards do
@@ -12,10 +12,14 @@ Rails.application.routes.draw do
     end
   end
   resources :lists
-  resources :cards
+
+  resources :cards do 
+    resources :comments, only: [:create, :destroy]
+  end  
+
   resources :board_messages
 
-  #devise使用者登錄
+  # devise使用者登錄
   devise_for :users, controllers: {
     sessions: "users/sessions",
     registrations: "users/registrations",
