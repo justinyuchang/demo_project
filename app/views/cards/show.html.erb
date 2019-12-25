@@ -1,4 +1,4 @@
-<div class="container">
+<div id class="container">
   <div class="row justify-content-center">
     <div class="col-lg-3 text-center">
       <h3><%= @card.title %></h3>
@@ -36,7 +36,7 @@
   </div>
   <% end %>
   <br>
-  <%= form_for ([@card, Comment.new]) do |f|%>
+  <%= form_for [@card, @comment], format: :js, remote: true  do |f|%>
   <div class="row justify-content-center form-group">
     <div class="col-lg-6">
       <%= f.text_area :content, class:'form-control', placeholder:'put comment' %>
@@ -48,8 +48,10 @@
     </div>
     <% end %>
   </div>
+
   <hr>
-  </div>
+
+  </div id="">
     <% @card.comments.each do |comment|%>
       <div>
         <%= comment.content %>

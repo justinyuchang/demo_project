@@ -1,15 +1,22 @@
 class CommentsController < ApplicationController
-  before_action :find_card, only: [:create]
+  before_action :find_card, only: [:create, :destroy]
 
   
 
   def create 
     @comment = @card.comments.build(comment_params)
     if @comment.save 
-      redirect_to card_path(@card.id)
+      respond_to do |format|
+        format.js 
+      end
     else
       redirect_to card_path(@card.id)
     end
+  end 
+
+  def destroy
+    @comment.destroy if @comment
+    redirect_to card_path(@card.id)
   end 
 
   private 
