@@ -49,7 +49,7 @@ class CardsController < ApplicationController
                                  :position,
                                  :description,
                                  :due_date,
-                                 :tag, 
+                                 :tags, 
                                  :archived,
                                  :list_id)
   end 
