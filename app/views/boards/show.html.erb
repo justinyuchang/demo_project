@@ -1,7 +1,6 @@
 <%= render 'shared/navbar' %>
 <%= render 'shared/navbarboard' %>
 
-<%= link_to "新增List", new_board_list_path(@board) %>
 <div>
     <div id="1" data-id= "<%= @board.id %>">
         <%= form_for @board_message, remote: true do |message| %>
