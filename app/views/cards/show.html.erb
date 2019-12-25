@@ -1,1 +1,62 @@
-<h1><%= card.title %></h1>
+<div id class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-3 text-center">
+      <h3><%= @card.title %></h3>
+    </div>
+  </div>
+
+  <%= form_for(@card) do |f| %>
+  <div class="row justify-content-center form-group">
+    <div class="col-lg-6">
+      <%= f.label :title, class:'form-label' %>
+      <%= f.text_field :title, class:'form-control' %>
+    </div>
+  </div>
+  <div class="row justify-content-center form-group">
+    <div class="col-lg-3">
+      <%= f.label :tags, class:'form-label' %>
+      <%= f.text_field :tags, class:'form-control' %>
+    </div>
+    <div class="col-lg-3">
+      <%= f.label :due_date, class:'form-label' %>
+      <%= f.date_field :due_date, class:'form-control' %>
+    </div>
+  </div>
+  <div class="row justify-content-center form-group">
+    <div class="col-lg-6">
+      <%= f.label :description, class:'form-label' %>
+      <%= f.text_area :description, class:'form-control' %>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-lg-3 text-center">
+      <%= f.submit class:'btn btn-primary'%>
+    </div>
+  </div>
+  <% end %>
+  <br>
+  <%= form_for [@card, @comment], format: :js, remote: true  do |f|%>
+  <div class="row justify-content-center form-group">
+    <div class="col-lg-6">
+      <%= f.text_area :content, class:'form-control', placeholder:'put comment' %>
+    </div>
+  </div>
+  <div class="row justify-content-center form-group">
+    <div class="col-lg-3 text-center">
+      <%= f.submit class:'btn btn-primary' %>
+    </div>
+    <% end %>
+  </div>
+
+  <hr>
+
+  </div id="">
+    <% @card.comments.each do |comment|%>
+      <div>
+        <%= comment.content %>
+        <%= link_to 'x', '#', method: "delete" %>
+      </div>
+    <% end %>
+  </div>
+</div>
