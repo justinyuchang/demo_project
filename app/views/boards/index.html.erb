@@ -21,7 +21,17 @@
 
 <div class="card m-3 float-left border-0 rounded" style="width: 15rem; height: 10rem; background-color: #F0F2F4">
   <p class="text-center mt-5">   
-    <%= link_to "新增Board +", new_board_path, class: 'text-dark' %>
+    <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#createBoard">新增Board ＋</a>
   </p>
 </div>
 
+<div class="modal fade" id="createBoard" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content col mt-5 p-5 text-info">
+      <h2 class="mb-4">新增Board</h2>
+      <%= notice %>
+      <%= render "form", board: @board %>
+    </div>
+  </div>
+</div>
