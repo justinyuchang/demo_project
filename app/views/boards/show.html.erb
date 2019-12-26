@@ -1,43 +1,27 @@
 <%= render 'shared/navbar' %>
 <%= render 'shared/navbarboard' %>
 <%= link_to "新增List", new_board_list_path(@board) %>
-
-<div>
-    <div id="1" data-id= "<%= @board.id %>">
-        <%= form_for @board_message, remote: true do |message| %>
-            <%= message.text_field :message %>
-            <%= message.submit "send_message" %>
-            <%= message.text_field :board_id %>
-        <% end %>
-    </div>
     
-    <div data-role = "message">
-        <% @board_messages.each do |board_message| %>
-        <div>
-            <em><%= board_message.user.id %></em>
-            <p><%= board_message.message %></p>
-        </div>
-        <% end %>
-    </div>
-    
-    <div data-role = "message-template">
-        <div>
-            <em data-role = "message-em"></em>
-            <p data-role = "message-p"></p>
-        </div>
-    </div>
-</div>
-
 <div class="lists d-flex"   data-role= "list-item">
     <% @lists.each do |list| %>
-    <div class="lists-item" >
-        <%= link_to list.title, new_board_list_path(@board), class: "btn btn-primary" %>
+    <div class="card" style="width: 19rem;">
+        <div class="card-body">
+            <h5 class="card-title"><%= list.title %></h5>
+            <a href="#" class="card-link">Card link</a>
+        </div>
     </div>
     <% end %>
-</div>
-
-<div data-role="lists-clone">
-    <div class="lists-item" >
-        <a class="" data-role="lists" href="/boards/<%= @board.id %>/lists/new"></a>
+    <div data-role="lists-create">
+        <%= link_to "新增list", new_board_list_path(@board), class: "btn btn-primary" %>
     </div>
 </div>
+
+<div data-role="">
+    <div data-role="cart-clone" class="card" style="width: 19rem;">
+        <div class="card-body">
+            <h5 data-role="cart-title" class="card-title"></h5>
+            <a data-role="cart-link" href="#" class="card-link">Card link</a>
+        </div>
+    </div>
+</div>
+
