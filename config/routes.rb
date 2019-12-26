@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root "boards#index"
 
   resources :boards, shallow: true do
-    resources :lists
+    resources :lists, only: [:new, :create, :destroy]
     member  do
       post :searchuser
     end
@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     resources :comments, only: [:create, :destroy]
   end  
 
-  resources :board_messages
+  resources :board_messages, only: [:new, :create, :destroy]
 
   # devise使用者登錄
   devise_for :users, controllers: {

@@ -1,6 +1,6 @@
 class ListsController < ApplicationController
   before_action :find_list, only: [:show, :edit, :update, :destroy]
-  before_action :find_board, only: [:create]
+  before_action :find_board, only: [:create, :new]
 
   def index
     @lists = List.sorted
@@ -14,12 +14,8 @@ class ListsController < ApplicationController
   end 
   
   def create 
-    @list = @board.lists.build(list_params)
-    if @list.save
-      redirect_to root_path
-    else 
-      render :new 
-    end 
+    @list = @board.lists.create(list_params)
+    BoardsChannel.broadcast_to  @board, @list
   end 
   
   def edit 

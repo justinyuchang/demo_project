@@ -1,5 +1,6 @@
 <%= render 'shared/navbar' %>
 <%= render 'shared/navbarboard' %>
+<%= link_to "新增List", new_board_list_path(@board) %>
 
 <div>
     <div id="1" data-id= "<%= @board.id %>">
@@ -27,11 +28,16 @@
     </div>
 </div>
 
-<div class="lists d-flex">
+<div class="lists d-flex"   data-role= "list-item">
     <% @lists.each do |list| %>
-    <div class="lists-item">
+    <div class="lists-item" >
         <%= link_to list.title, new_board_list_path(@board), class: "btn btn-primary" %>
     </div>
     <% end %>
 </div>
 
+<div data-role="lists-clone">
+    <div class="lists-item" >
+        <a class="" data-role="lists" href="/boards/<%= @board.id %>/lists/new"></a>
+    </div>
+</div>
