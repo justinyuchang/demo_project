@@ -6,10 +6,10 @@ class BoardsController < ApplicationController
   def index
     @boards = current_user.boards.all
     @searchuser = current_user.search_users.all
+    @board = Board.new
   end
 
   def new
-    @board = Board.new
   end
 
   def show

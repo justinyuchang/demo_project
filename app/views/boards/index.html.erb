@@ -23,6 +23,7 @@
   <p class="text-center mt-5">   
     <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#createBoard">新增Board ＋</a>
   </p>
+</div>
 <div>
     <% @searchuser.each do |msg| %>
       <%= msg.email %>
@@ -42,7 +43,7 @@
     <div class="modal-content col mt-5 p-5 text-info">
       <h2 class="mb-4">新增Board</h2>
       <%= notice %>
-      <%= render "form", board: @board %>
+      <%= render "boardcreate", board: @board %>
     </div>
   </div>
 </div>
