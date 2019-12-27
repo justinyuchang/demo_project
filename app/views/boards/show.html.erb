@@ -1,13 +1,15 @@
 <%= render 'shared/navbar' %>
 <%= render 'shared/navbarboard' %>
 <%= link_to "新增List", new_board_list_path(@board) %>
+
+<%= render "cartcreate" %>
     
 <div class="lists d-flex"   data-role= "list-item">
     <% @lists.each do |list| %>
-    <div class="card" style="width: 19rem;">
+    <div data-role="cart-clone" class="card" style="width: 19rem;">
         <div class="card-body">
-            <h5 class="card-title"><%= list.title %></h5>
-            <a href="#" class="card-link">Card link</a>
+            <h5 data-role="cart-title" class="card-title"><%= list.title %></h5>
+            <button class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#createCart">新增Cart ＋</button>
         </div>
     </div>
     <% end %>
@@ -16,12 +18,4 @@
     </div>
 </div>
 
-<div data-role="">
-    <div data-role="cart-clone" class="card" style="width: 19rem;">
-        <div class="card-body">
-            <h5 data-role="cart-title" class="card-title"></h5>
-            <a data-role="cart-link" href="#" class="card-link">Card link</a>
-        </div>
-    </div>
-</div>
 

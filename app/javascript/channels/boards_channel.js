@@ -9,6 +9,7 @@ $( document ).on('turbolinks:load', function() {
           {channel: "BoardsChannel",board: room_id},
           {received: function(data) {
             console.log(data)
+
             let lists = $('[data-role="cart-clone"]').clone(true, true)
             lists.find('[data-role="cart-title"]').text(data.title)
             $('[data-role="lists-create"]').before(lists)

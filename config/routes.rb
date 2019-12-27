@@ -15,11 +15,13 @@ Rails.application.routes.draw do
 
 
 
-  resources :cards do 
-    resources :comments, only: [:create, :destroy]
-  end  
+  scope :lists do
+    resources :cards, except: [:index] do
+      # resources :comments, only: [:create, :destroy]
+    end
+  end 
 
-  resources :board_messages, only: [:new, :create, :destroy]
+  # resources :board_messages, only: [:new, :create, :destroy]
 
   # devise使用者登錄
   devise_for :users, controllers: {

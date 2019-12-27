@@ -13,14 +13,7 @@ class CardsController < ApplicationController
     @card = Card.new
   end 
   
-  def create 
-    @card = Card.new(card_params)
-    if @card.save 
-      redirect_to cards_path
-    else
-      render :new 
-    end
-  end 
+
   
   def edit 
   end 
