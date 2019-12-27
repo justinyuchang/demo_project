@@ -1,15 +1,15 @@
 class List < ApplicationRecord
-  #gem_include
+  # gem_include
   acts_as_list
 
-  #vilidates
+  # validates
   validates :title, presence: true
   
-  #ActiveRecord關聯設定
+  # ActiveRecord關聯設定
   has_many :cards, -> { order(position: :asc) }, dependent: :destroy 
   belongs_to :board
 
-  #scope
+  # scope
   scope :sorted, -> { order(position: :asc) }
   
 end

@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     end
     collection do
       put :agree_invite
-      delete :refuse_invite
+      # delete :reject_invite 
     end
   end
   resources :lists
