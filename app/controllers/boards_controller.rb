@@ -65,19 +65,28 @@ class BoardsController < ApplicationController
   end
 
   def agree_invite 
-    p "-"*30
+    p "-"*50
     p "#{params}"
-    p "-"*30
+    p "-"*50
     @invitation = SearchUser.find(params[:id])
+    @reply = params[:agree] 
+    @board = Board.find(params[:board_id])
+
+    if @reply == "true"
+      @board.users << [current_user]
+      p "-"*50
+      p "You are now join to #{@board.title}"
+      p "-"*50
+      @invitation.destroy
+    else
+      @invitation.destroy
+    end
   end
 
-  def reject_invite
-    p "-"*30
-    p "#{params}"
-    p "-"*30
-    @invitation = SearchUser.find(params[:id])
-    @invitation.destroy if @invitation
-  end
+  # def reject_invite
+  #   @invitation = SearchUser.find(params[:id])
+  #   @invitation.destroy if @invitation
+  # end
 
   
   private
