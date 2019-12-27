@@ -1,15 +1,21 @@
-<%= form_for board do |board| %>
-
-  <div class="form-group">
-    <%= board.label :title, "標題" %>
-    <%= board.text_field :title , class: 'form-control' %>
+<div class="modal fade" id="createBoard" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content col mt-5 p-5 text-info">
+      <h2 class="mb-4">新增Board</h2>
+      <%= notice %>
+      <%= form_for board do |board| %>
+        <div class="form-group">
+          <%= board.label :title, "標題" %>
+          <%= board.text_field :title , class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= board.label :visibility, "狀態" %>
+          <%= board.text_field :visibility , class: 'form-control' %> 
+        </div>
+        <div class="form-group d-flex justify-content-end">
+          <%= board.submit %>
+        </div>
+      <% end %>
+    </div>
   </div>
-  <div class="form-group">
-    <%= board.label :visibility, "狀態" %>
-    <%= board.text_field :visibility , class: 'form-control' %> 
-  </div>
-  <div class="form-group d-flex justify-content-end">
-    <%= board.submit %>
-  </div>
-  
-<% end %>
+</div>

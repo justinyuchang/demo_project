@@ -33,17 +33,6 @@
       <%= link_to "同意", agree_invite_boards_path(id: msg.id, agree: true), method: "put", remote: true %>
       <%= link_to "不同意", refuse_invite_boards_path(id: msg.id), method: "delete", remote: true %>      
       <% end %>
-
-    
 </div>
 
-<div class="modal fade" id="createBoard" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content col mt-5 p-5 text-info">
-      <h2 class="mb-4">新增Board</h2>
-      <%= notice %>
-      <%= render "boardcreate", board: @board %>
-    </div>
-  </div>
-</div>
+<%= render "boardcreate", board: @board %>
