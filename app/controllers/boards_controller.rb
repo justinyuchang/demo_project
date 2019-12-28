@@ -55,7 +55,7 @@ class BoardsController < ApplicationController
        @invitation = SearchUser.create(user: @user,
                                        board: @board,
                                        email: @email, 
-                                       message: @message)  
+                                       message: @message)
        p "-"*30
        p "#{params}"
        p "-"*30
@@ -65,9 +65,6 @@ class BoardsController < ApplicationController
   end
 
   def agree_invite 
-    p "-"*50
-    p "#{params}"
-    p "-"*50
     @invitation = SearchUser.find(params[:id])
     @reply = params[:agree] 
     @board = Board.find(params[:board_id])
@@ -82,12 +79,6 @@ class BoardsController < ApplicationController
       @invitation.destroy
     end
   end
-
-  # def reject_invite
-  #   @invitation = SearchUser.find(params[:id])
-  #   @invitation.destroy if @invitation
-  # end
-
   
   private
   def board_params

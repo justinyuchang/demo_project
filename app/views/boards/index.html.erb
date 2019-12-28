@@ -1,4 +1,8 @@
-<%= render 'shared/navbar' %>
+<% content_for :navbar do %>
+  <%= render 'shared/navbar' %>
+<% end %>
+
+
 <h1 class="d-block" style="margin: 20px; color: #2779BF;">Boards<%= notice %></h1>
 
 
@@ -25,8 +29,10 @@
   </p>
   <div>
 
+
     <div>
       <% @searchuser.each do |invitation| %>
+      <%= invitation.user_id %> 
       <h5>From user:<%= invitation.user_id %></h5>
       <p><%= invitation.message %></p>
       <p>Board ID:<%= invitation.board_id %></p>
