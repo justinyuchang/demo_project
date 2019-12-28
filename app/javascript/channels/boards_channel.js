@@ -2,11 +2,11 @@ import consumer from "./consumer"
 
 $( document ).on('turbolinks:load', function() {
     $(function(env){
-        let room_url = location.pathname.split('/')
-        let room_id =  room_url[room_url.length - 1]
+        let board_url = location.pathname.split('/')
+        let board_id =  board_url[board_url.length - 1]
 
         consumer.subscriptions.create(
-          {channel: "BoardsChannel",board: room_id},
+          {channel: "BoardsChannel",board: board_id},
           {received: function(data) {
             console.log(data)
 

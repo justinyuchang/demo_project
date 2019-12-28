@@ -8,8 +8,18 @@
     <% @lists.each do |list| %>
     <div data-role="cart-clone" class="card" style="width: 19rem;">
         <div class="card-body">
-            <h5 data-role="cart-title" class="card-title"><%= list.title %></h5>
-            <button class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#createCart">新增Cart ＋</button>
+            <div data-role="card-header">
+                <h4 data-role="cart-title" class="card-title"><%= list.title %></h4>
+            </div  >
+            <% list.cards.each do |card|%>
+                <div><span data-role="card-id" class="card-id"><%= card.id %></span>
+                    <%= card.title %>
+                </div>
+            <% end %>
+            <div data-role="card-input">
+                <textarea name="" id="" cols="27" rows="2"></textarea>
+                <input data-role="card-button" type="submit" class="" value="送出"></input>
+            </div>
         </div>
     </div>
     <% end %>
@@ -17,5 +27,7 @@
         <%= link_to "新增list", new_board_list_path(@board), class: "btn btn-primary" %>
     </div>
 </div>
+
+
 
 

@@ -1,4 +1,3 @@
-import "./card.js"; 
 import axios from 'axios';
 
 const token = document.querySelector("meta[name=csrf-token]") || { content: 'no-csrf-token' }

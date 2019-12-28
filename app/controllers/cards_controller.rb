@@ -1,17 +1,19 @@
 class CardsController < ApplicationController
-  before_action :find_card, only: [:show, :edit, :update, :destroy]
+  before_action :load_list_card_params, only: [:create]
 
-  def index
-    @cards = Card.all
-  end 
   
   def show
-    @comment = Comment.new 
   end
-    
-  def new 
-    @card = Card.new
-  end 
+
+  def create
+    p "--------------#{@card_params}----------------"
+    p "--------------#{params[:list_name]}----------------"
+    p "--------------#{params[:card]}----------------"
+    p "--------------#{params[:board_id]}----------------"
+    p "--------------#{@board_id.id}----------------"
+    p "--------------#{@list_id.id}----------------"
+    @card = @list_id.cards.create(title: @card_title)
+  end
   
 
   
@@ -19,31 +21,16 @@ class CardsController < ApplicationController
   end 
   
   def update 
-    if @card.update(card_params) 
-      redirect_to cards_path
-    else
-      render :edit
-    end 
   end 
   
   def destroy
-    @card.destroy if @card
-    redirect_to cards_path
   end 
 
-  private 
-
-  def find_card
-    @card = Card.find(params[:id])
-  end 
-
-  def card_params
-    params.require(:card).permit(:title,
-                                 :position,
-                                 :description,
-                                 :due_date,
-                                 :tag, 
-                                 :archived,
-                                 :list_id)
-  end 
+  private
+  def  load_list_card_params
+    @card_params = params.permit( :board_id, :card, :list_name )
+    @board_id = Board.find(@card_params[:board_id])
+    @list_id = @board_id.lists.find_by(title: @card_params[:list_name])
+    @card_title = @card_params[:card]
+  end
 end
