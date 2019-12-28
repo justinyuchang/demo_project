@@ -2,18 +2,21 @@
 
     <h3 class="text-info"><%= @board.title %></h3>
 
+<!-- Board archived  -->
     <%= link_to boards_path, class:"btn btn-sm btn-light text-primary mx-1" do %>
     <i class="far fa-star"></i>
     <% end %>
 
     <span>|</span>
 
+<!-- Board Visibility  -->
     <button type="button" class="btn btn-sm btn-light text-primary mx-1 px-3">
         <%= @board.visibility %>
     </button>
 
     <span>|</span>
 
+<!-- Board member list  -->
     <div class="dropdown mr-1">
         <button type="button" class="btn btn-sm btn-light text-primary mx-1 dropdown-toggle" id="dropdownMenuOffset"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
@@ -26,28 +29,24 @@
         </ul>
     </div>
 
-
-    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-        <div class="btn-group" role="group">
-            <button id="btnGroupDrop1" type="button" class="btn btn-sm btn-light text-primary mx-1 dropdown-toggle"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Invite
-            </button>
-
-
-            
-                
-                  <%=  form_with scope: :invite, url: searchuser_board_path  do |f| %>
-                    
-                        <%= f.label :email %>
-                        <%= f.text_field :email, class:"form-control"%>
-                    
-                        <%= f.label :message %>
-                        <%= f.text_area :message, class:"form-control" %>
-
-                    <%= f.submit "Send invitation", class:"btn btn-sm btn-primary" %>
-                  <% end %>
-
+<!-- Form for Invitation to other users -->
+    <div class="dropdown">
+        <button class="btn btn-sm btn-light text-primary mx-1 dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Invite 
+        </button>
+        <div class="dropdown-menu p-2">
+            <%=  form_with scope: :search, url: searchuser_board_path do |f| %>
+            <div class="form-group">
+                <%= f.label :email %>
+                <%= f.text_field :email, class:"form-control" %>
+            </div>
+            <div class="form-group">
+                <%= f.label :message %>
+                <%= f.text_area :message, class:"form-control" %>
+            </div>
+            <%= f.submit "Send", class:"btn btn-sm btn-primary" %>
+            <% end %>
         </div>
     </div>
 </nav>
