@@ -1,0 +1,46 @@
+<nav class="navbar navbar-light bg-white py-0 d-flex justify-content-start">
+
+    <h3 class="text-info"><%= @board.title %></h3>
+
+    <%= link_to boards_path, class:"btn btn-sm btn-light text-primary mx-1" do %>
+    <i class="far fa-star"></i>
+    <% end %>
+
+    <span>|</span>
+
+    <button type="button" class="btn btn-sm btn-light text-primary mx-1 px-3">
+        <%= @board.visibility %>
+    </button>
+
+    <span>|</span>
+
+    <div class="dropdown mr-1">
+        <button type="button" class="btn btn-sm btn-light text-primary mx-1 dropdown-toggle" id="dropdownMenuOffset" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+            Member
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+            <% @board.users.each do |member| %>
+            <li class="dropdown-item"><%= member.email %></li>
+            <% end %>
+        </ul>
+    </div>
+    
+
+    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+        <div class="btn-group" role="group">
+            <button id="btnGroupDrop1" type="button" class="btn btn-sm btn-light text-primary mx-1 dropdown-toggle"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Invite
+            </button>
+            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                <%=  form_with scope: :search, url: searchuser_board_path  do |form| %>
+                <%= form.text_field :email %>
+                <%= form.text_area :message %>
+                <%= form.submit "傳送"%>
+                <% end %>
+            </div>
+        </div>
+    </div>
+
+</nav>
