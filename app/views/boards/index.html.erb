@@ -28,9 +28,12 @@
     <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#createBoard">新增Board ＋</a>
   </p>
   <div>
+    <%= @searchuser %>
+
 
     <div>
       <% @searchuser.each do |invitation| %>
+      <%= invitation.user_id %> 
       <h5>From user:<%= invitation.user_id %></h5>
       <p><%= invitation.message %></p>
       <p>Board ID:<%= invitation.board_id %></p>
