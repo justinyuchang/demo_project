@@ -2,9 +2,9 @@
   <%= render 'shared/navbar' %>
 <% end %>
 
+<%= render "boardcreate", board: @board %>
 
 <h1 class="d-block" style="margin: 20px; color: #2779BF;">Boards<%= notice %></h1>
-
 
 <% @boards.each do |board| %>
 <div class="card text-white m-3 float-left border-0" style="width: 15rem; height: 10rem">
@@ -27,30 +27,15 @@
   <p class="text-center mt-5">
     <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#createBoard">新增Board ＋</a>
   </p>
-  <div>
+</div>
 
-
-    <div>
-      <% @searchuser.each do |invitation| %>
-      <%= invitation.user_id %> 
-      <h5>From user:<%= invitation.user_id %></h5>
-      <p><%= invitation.message %></p>
-      <p>Board ID:<%= invitation.board_id %></p>
-      <p>invitation ID:<%= invitation.id %></p>
-      <%= link_to "同意", agree_invite_boards_path(id: invitation.id, board_id: invitation.board_id, agree: true), method: "put", remote: true %>
-      <%= link_to "不同意", agree_invite_boards_path(id: invitation.id, board_id: invitation.board_id, agree: false), method: "put", remote: true %>
-      <% end %>
-    </div>
-
-  </div>
-
-  <div class="modal fade" id="createBoard" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content col mt-5 p-5 text-info">
-        <h2 class="mb-4">新增Board</h2>
-        <%= notice %>
-        <%= render "form", board: @board %>
-      </div>
-    </div>
-  </div>
+<div>
+  <% @searchuser.each do |invitation| %>
+  <h5>From user:<%= invitation.user_id %></h5>
+  <p><%= invitation.message %></p>
+  <p>Board ID:<%= invitation.board_id %></p>
+  <p>invitation ID:<%= invitation.id %></p>
+  <%= link_to "同意", agree_invite_boards_path(id: invitation.id, board_id: invitation.board_id, agree: true), method: "put", remote: true %>
+  <%= link_to "不同意", agree_invite_boards_path(id: invitation.id, board_id: invitation.board_id, agree: false), method: "put", remote: true %>
+  <% end %>
+</div>

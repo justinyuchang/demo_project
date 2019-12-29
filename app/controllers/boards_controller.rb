@@ -6,14 +6,14 @@ class BoardsController < ApplicationController
   def index
     @boards = current_user.boards.all
     @searchuser = current_user.search_users.all
-  end
-
-  def new
     @board = Board.new
   end
 
+  def new
+  end
+
   def show
-    @lists = List.new()
+    @lists = @board.lists.all
     @board_message = BoardMessage.new(board: @board)
     @board_messages = @board.board_messages.includes(:user)
   end
@@ -91,6 +91,6 @@ class BoardsController < ApplicationController
   end
 
   def find_board
-    @board = Board.find_by(id: params[:id])
+    @board = Board.find(params[:id])
   end
 end

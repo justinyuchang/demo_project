@@ -1,18 +1,19 @@
 import consumer from "./consumer"
 
 $( document ).on('turbolinks:load', function() {
-    $(function(){
-        let room_id =$("#1").data("id")
-        let $element = $('[data-role = "message"]');
-        let messageTemplate = $('[data-role = "message-template"]');
+    $(function(env){
+        let board_url = location.pathname.split('/')
+        let board_id =  board_url[board_url.length - 1]
 
         consumer.subscriptions.create(
-          {channel: "BoardsChannel",board: room_id},
+          {channel: "BoardsChannel",board: board_id},
           {received: function(data) {
-            let content = messageTemplate.children().clone(true, true);
-            content.find('[data-role = "message-p"]').text(data.message);
-            content.find('[data-role = "message-em"]').text(data.user_id);
-            $element.append(content);
+            console.log(data)
+
+            let lists = $('[data-role="cart-clone"]').clone(true, true)
+            lists.find('[data-role="cart-title"]').text(data.title)
+            $('[data-role="lists-create"]').before(lists)
+
             // $element.animate({ scrollTop: $element.prop("scrollHeight")}, 1000) 
           }
         }  

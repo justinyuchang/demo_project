@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   # 首頁
   root "boards#index"
 
-  resources :boards do
+  resources :boards, shallow: true do
+    resources :lists, only: [:new, :create, :destroy]
     member  do
       post :searchuser
     end
@@ -11,13 +12,16 @@ Rails.application.routes.draw do
       # delete :reject_invite 
     end
   end
-  resources :lists
 
-  resources :cards do 
-    resources :comments, only: [:create, :destroy]
-  end  
 
-  resources :board_messages
+
+  scope :lists do
+    resources :cards, except: [:index] do
+      # resources :comments, only: [:create, :destroy]
+    end
+  end 
+
+  # resources :board_messages, only: [:new, :create, :destroy]
 
   # devise使用者登錄
   devise_for :users, controllers: {
