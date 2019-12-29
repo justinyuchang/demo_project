@@ -1,28 +1,35 @@
 <%= render 'shared/navbar' %>
 <%= render 'shared/navbarboard' %>
+<%= render "carditem" %>
 <%= link_to "新增List", new_board_list_path(@board) %>
 
-<%= render "cartcreate" %>
-    
 <div class="lists d-flex"   data-role= "list-item">
     <% @lists.each do |list| %>
     <div data-role="cart-clone" class="card" style="width: 19rem;">
         <div class="card-body">
+
             <div data-role="card-header">
                 <h4 data-role="cart-title" class="card-title"><%= list.title %></h4>
             </div  >
+
             <% list.cards.each do |card|%>
-                <div><span data-role="card-id" class="card-id"><%= card.id %></span>
+            <button data-role="btn card-name" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#Carditem">
+                    <span data-role="card-id" class="d-none ">
+                        <%= card.id %>
+                    </span>
                     <%= card.title %>
-                </div>
+            </button>
             <% end %>
+
             <div data-role="card-input">
                 <textarea name="" id="" cols="27" rows="2"></textarea>
                 <input data-role="card-button" type="submit" class="" value="送出"></input>
             </div>
+
         </div>
     </div>
     <% end %>
+
     <div data-role="lists-create">
         <%= link_to "新增list", new_board_list_path(@board), class: "btn btn-primary" %>
     </div>
