@@ -8,17 +8,15 @@
 
 <% @boards.each do |board| %>
 <div class="card text-white m-3 float-left border-0" style="width: 15rem; height: 10rem">
-  <div class="card-body" style="background-color: #2068A2; ;border-radius:5px">
-    <h5 class="card-title">
-      <%= link_to board.title, board_path(board.id),  class: 'text-white' %>
-    </h5>
+  <div class="card-body " style="background-color: #2068A2; ;border-radius:5px">
+    <p class="text-right"><%= link_to "X", board_path(board), method: "delete", data: { confirm: "確認要刪除Board嗎？" }, class: 'text-dark' %>
+    </p>
+    <h4 class="card-title">
+      <%= link_to board.title, board_path(board.id), class: 'text-white' %>
+    </h4>
     <p class="card-state">
       <%= board.visibility %>
     </p>
-    <div class="card-button d-flex justify-content-end">
-      <%= link_to "編輯", edit_board_path(board), class: 'btn btn-light btn-sm m-1' %>
-      <%= link_to "刪除", board_path(board), method: "delete", data: { confirm: "確認要刪除Board嗎？" }, class: 'btn btn-light btn-sm m-1' %>
-    </div>
   </div>
 </div>
 <% end %>
