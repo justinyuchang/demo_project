@@ -4,13 +4,14 @@
   <%= render 'shared/navbar' %>
 <% end %>
 
+<% content_for :boardheader do %>
+  <%= render 'shared/boardheader' %>
+<% end %>
+
 <div class="lists d-flex"   data-role= "list-item">
     <% @lists.each do |list| %>
     <div data-role="cart-clone" class="card" style="width: 19rem;">
         <div class="card-body">
-<% content_for :boardheader do %>
-  <%= render 'shared/boardheader' %>
-<% end %>
 
             <div data-role="card-header">
                 <h4 data-role="cart-title" class="card-title"><%= list.title %></h4>
