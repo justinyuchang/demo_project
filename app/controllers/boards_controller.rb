@@ -1,5 +1,4 @@
 class BoardsController < ApplicationController
-  # devise方法:當前使用者=> current_user
   before_action :find_board, only: [:edit, :update, :destroy, :show, :searchuser]
   before_action :search_params, only: [:searchuser]
 
@@ -47,13 +46,10 @@ class BoardsController < ApplicationController
 
   def searchuser
     if @user = User.find_by(email: @email)
-       @invitation = SearchUser.create(user: @user,
-                                       board: @board,
-                                       email: @email, 
-                                       message: @message)
-       p "-"*30
-       p "#{params}"
-       p "-"*30
+      @invitation = SearchUser.create(user: @user,
+                                                                          board: @board,
+                                                                          email: @email, 
+                                                                          message: @message)
     else
       render :template => "shared/_navbarboard"
     end
@@ -66,9 +62,6 @@ class BoardsController < ApplicationController
 
     if @reply == "true"
       @board.users << [current_user]
-      p "-"*50
-      p "You are now join to #{@board.title}"
-      p "-"*50
       @invitation.destroy
     else
       @invitation.destroy

@@ -3,30 +3,18 @@ class CardsController < ApplicationController
   before_action :load_card_items_params, only: [:update]
   
   def show
-    p "--------------#{params}----------------"
-    p "--------------#{params[:id]}----------------"
     @card_item = Card.find(params[:id])
     render json: @card_item
   end
 
   def create
-    p "--------------#{@card_params}----------------"
-    p "--------------#{params[:list_name]}----------------"
-    p "--------------#{params[:card]}----------------"
-    p "--------------#{params[:board_id]}----------------"
-    p "--------------#{@board_id.id}----------------"
-    p "--------------#{@list_id.id}----------------"
     @card = @list_id.cards.create(title: @card_title)
   end
-  
-
   
   def edit 
   end 
   
   def update 
-    p "--------------#{@find_card.id}----------------"
-    p "--------------#{@card_item_params}----------------"
     @find_card.update(@card_item_params)
   end 
   
@@ -45,4 +33,5 @@ class CardsController < ApplicationController
     @find_card = Card.find(params[:id])
     @card_item_params = params.require(:card).permit(:description, :tags, :archived, :due_date)
   end
+  
 end
