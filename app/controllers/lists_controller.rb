@@ -15,7 +15,6 @@ class ListsController < ApplicationController
   
   def create 
     @list = @board.lists.create(list_params)
-    BoardsChannel.broadcast_to  @board, @list
   end 
   
   def edit 

@@ -1,0 +1,32 @@
+.mod-add{
+    width: 300px;
+    height: auto;
+    border-radius: 5px;
+    background-color: hsla(0, 0%, 100%, 0.24);
+    margin: 15px;
+    padding: 6px 8px;
+    display: inline-block;
+    cursor: pointer;
+    form{
+        display: block;
+        .list-add{
+            color: rgb(255, 255, 255);
+            display: block;
+            text-decoration: none;
+            span{
+                display: block;
+                i{
+                    padding-right: 5px;
+                }
+            }
+        }
+        input{
+            display: block;
+            width: 100%;
+        }
+    }
+
+}
+.mod-add:hover{
+    background-color: hsla(0, 0%, 100%, 0.34);
+}

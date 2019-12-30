@@ -1,6 +1,6 @@
 import axios from 'helpers/axios';
 $(document).on("turbolinks:load", function(){
-  ////////////////////////////////////////
+////////////////////////////////////////
     $('[data-role="card-button"]').click(function(){
       console.log("已觸發")
       let board_url = location.pathname.split('/')
