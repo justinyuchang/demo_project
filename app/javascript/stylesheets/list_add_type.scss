@@ -1,6 +1,6 @@
-.mod-add{
+.list-mod-add{
     width: 300px;
-    height: auto;
+    height: 100%;
     border-radius: 5px;
     background-color: hsla(0, 0%, 100%, 0.24);
     margin: 15px;
@@ -27,6 +27,30 @@
     }
 
 }
-.mod-add:hover{
+.list-mod-add:hover{
     background-color: hsla(0, 0%, 100%, 0.34);
+}
+///////////////////////////////////////////////////////
+.list-mod-group{
+    width: 270px;
+    height: auto;
+    border-radius: 5px;
+    background-color: hsla(0, 0%, 100%, 0.74);
+    margin: 15px;
+    padding: 6px 8px;
+    p{
+        display: block;
+        width: 100%;
+        font-size: 16px;
+    }
+    span{
+        display: block;
+    }
+    .card-create{
+        .card-add{
+            i{
+                margin-right: 5px;
+            }
+        }
+    }
 }
