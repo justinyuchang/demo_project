@@ -7,6 +7,7 @@ $(document).on("turbolinks:load", function(){
       let board_id =  board_url[board_url.length - 1]
       let list_name = $(this).parent().siblings().children("h4").text();
       let card_text = $(this).siblings("textarea").val();
+      console.log(board_url)
       console.log(card_text)
       console.log(list_name)
       console.log(board_id)
@@ -26,6 +27,7 @@ $(document).on("turbolinks:load", function(){
   $('[data-role="btn card-name"]').click(function(event){
     console.log("已觸發")
     let card_id = $(this).children("span").text().replace(/\s+/g,"");
+    console.log(card_id)
     axios({
       method: 'get',
       url: `/lists/cards/${card_id}`,

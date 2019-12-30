@@ -1,3 +1,4 @@
+
 <% content_for :navbar do %>
   <%= render 'shared/navbar' %>
 <% end %>
@@ -29,13 +30,23 @@
   </p>
 </div>
 
-<div>
-  <% @searchuser.each do |invitation| %>
-  <h5>From user:<%= invitation.user_id %></h5>
-  <p><%= invitation.message %></p>
-  <p>Board ID:<%= invitation.board_id %></p>
-  <p>invitation ID:<%= invitation.id %></p>
-  <%= link_to "同意", agree_invite_boards_path(id: invitation.id, board_id: invitation.board_id, agree: true), method: "put", remote: true %>
-  <%= link_to "不同意", agree_invite_boards_path(id: invitation.id, board_id: invitation.board_id, agree: false), method: "put", remote: true %>
-  <% end %>
+
+<div class="card" style="width: 12rem;">
+  <div class="card-body">
+    <% @searchuser.each do |invitation| %>
+    <!-- <h5 class="card-title">Card title</h5> -->
+    <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
+    <p class="card-text"><%= invitation.message %></p>
+    <a href="#" class="card-link mx-1">
+      <%= link_to "Agree", agree_invite_boards_path(id: invitation.id, board_id: invitation.board_id, agree: true), method: "put", remote: true %>
+    </a>
+    <a href="#" class="card-link mx-1">
+      <%= link_to "Disagree", agree_invite_boards_path(id: invitation.id, board_id: invitation.board_id, agree: false), method: "put", remote: true %>
+    </a>
+    <% end %>
+  </div>
 </div>
+
+
+
+
