@@ -51,7 +51,8 @@ class BoardsController < ApplicationController
   end
 
   def searchuser
-    if @user = User.find_by(email: @email)
+    @user = User.find_by(email: @email)
+    if @board.user_ids.include?(@user.id) == false 
        @invitation = SearchUser.create(user: @user,
                                        board: @board,
                                        email: @email, 
@@ -60,6 +61,7 @@ class BoardsController < ApplicationController
        p "#{params}"
        p "-"*30
     else
+      p "#{@user.id} is already a member."
       render :template => "shared/_navbarboard"
     end
   end
