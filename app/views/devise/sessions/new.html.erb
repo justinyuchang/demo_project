@@ -1,6 +1,6 @@
 <div class="container">
-
-  <div class="row h100vh justify-content-center align-items-center">
+    <%= render "devise/shared/logo" %>
+  <div class="row justify-content-center align-items-center">
 
     <div class="col-4 shadow p-3 mb-5 bg-white rounded">
     
@@ -25,16 +25,16 @@
             <% if devise_mapping.rememberable? %>
             <%= f.check_box :remember_me, class: 'form-check-input' %>
                 <%= f.label :remember_me %>
-            <% end %>                             
+            <% end %>
               
           </div>
             
           <div class="form-grou">
 
             <%= f.submit "登錄", class: 'btn btn-light' %>
-            <div class="text-center">or</div>
 
-            <div>          
+            <div class="text-center">OR</div>
+            <div>
               <%- if devise_mapping.omniauthable? %>
                 <%- resource_class.omniauth_providers.each do |provider| %>
                 <%= link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider) , class: 'btn btn-light' %>
