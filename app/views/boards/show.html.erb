@@ -1,4 +1,3 @@
-
   <%= render "carditem" %>
   <% content_for :navbar do %>
     <%= render 'shared/navbar' %>
@@ -15,7 +14,7 @@
       <div class="list-wrapper">
         <div class='list-content box'>
           <div class="list-new">
-            <p id="list-title"><%= list.title %></p>
+            <p data-role="list-title"><%= list.title %></p>
             <span><i class="fas fa-align-justify"></i></span>
           </div>
           <div class="card-group">
@@ -29,19 +28,18 @@
   </div>
   <% end %>
 
-  <div class="list-group item">
+  <div data-role="input-local" class="list-group item">
     <div class="list-wrapper">
       <div class="list-content btn">
         <a class="list-add" href=""><span><i class="fas fa-plus"></i>新增列表</span></a>
       <form data-role="list-create">
-        <input data-role="list-title" type="text" placeholder= "請輸入標題" maxlength= "100">
-        <button data-role="btn list-create">送出</button>
+        <input data-role="api-list-title" type="text" placeholder= "請輸入標題" maxlength= "100">
+        <a data-role="btn list-create">送出</a>
         <a class="list-add" href=""><span><i class="fas fa-times"></i></span></a>
       </form>
     </div>
     </div>
 </div>
-
 
 </div>
 

@@ -10,7 +10,6 @@ class ListsController < ApplicationController
   end
   
   def new 
-    @list = List.new 
   end 
   
   def create 
@@ -30,12 +29,9 @@ class ListsController < ApplicationController
   end 
   
   def destroy
-    @list.destroy if @list
-    redirect_to lists_path
   end 
 
   private 
-
   def find_list 
     @list = List.find(params[:id])
   end 

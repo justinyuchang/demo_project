@@ -12,8 +12,8 @@ class BoardsController < ApplicationController
 
   def show
     @lists = @board.lists.all
-    @board_message = BoardMessage.new(board: @board)
-    @board_messages = @board.board_messages.includes(:user)
+    # @board_message = BoardMessage.new(board: @board)
+    # @board_messages = @board.board_messages.includes(:user)
   end
 
   def create

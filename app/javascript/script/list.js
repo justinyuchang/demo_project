@@ -1,16 +1,17 @@
 import axios from 'helpers/axios';
 $(document).on("turbolinks:load", function(){
 //list_create
-    $('[data-role="list-create"]').click(function(){
+    $('[data-role="btn list-create"]').click(function(){
         let board_url = location.pathname.split('/')
         let board_id =  board_url[board_url.length - 1]
-        let list_title = $('[data-role="list-title"]').val();
+        let api_list_title = $('[data-role="api-list-title"]').val();
+        console.log(api_list_title)
         axios({
             method: 'post',
             url: `/boards/${board_id}/lists`,
             data: {
               list: {
-                title: list_title
+                title: api_list_title
               }
             }
           })
