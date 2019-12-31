@@ -1,10 +1,13 @@
 @import "reset.scss"; 
 @import "bootstrap/scss/bootstrap";
+@import "@fortawesome/fontawesome-free";
 .lists{
     .btn{
         width: 300px;
         margin: 15px;
     }
 }
-
+.h100vh{
+    height: 100vh;
+}
 
