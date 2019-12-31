@@ -70,7 +70,7 @@
     <span class="fas fa-user-edit"></span>
     個人看板
   </h3>
-  <% @boards.each do |board| %>
+  <% @private_boards.each do |board| %>
     <ul class="personal-boards">
       <li>
         <%= link_to board_path(board.id), class: 'card-body' do %>
@@ -87,7 +87,7 @@
     <span class="fas fa-users"></span>
     團隊看板
   </h3>
-  <% @boards.each do |board| %>
+  <% @public_boards.each do |board| %>
     <ul class="team-boards">
       <li>
         <%= link_to board_path(board.id), class: 'card-body' do %>

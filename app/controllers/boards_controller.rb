@@ -5,6 +5,8 @@ class BoardsController < ApplicationController
 
   def index
     @boards = current_user.boards.all
+    @private_boards = current_user.boards.where(visibility: "私人")
+    @public_boards = current_user.boards.where(visibility: "團隊")
     @searchuser = current_user.search_users.all
     @board = Board.new
   end
@@ -22,7 +24,6 @@ class BoardsController < ApplicationController
     # @board = current_user.boards.build(board_params)
     @board = Board.new(board_params)
     @board.users = [current_user] 
-
     if @board.save
       redirect_to board_path(@board.id), notice: "新增成功!"
     else
