@@ -1,56 +1,53 @@
-.list-mod-add{
-    width: 300px;
+html,body{
+  height: 100%;
+  .wrapper {
+    display: flex;
+    flex-direction: column;
     height: 100%;
-    border-radius: 5px;
-    background-color: hsla(0, 0%, 100%, 0.24);
-    margin: 15px;
-    padding: 6px 8px;
-    display: inline-block;
-    cursor: pointer;
-    form{
-        display: block;
-        .list-add{
-            color: rgb(255, 255, 255);
-            display: block;
-            text-decoration: none;
-            span{
-                display: block;
-                i{
-                    padding-right: 5px;
-                }
-            }
-        }
-        input{
-            display: block;
-            width: 100%;
-        }
-    }
-
-}
-.list-mod-add:hover{
-    background-color: hsla(0, 0%, 100%, 0.34);
-}
-///////////////////////////////////////////////////////
-.list-mod-group{
-    width: 270px;
+  }
+  .navbarDiv{
     height: auto;
-    border-radius: 5px;
-    background-color: hsla(0, 0%, 100%, 0.74);
-    margin: 15px;
-    padding: 6px 8px;
-    p{
-        display: block;
+  }
+  .parentDiv{
+    width: 100%;
+    position: relative;
+    flex-grow: 1;
+  }
+}
+
+.list-container {
+  position: absolute;
+  display: flex;
+  top:0;
+  bottom: 0;
+  overflow-x:  scroll;
+  width: 100%;
+    .list-group.item {
+      flex-grow: 1;
+      .list-content{
+        width: 300px;
+        height: auto;
+    }
+  }
+}
+//
+.list-content.btn{
+  width: 100%;
+  border-radius: 5px;
+  margin: 3px;
+  padding: 0 5px;
+  text-align:left;
+  background-color: hsla(0, 0%, 100%, 0.24);
+    form{
+      input{
         width: 100%;
-        font-size: 16px;
+      }
     }
-    span{
-        display: block;
-    }
-    .card-create{
-        .card-add{
-            i{
-                margin-right: 5px;
-            }
-        }
-    }
+}
+.list-content.box{
+  width: 100%;
+  border-radius: 5px;
+  margin: 3px 10px;
+  padding: 0 5px;
+  background-color: hsla(0, 0%, 100%, 0.74);
 }

@@ -1,59 +1,52 @@
-<%= render "carditem" %>
-<% content_for :navbar do %>
-  <%= render 'shared/navbar' %>
-<% end %>
 
-<% content_for :boardheader do %>
-  <%= render 'shared/boardheader' %>
-<% end %>
+  <%= render "carditem" %>
+  <% content_for :navbar do %>
+    <%= render 'shared/navbar' %>
+  <% end %>
+  
+  <% content_for :boardheader do %>
+    <%= render 'shared/boardheader' %>
+  <% end %>
 
-<div class="list-box">
-    <div class="d-flex">
-        <div class="list-card-group d-flex" id="list-card-group">
-            <% @lists.each do |list| %>
-            <div class="list-mod-group">
-                <div class="d-flex">
-                    <p id="list-title"><%= list.title %></p>
-                    <span><i class="fas fa-align-justify"></i></span>
-                </div>
-                <div class="card-group">
-                    <div>
-                        <span></span>
-                    </div>
-                </div>
-                <div class="card-create">
-                    <a class="card-add" href=""><span><i class="fas fa-plus"></i>新增卡片</span></a>
-                </div>
-            </div>
-            <% end %>
+<div class="list-container">
+
+  <% @lists.each do |list| %>
+  <div class="list-group item">
+      <div class="list-wrapper">
+        <div class='list-content box'>
+          <div class="list-new">
+            <p id="list-title"><%= list.title %></p>
+            <span><i class="fas fa-align-justify"></i></span>
+          </div>
+          <div class="card-group">
+              <span></span>
+          </div>
+          <div class="card-create">
+              <a class="card-add" href=""><span><i class="fas fa-plus"></i>新增卡片</span></a>
+          </div>
         </div>
- 
-        <div class="list-create list-mod-add">
-            <form>
-                <a class="list-add" href=""><span><i class="fas fa-plus"></i>新增列表</span></a>
-                <input data-role="list-title" type="text" placeholder= "請輸入標題" maxlength= "100">
-            </form>
-            <div data-role="list-create">
-                <button data-role="btn list-create">送出</button>
-                <a class="list-add" href=""><span><i class="fas fa-times"></i></span></a>
-            </div>
-        </div>
+      </div>
+  </div>
+  <% end %>
+
+  <div class="list-group item">
+    <div class="list-wrapper">
+      <div class="list-content btn">
+        <a class="list-add" href=""><span><i class="fas fa-plus"></i>新增列表</span></a>
+      <form data-role="list-create">
+        <input data-role="list-title" type="text" placeholder= "請輸入標題" maxlength= "100">
+        <button data-role="btn list-create">送出</button>
+        <a class="list-add" href=""><span><i class="fas fa-times"></i></span></a>
+      </form>
+    </div>
     </div>
 </div>
 
-<template id="list-template">
-    <div class="list-mod-group">
-        <div class="d-flex">
-            <p id="list-title"></p>
-            <span><i class="fas fa-align-justify"></i></span>
-        </div>
-        <div class="card-group">
-            <div>
-                <span></span>
-            </div>
-        </div>
-        <div class="card-create">
-            <a class="card-add" href=""><span><i class="fas fa-plus"></i>新增卡片</span></a>
-        </div>
-    </div>
-</template>
+
+</div>
+
+
+
+
+
+
