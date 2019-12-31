@@ -24,10 +24,8 @@ class BoardsController < ApplicationController
     @board.users = [current_user] 
 
     if @board.save
-      # 成功
       redirect_to board_path(@board.id), notice: "新增成功!"
     else
-      # 失敗
       render :new, notice: "請填寫標題及狀態"
     end
   end
@@ -37,10 +35,8 @@ class BoardsController < ApplicationController
 
   def update
     if @board.update_attributes(board_params)
-      # 成功
       redirect_to boards_path, notice: "資料更新成功!"
     else
-      # 失敗
       render :edit
     end
   end

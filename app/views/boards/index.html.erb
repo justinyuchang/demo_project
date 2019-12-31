@@ -1,31 +1,109 @@
-<% content_for :navbar do %>
-  <%= render 'shared/navbar' %>
-<% end %>
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Smashello</title>
+    <style>
+      p {
+        margin: 10px 5px 20px;
+        font-size: 24px;
+        color: #2068A2;
+      }
+      h3 {
+        color: #162B4D;
+        line-height: 24px;
+        margin: 4px 0 0;
+        font-size: 16px;
+        font-weight: 700;
+      }
+      h3 span {
+        margin: 5px;
+      }
 
-<%= render "boardcreate", board: @board %>
+      .personal-boards, .team-boards {
+        display: inline-block;
+        flex-flow: column wrap;
+      }
 
-<h1 class="d-block" style="margin: 20px; color: #2779BF;">Boards<%= notice %></h1>
+      .all-boards-container {
+        display: inline-block;
+        flex-flow: column wrap; 
+      }
+      .card-title {
+        color: white;
+      }
+      .card-body {
+        display: block;
+        margin: 6px;
+        border-radius: 5px;
+        padding: 15px;
+        width: 200px;
+        height: 100px;
+        background-color: #2068A2;
+      }
+      .card-create {
+        margin: 6px;
+        border-radius: 5px;
+        padding: 15px;
+        width: 200px;
+        height: 100px;
+        background-color: #F0F2F4;
+      }
+      .board-create {
+        text-align: center;
+        margin: 10px;
+      }
+    </style>
+    <% content_for :navbar do %>
+    <%= render 'shared/navbar' %>
+    <% end %>
 
-<% @boards.each do |board| %>
-<div class="card text-white m-3 float-left border-0" style="width: 15rem; height: 10rem">
-  <div class="card-body" style="background-color: #2068A2; ;border-radius:5px">
-    <h5 class="card-title">
-      <%= link_to board.title, board_path(board.id),  class: 'text-white' %>
-    </h5>
-    <p class="card-state">
-      <%= board.visibility %>
-    </p>
-    <div class="card-button d-flex justify-content-end">
-      <%= link_to "編輯", edit_board_path(board), class: 'btn btn-light btn-sm m-1' %>
-      <%= link_to "刪除", board_path(board), method: "delete", data: { confirm: "確認要刪除Board嗎？" }, class: 'btn btn-light btn-sm m-1' %>
-    </div>
-  </div>
+    <%= render "boardcreate", board: @board %>
+</head>
+<body>
+  <p><%= notice %></p>
+
+<div class="all-boards-container">
+  <h3>
+    <span class="fas fa-user-edit"></span>
+    個人看板
+  </h3>
+  <% @boards.each do |board| %>
+    <ul class="personal-boards">
+      <li>
+        <%= link_to board_path(board.id), class: 'card-body' do %>
+        <span class="card-title">
+          <%= board.title %>
+        </span>
+        <% end %>
+      </li>
+    </ul>
+  <% end %>
 </div>
-<% end %>
+<div class="all-boards-container">
+  <h3>
+    <span class="fas fa-users"></span>
+    團隊看板
+  </h3>
+  <% @boards.each do |board| %>
+    <ul class="team-boards">
+      <li>
+        <%= link_to board_path(board.id), class: 'card-body' do %>
+        <span class="card-title">
+          <%= board.title %>
+        </span>
+        <% end %>
+      </li>
+    </ul>
+  <% end %>
+</div>
 
-<div class="card m-3 float-left border-0 rounded" style="width: 15rem; height: 10rem; background-color: #F0F2F4">
-  <p class="text-center mt-5">
-    <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#createBoard">新增Board ＋</a>
+
+<div class="card-create">
+  <p class="board-create">
+    <a href="" class="btn mb-4" data-toggle="modal" data-target="#createBoard">新增Board ＋</a>
   </p>
 </div>
 
@@ -39,3 +117,10 @@
   <%= link_to "不同意", agree_invite_boards_path(id: invitation.id, board_id: invitation.board_id, agree: false), method: "put", remote: true %>
   <% end %>
 </div>
+    
+</body>
+</html>
+
+
+
+
