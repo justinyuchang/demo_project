@@ -9,7 +9,6 @@ Rails.application.routes.draw do
     end
     collection do
       put :agree_invite
-      # delete :reject_invite 
     end
   end
 
@@ -17,7 +16,7 @@ Rails.application.routes.draw do
 
   scope :lists do
     resources :cards, except: [:index] do
-      # resources :comments, only: [:create, :destroy]
+      resources :comments, only: [:create, :destroy]
     end
   end 
 

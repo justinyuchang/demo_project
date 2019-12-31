@@ -4,14 +4,11 @@ class CommentsController < ApplicationController
   
 
   def create 
-    @comment = @card.comments.build(comment_params)
-    if @comment.save 
-      respond_to do |format|
-        format.js 
-      end
-    else
-      redirect_to card_path(@card.id)
-    end
+    p "="*50
+    p "#{comment_params}"
+    p "="*50
+    @comment = @card.comments.create(comment_params)
+    render json: @comment
   end 
 
   def destroy
@@ -22,8 +19,7 @@ class CommentsController < ApplicationController
   private 
   
   def comment_params
-    params.require(:comment).permit(:content,
-                                    :card_id)
+    params.require(:comment).permit(:content)
                             .merge(user: current_user)
   end
 

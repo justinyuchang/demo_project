@@ -1,7 +1,7 @@
 import axios from 'helpers/axios';
 $(document).on("turbolinks:load", function(){
   ////////////////////////////////////////
-    $('[data-role="card-button"]').click(function(){
+    $('[data-role ="card-button"]').click(function(){
       console.log("已觸發")
       let board_url = location.pathname.split('/')
       let board_id =  board_url[board_url.length - 1]
@@ -13,7 +13,7 @@ $(document).on("turbolinks:load", function(){
       console.log(board_id)
       axios({
           method: 'post',
-          url: '/lists/cards',
+          url: `/lists/cards`,
           data: {
             card: {
               card_text: card_text,
@@ -24,7 +24,7 @@ $(document).on("turbolinks:load", function(){
         })
     });
 /////////////////////////////////////////////
-  $('[data-role="btn card-name"]').click(function(event){
+  $('[data-role ="btn card-name"]').click(function(event){
     console.log("已觸發")
     let card_id = $(this).children("span").text().replace(/\s+/g,"");
     console.log(card_id)
@@ -37,22 +37,22 @@ $(document).on("turbolinks:load", function(){
       console.log(response.data)
       let card_item = response.data
       console.log(card_item)
-      $('[data-role = "card-focus-id"]').text(`${card_item.id}`)
-      $('[data-role = "card-title"]').text(`${card_item.title}`)
-      $('[data-role = "card-description"]').val(`${card_item.description}`)
-      $('[data-role="card-due-date"]').val(`${card_item.due_date}`)
-      $('[data-role="card-archived"]').val(`${card_item.archived}`)
-      $('[data-role="card-tags"]').val(`${card_item.tags}`)
+      $('[data-role ="card-focus-id"]').text(`${card_item.id}`)
+      $('[data-role ="card-title"]').text(`${card_item.title}`)
+      $('[data-role ="card-description"]').val(`${card_item.description}`)
+      $('[data-role ="card-due-date"]').val(`${card_item.due_date}`)
+      $('[data-role ="card-archived"]').val(`${card_item.archived}`)
+      $('[data-role ="card-tags"]').val(`${card_item.tags}`)
     })
-  });
+  })
 /////////////////////////////////////////////
-  $('[data-role="card-update"]').click(function(){
+  $('[data-role ="card-update"]').click(function(){
     console.log("已觸發")
-    let card_id = $('[data-role = "card-focus-id"]').text()
-    let card_description = $('[data-role = "card-description"]').val()
-    let card_due_date = $('[data-role="card-due-date"]').val()
-    let card_archived = $('[data-role="card-archived"]').val()
-    let card_tags = $('[data-role="card-tags"]').val()
+    let card_id = $('[data-role ="card-focus-id"]').text()
+    let card_description = $('[data-role ="card-description"]').val()
+    let card_due_date = $('[data-role ="card-due-date"]').val()
+    let card_archived = $('[data-role ="card-archived"]').val()
+    let card_tags = $('[data-role ="card-tags"]').val()
     console.log(card_id)
     console.log(card_description)
     console.log(card_due_date)
@@ -68,7 +68,24 @@ $(document).on("turbolinks:load", function(){
         tags: card_tags
       }
     })
-
+  })
+/////////////////////////////////////////////
+  $('[data-role ="comment-send"]').click(function(){
+    console.log("OKOK")      
+    let card_id = $('[data-role ="card-focus-id"]').text()
+    let card_comment = $(this).siblings("textarea").val();    
+    console.log(card_id)
+    console.log(card_comment)
+    axios({
+      method: 'post', 
+      url: `/lists/cards/${card_id}/comments`,
+      data: {
+        content: card_comment
+      }
+    })
+    .then(function(){
+      $('[data-role ="comment-area"]').append(`${card_comment}`)
+    })
   })
 /////////////////////////////////////////////
 })
