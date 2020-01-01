@@ -35,14 +35,21 @@ $(document).on("turbolinks:load", function(){
     .then(function (response) {
       console.log(response)
       console.log(response.data)
-      let card_item = response.data
+      let card_item = response.data.card
       console.log(card_item)
+      let comments = response.data.comments.map(comment => comment.content)
+      console.log(comments)
+      let comment = comments; 
+        for (var i = 0; i < comments.length; i++) {
+        console.log(comment[i]);
+      }
       $('[data-role ="card-focus-id"]').text(`${card_item.id}`)
       $('[data-role ="card-title"]').text(`${card_item.title}`)
       $('[data-role ="card-description"]').val(`${card_item.description}`)
       $('[data-role ="card-due-date"]').val(`${card_item.due_date}`)
       $('[data-role ="card-archived"]').val(`${card_item.archived}`)
       $('[data-role ="card-tags"]').val(`${card_item.tags}`)
+      // $('[data-role ="comment-area"]').val(`<div>${comment}</div>`)
     })
   })
 /////////////////////////////////////////////
@@ -71,7 +78,6 @@ $(document).on("turbolinks:load", function(){
   })
 /////////////////////////////////////////////
   $('[data-role ="comment-send"]').click(function(){
-    console.log("OKOK")      
     let card_id = $('[data-role ="card-focus-id"]').text()
     let card_comment = $(this).siblings("textarea").val();    
     console.log(card_id)
@@ -84,7 +90,10 @@ $(document).on("turbolinks:load", function(){
       }
     })
     .then(function(){
-      $('[data-role ="comment-area"]').append(`${card_comment}`)
+      $('[data-role ="comment-area"]').append(`<div>${card_comment}</div>`)
+    })
+    .then(function(){
+      $('[data-role ="comment-input"]').val("")
     })
   })
 /////////////////////////////////////////////

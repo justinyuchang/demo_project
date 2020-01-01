@@ -1,47 +1,61 @@
 <div class="modal fade" id="Carditem" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
-    <div class="modal-content col mt-5 p-5 text-info">
+    <div class="modal-content col pt-3 px-1 text-secondary">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <i class="far fa-window-maximize"></i>
+            <h5 data-role="card-title" class="d-inline-block mb-3 ml-1 font-weight-bold text-dark"></h5>
+            <span data-role="card-focus-id" class="d-none"></span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-9">
+            <div class="form-group">
+              <i class="fas fa-align-left"></i>
+              <label class="ml-1 text-dark" for="card-description">Description</label>
+              <textarea data-role="card-description" type="text" class="form-control" id="card-description" placeholder="Add more detail..."></textarea>
+            </div>
+            <!-- Comment Area -->
+            <div class="form-group">
+              <textarea data-role="comment-input" class="form-control" placeholder="Write a comment..."></textarea>
+              <button data-role="comment-send" type="submit" class="btn btn-sm btn-primary mt-1">Send</button>
+            </div>
 
-      <h2 data-role="card-title" class="mb-4"></h2>
-      <span data-role="card-focus-id" class="d-none"></span>
+            <div data-role="comment-area">
+              <div></div>
+            </div>
 
-      <div class="form-group">
-        <label for="card-description">description</label>
-        <input data-role="card-description" type="text" class="form-control" id="card-description" placeholder="">
+          </div>
+          <!-- Side Bar -->
+          <div class="col-3">
+            <span class="text-muted small">Add to card</span>
+            <div class="input-group-sm">
+              <label for="card-due-date">Due date</label>
+              <input data-role="card-due-date" type="date" class="form-control" id="card-due-date">
+            </div>
+
+            <!-- <div class="form-group">
+              <label for="card-archived">card-archived</label>
+              <select data-role="card-archived" id="card-archived" class="form-control">
+                <option selected>true</option>
+                <option>false</option>
+              </select>
+            </div> -->
+
+            <div class="input-group-sm">
+              <label for="card-tags">Card Tag</label>
+              <select data-role="card-tags" id="card-tags" class="form-control">
+                <option selected>red</option>
+                <option>blue</option>
+              </select>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <div class="form-group">
-        <label for="card-due-date">due_date</label>
-        <input data-role="card-due-date" type="date" class="form-control" id="card-due-date">
-      </div>
-
-      <div class="form-group">
-        <label for="card-archived">card-archived</label>
-        <select data-role="card-archived" id="card-archived" class="form-control">
-          <option selected>true</option>
-          <option>false</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="card-tags">card-tags</label>
-        <select data-role="card-tags" id="card-tags" class="form-control">
-          <option selected>red</option>
-          <option>blue</option>
-        </select>
-      </div>
-
       <div class="form-group d-flex justify-content-end">
         <button data-role="card-update" type="submit" class="btn btn-primary">儲存</button>
-      </div>
-
-      <!-- Comment Area -->
-      <div class="form-group">
-        <textarea data-role="comment-input" class="form-control" placeholder="Write a comment..."></textarea>
-        <button data-role="comment-send" type="submit" class="btn btn-primary">Send</button>
-      </div>
-      
-      <div data-role="comment-area"></div>
+      </div>      
     </div>
   </div>
 </div>

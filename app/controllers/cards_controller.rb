@@ -6,7 +6,11 @@ class CardsController < ApplicationController
     p "--------------#{params}----------------"
     p "--------------#{params[:id]}----------------"
     @card_item = Card.find(params[:id])
-    render json: @card_item
+    @comments = @card_item.comments.all
+    p "="*50
+    p "#{@comments}"
+    p "="*50
+    render json: { card: @card_item, comments: @comments}
   end
 
   def create
