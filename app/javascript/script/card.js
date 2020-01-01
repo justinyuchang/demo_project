@@ -1,18 +1,20 @@
 import axios from 'helpers/axios';
-import board_id from 'helpers/board_url';
 
 $(document).on("turbolinks:load", function(){
 //card_create
     $('[data-role="card-create-btn"]').click(function(){
+      const board_url = location.pathname.split('/')
+      const board_id =  board_url[board_url.length - 1]
       let list_id = $(this).parents("#card-wrapper").siblings("#list-item").find("#list-id").attr("val")
       let card_text = $(this).parents("#card-btn").siblings("#card-input").find("textarea").val()
       axios({
           method: 'post',
           url: '/lists/cards',
           data: {
+            board_id: board_id,
             card: {
               title: card_text,
-              list_id: list_id
+              list_id: list_id,
             }
           }
         })

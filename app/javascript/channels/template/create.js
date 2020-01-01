@@ -3,7 +3,7 @@ const list_create = `<div>
                                           <div class="list-wrapper">
                                             <div class='list-content box'>
                                               <div class="list-item">
-                                                <span data-role="list-title" class="list-view"><%= list.title %></span>
+                                                <span data-role="list-title" class="list-view"></span>
                                                 <span class="list-men"><i class="fas fa-align-justify"></i></span>
                                               </div>
                                               <div class="card-wrapper">
