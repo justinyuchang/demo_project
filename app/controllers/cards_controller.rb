@@ -1,5 +1,5 @@
 class CardsController < ApplicationController
-  before_action :load_list_card_params, only: [:create]
+  before_action :card_params, only: [:create]
   before_action :load_card_items_params, only: [:update]
   
   def show
@@ -8,7 +8,8 @@ class CardsController < ApplicationController
   end
 
   def create
-    @card = @list_id.cards.create(title: @card_title)
+    @card = Card.create(card_params)
+    
   end
   
   def edit 
@@ -22,11 +23,8 @@ class CardsController < ApplicationController
   end 
 
   private
-  def  load_list_card_params
-    @card_params = params.require(:card).permit(:board_id, :card_text, :list_name)
-    @board_id = Board.find(@card_params[:board_id])
-    @list_id = @board_id.lists.find_by(title: @card_params[:list_name])
-    @card_title = @card_params[:card_text]
+  def  card_params
+    params.require(:card).permit(:title, :list_id)
   end
 
   def load_card_items_params
