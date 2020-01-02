@@ -1,0 +1,102 @@
+html,body{
+  height: 100%;
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .navbarDiv{
+    height: auto;
+  }
+  .parentDiv{
+    width: 100%;
+    position: relative;
+    flex-grow: 1;
+  }
+}
+
+.list-container {
+  position: absolute;
+  display: flex;
+  top:0;
+  bottom: 0;
+  overflow-x:  scroll;
+  width: 100%;
+    .list-group.item {
+      flex-grow: 1;
+      padding: 15px 5px 0px 0px;
+      .list-content{
+        width: 300px;
+        height: auto;
+    }
+  }
+}
+//list-create
+.list-content.btn{
+  width: 100%;
+  border-radius: 5px;
+  margin: 3px;
+  padding: 0 5px;
+  text-align:left;
+  background-color: hsla(0, 0%, 100%, 0.24);
+    form{
+      input.api-inp{
+        width: 100%;
+      }
+    }
+}
+//list-group
+.list-content.box{
+  width: 100%;
+  border-radius: 5px;
+  margin: 3px 10px;
+  padding: 5px 5px;
+  background-color: hsla(0, 0%, 100%, 0.74);
+  .list-item{
+    span.list-view{
+      width: 90%;
+      display: inline-block;
+      padding-left: 0.5em;
+    }
+    span.list-men{
+      width: 20px;
+      display: inline-block;
+    }
+  }
+
+  .card-wrapper{
+    .card-group{
+      width: 100%;
+      height: auto;
+        .cart-item{
+          width: 100%;
+          height: 30px;
+          padding: 3px 3px 0px 9px;
+          margin: 10px 6px 0px 6px;
+          border-radius: 5px;
+          background-color: hsla(0, 0%, 100%, 0.94);
+          box-shadow: 0px 4px 3px #ccc;
+          a{
+            display: block;
+          }
+        }
+    }
+    .card-create.input{
+      width: 100%;
+      padding:10px 6px 0px 6px;
+      textarea{
+        display: block;
+        background-color: hsla(0, 0%, 100%, 0.94);
+        border-radius: 5px;
+        border-style: none;
+        box-shadow: 0px 1px 3px #ccc;
+        width:100%;
+        overflow-wrap: break-word;
+        resize : none;
+      }
+    }
+    .card-create.btn{
+      padding-left: 0.9em;
+    }
+  }
+}
