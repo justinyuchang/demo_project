@@ -1,8 +1,6 @@
 class CommentsController < ApplicationController
   before_action :find_card, only: [:create, :destroy]
 
-  
-
   def create 
     p "="*50
     p "#{comment_params}"
