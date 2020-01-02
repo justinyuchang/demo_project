@@ -1,5 +1,4 @@
 class BoardsController < ApplicationController
-  # devise方法:當前使用者=> current_user
   before_action :find_board, only: [:edit, :update, :destroy, :show, :searchuser]
   before_action :search_params, only: [:searchuser]
 
@@ -8,16 +7,15 @@ class BoardsController < ApplicationController
     @private_boards = current_user.boards.where(visibility: "Private")
     @public_boards = current_user.boards.where(visibility: "Team")
     @searchuser = current_user.search_users.all
-    @board = Board.new
   end
 
   def new
   end
 
   def show
-    @lists = @board.lists.all
-    @board_message = BoardMessage.new(board: @board)
-    @board_messages = @board.board_messages.includes(:user)
+    @lists = @board.lists.includes(:cards)
+    # @board_message = BoardMessage.new(board: @board)
+    # @board_messages = @board.board_messages.includes(:user)
   end
 
   def create
@@ -28,7 +26,7 @@ class BoardsController < ApplicationController
     if @board.save
       redirect_to board_path(@board.id), notice: "新增成功!"
     else
-      render :new, notice: "請填寫標題"
+      render :new, notice: "請填寫標題及狀態"
     end
   end
 
@@ -50,13 +48,10 @@ class BoardsController < ApplicationController
 
   def searchuser
     if @user = User.find_by(email: @email)
-       @invitation = SearchUser.create(user: @user,
-                                       board: @board,
-                                       email: @email, 
-                                       message: @message)
-       p "-"*30
-       p "#{params}"
-       p "-"*30
+      @invitation = SearchUser.create(user: @user,
+                                                                          board: @board,
+                                                                          email: @email, 
+                                                                          message: @message)
     else
       render :template => "shared/_navbarboard"
     end
@@ -69,9 +64,6 @@ class BoardsController < ApplicationController
 
     if @reply == "true"
       @board.users << [current_user]
-      p "-"*50
-      p "You are now join to #{@board.title}"
-      p "-"*50
       @invitation.destroy
     else
       @invitation.destroy

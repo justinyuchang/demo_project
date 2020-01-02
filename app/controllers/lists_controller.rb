@@ -10,12 +10,12 @@ class ListsController < ApplicationController
   end
   
   def new 
-    @list = List.new 
   end 
   
   def create 
     @list = @board.lists.create(list_params)
-    BoardsChannel.broadcast_to  @board, @list
+    @list_channel = {id: @list.id,title: @list.title, stats: "list_create"}
+    BoardsChannel.broadcast_to(@board, @list_channel)
   end 
   
   def edit 
@@ -30,12 +30,9 @@ class ListsController < ApplicationController
   end 
   
   def destroy
-    @list.destroy if @list
-    redirect_to lists_path
   end 
 
   private 
-
   def find_list 
     @list = List.find(params[:id])
   end 

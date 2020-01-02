@@ -1,5 +1,7 @@
 @import "reset.scss"; 
+@import "list_add_type.scss"; 
 @import "bootstrap/scss/bootstrap";
+
 .lists {
     .btn{
         width: 300px;
@@ -51,8 +53,12 @@ p span {
     height: 100px;
     background-color: #F0F2F4;
 }
-  .board-create {
+.board-create {
     text-align: center;
     margin: 10px;
+}
+
+body {
+    background-color: rgb(179, 179, 179);
 }
 
