@@ -2,7 +2,7 @@ import axios from 'helpers/axios';
 
 $(document).on("turbolinks:load", function(){
 
-    $('[data-role="card-create-btn"]').on("click", function(event){
+    $('[data-role="js-list"]').on("click",'[data-role="card-create-btn"]', function(event){
       event.preventDefault();
       const board_url = location.pathname.split('/')
       const board_id =  board_url[board_url.length - 1]
