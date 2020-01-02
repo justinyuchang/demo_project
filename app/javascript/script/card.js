@@ -1,6 +1,7 @@
 import axios from 'helpers/axios';
+
 $(document).on("turbolinks:load", function(){
-  ////////////////////////////////////////
+// Create card 
     $('[data-role ="card-button"]').click(function(){
       console.log("已觸發")
       let board_url = location.pathname.split('/')
@@ -23,7 +24,7 @@ $(document).on("turbolinks:load", function(){
           }
         })
     });
-/////////////////////////////////////////////
+// Click card and get data from server
   $('[data-role ="btn card-name"]').click(function(event){
     console.log("已觸發")
     let card_id = $(this).children("span").text().replace(/\s+/g,"");
@@ -36,12 +37,15 @@ $(document).on("turbolinks:load", function(){
       console.log(response)
       console.log(response.data)
       let card_item = response.data.card
-      console.log(card_item)
+      console.log(card_item) 
+      let card_comment = response.data.comments
+      console.log(card_comment)
+// Get comment's content 
       let comments = response.data.comments.map(comment => comment.content)
       console.log(comments)
       let comment = comments; 
         for (var i = 0; i < comments.length; i++) {
-        console.log(comment[i]);
+        $('[data-role ="comment-area"]').append(`<div class="bg-light mb-1">${comment[i]}</div>`);
       }
       $('[data-role ="card-focus-id"]').text(`${card_item.id}`)
       $('[data-role ="card-title"]').text(`${card_item.title}`)
@@ -50,8 +54,8 @@ $(document).on("turbolinks:load", function(){
       $('[data-role ="card-archived"]').val(`${card_item.archived}`)
       $('[data-role ="card-tags"]').val(`${card_item.tags}`)
     })
-  })
-/////////////////////////////////////////////
+  });
+// Update card 
   $('[data-role ="card-update"]').click(function(){
     console.log("已觸發")
     let card_id = $('[data-role ="card-focus-id"]').text()
@@ -74,8 +78,8 @@ $(document).on("turbolinks:load", function(){
         tags: card_tags
       }
     })
-  })
-/////////////////////////////////////////////
+  });
+// Send Comment
   $('[data-role ="comment-send"]').click(function(){
     let card_id = $('[data-role ="card-focus-id"]').text()
     let card_comment = $(this).siblings("textarea").val();    
@@ -89,11 +93,11 @@ $(document).on("turbolinks:load", function(){
       }
     })
     .then(function(){
-      $('[data-role ="comment-area"]').append(`<div>${card_comment}</div>`)
+      $('[data-role ="comment-area"]').append(`<div class="bg-light mb-1">${card_comment}</div>`)
     })
     .then(function(){
       $('[data-role ="comment-input"]').val("")
     })
-  })
+  });
 /////////////////////////////////////////////
 })

@@ -6,7 +6,7 @@ class CardsController < ApplicationController
     p "--------------#{params}----------------"
     p "--------------#{params[:id]}----------------"
     @card_item = Card.find(params[:id])
-    @comments = @card_item.comments.all
+    @comments = @card_item.comments
     p "="*50
     p "#{@comments}"
     p "="*50
