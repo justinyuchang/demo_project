@@ -30,6 +30,7 @@ $(document).on("turbolinks:load", function(){
   $('[data-role="btn card-name"]').click(function(event){
     console.log("已觸發")
     let card_id = $(this).children("span").text().replace(/\s+/g,"");
+    console.log(card_id)
     axios({
       method: 'get',
       url: `/lists/cards/${card_id}`,
