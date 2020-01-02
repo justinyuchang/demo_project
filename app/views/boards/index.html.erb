@@ -1,8 +1,7 @@
+<%= render "boardcreate", board: @board %>
 <% content_for :navbar do %>
   <%= render 'shared/navbar' %>
 <% end %>
-
-
 
 <p class="board-notice"><%= notice %></p>
 
@@ -11,7 +10,6 @@
     <span class="fas fa-user-edit"></span>
     個人看板
   </p>
-
   <% @private_boards.each do |board| %>
     <ul class="personal-boards">
       <li>
@@ -42,7 +40,6 @@
     </ul>
   <% end %>
 </div>
-
 
 <div class="card-create">
   <p class="board-create">
