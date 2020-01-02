@@ -5,9 +5,8 @@
     </div>
 
     <div class="col border mt-5 p-5 text-info ">
-      <h2 class="mb-4">新增Board</h2>
-      <%= notice %>
-      <%= render "form", board: @board %>
+      <p class="mb-4">請填寫標題及狀態</p>
+      <%= render "boardcreate", board: @board %>
       <%= link_to '回Board列表', boards_path, class: 'btn btn-light' %>
     </div>
     
