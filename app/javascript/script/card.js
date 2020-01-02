@@ -48,7 +48,7 @@ $(document).on("turbolinks:load", function(){
       console.log(comments)
       $('[data-role ="comment-area"]').append(`<div class="bg-light mb-1">${comments}</div>`);
       $('[data-role ="card-focus-id"]').text(`${card_item.id}`)
-      $('[data-role ="card-title"]').text(`${card_item.title}`)
+      $('[data-role ="card-inner_title"]').text(`${card_item.title}`)
       $('[data-role ="card-description"]').val(`${card_item.description}`)
       $('[data-role ="card-due-date"]').val(`${card_item.due_date}`)
       $('[data-role ="card-archived"]').val(`${card_item.archived}`)
