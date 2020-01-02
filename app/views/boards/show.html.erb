@@ -25,7 +25,7 @@
               <% list.cards.each do |card| %>
               <div class="cart-item">
                 <input data-role="card-id" type="hidden" val= "<%= card.id %>">
-                <a data-role="card-title" href=""><%= card.title %></a>
+                <a data-role="card-title" href="" data-toggle="modal" data-target="#Carditem"><%= card.title %></a>
               </div>
               <% end %>
             </div>

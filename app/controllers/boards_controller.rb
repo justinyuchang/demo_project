@@ -4,6 +4,9 @@ class BoardsController < ApplicationController
 
   def index
     @boards = current_user.boards.all
+    @board = Board.new()
+    @private_boards = current_user.boards.where(visibility: "Private")
+    @public_boards = current_user.boards.where(visibility: "Team")
     @searchuser = current_user.search_users.all
   end
 
@@ -45,11 +48,12 @@ class BoardsController < ApplicationController
   end
 
   def searchuser
-    if @user = User.find_by(email: @email)
-      @invitation = SearchUser.create(user: @user,
-                                                                          board: @board,
-                                                                          email: @email, 
-                                                                          message: @message)
+    @user = User.find_by(email: @email)
+    if @board.user_ids.include?(@user.id) == false 
+       @invitation = SearchUser.create(user: @user,
+                                       board: @board,
+                                       email: @email, 
+                                       message: @message)
     else
       render :template => "shared/_navbarboard"
     end
