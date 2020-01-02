@@ -1,12 +1,25 @@
 @import "reset.scss"; 
 @import "list_add_type.scss"; 
 @import "bootstrap/scss/bootstrap";
+@import "@fortawesome/fontawesome-free";
 
 .lists {
     .btn{
         width: 300px;
         margin: 15px;
     }
+
+}
+.fullversion{
+    width: 100vw;
+    height: 100vh;
+}
+.rootbg{
+    background: linear-gradient(87deg, rgba(100, 167, 189, 1)36%, rgba(129, 235, 185, 0.8)90%);
+    background: -moz-linear-gradient(87deg, rgba(100, 167, 189, 1)36%, rgba(129, 235, 185, 0.8)90%);
+    background: -webkit-linear-gradient(87deg, rgba(100, 167, 189, 1)36%, rgba(129, 235, 185, 0.8)90%);
+    background: -o-linear-gradient(87deg, rgba(100, 167, 189, 1)36%, rgba(129, 235, 185, 0.8)90%);
+}
 }
 .board-notice {
     margin: 10px 5px 20px;
@@ -61,5 +74,3 @@ p span {
 body {
     background-color: rgb(179, 179, 179);
 }
-
-

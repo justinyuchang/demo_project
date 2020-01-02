@@ -1,53 +1,57 @@
-<div class="container">
+<body class="container fullversion rootbg">
+    <%= render "devise/shared/logo" %>
+  <div class="row justify-content-end align-items-center">
 
-  <div class="row">
-
-    <div class="col">
-    </div>
-
-    <div class="col">
+    <div class="col-4 shadow p-3 mb-5 bg-white rounded">
     
-      <h2>使用者登錄</h2>
-                                 
-          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-              <div class="form-group">
+      <h2>使用者登錄</h2>      
+        
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <div class="form-group">
               
-                <%= f.label :email, "電子信箱" %><br />
-                <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+            <%= f.label :email, "電子信箱" %><br />
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
 
-              </div>
+          </div>
             
-              <div class="form-group">
+          <div class="form-group">
 
-                <%= f.label :password, "使用者密碼" %><br />
-                <%= f.password_field :password, autocomplete: "current-password", class: 'form-control' %>            
-              </div>
+            <%= f.label :password, "使用者密碼" %><br />
+            <%= f.password_field :password, autocomplete: "current-password", class: 'form-control' %>            
+          </div>
             
-              <div class="form-group form-check">
+          <div class="form-group form-check">
               
-                <% if devise_mapping.rememberable? %>
-                <%= f.check_box :remember_me, class: 'form-check-input' %>
+            <% if devise_mapping.rememberable? %>
+            <%= f.check_box :remember_me, class: 'form-check-input' %>
                 <%= f.label :remember_me %>
-          <% end %>                             
+            <% end %>
               
-              </div>
+          </div>
             
-              <div class="form-grou">
+          <div class="form-grou">
 
-                <%= f.submit "登錄", class: 'btn btn-light' %>
-                
-              </div>  
+            <%= f.submit "登錄", class: 'btn btn-light' %>
+
+            <div class="text-center">OR</div>
+            <div>
+              <%- if devise_mapping.omniauthable? %>
+                <%- resource_class.omniauth_providers.each do |provider| %>
+                <%= link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider) , class: 'btn btn-light' %>
+                 <% end %>
               <% end %>
+            </div>   
+          </div>  
+        <% end %>
+
+        <hr>
               
       <%= render "devise/shared/links" %>       
     
     </div>
-
-    <div class="col">
-    </div>
-    
+   
   </div>
-</div>
+</body>
 
 
 
