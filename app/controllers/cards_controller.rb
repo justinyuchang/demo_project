@@ -1,32 +1,22 @@
 class CardsController < ApplicationController
-  before_action :load_list_card_params, only: [:create]
+  before_action :find_board, only: [:create]
   before_action :load_card_items_params, only: [:update]
   
   def show
-    p "--------------#{params}----------------"
-    p "--------------#{params[:id]}----------------"
     @card_item = Card.find(params[:id])
     render json: @card_item
   end
 
   def create
-    p "--------------#{@card_params}----------------"
-    p "--------------#{params[:list_name]}----------------"
-    p "--------------#{params[:card]}----------------"
-    p "--------------#{params[:board_id]}----------------"
-    p "--------------#{@board_id.id}----------------"
-    p "--------------#{@list_id.id}----------------"
-    @card = @list_id.cards.create(title: @card_title)
+    @card = Card.create(card_params)
+    @card_channel = {id: @card.id, title: @card.title,list_id: @card.list_id ,stats: "card_create"}
+    BoardsChannel.broadcast_to(@board, @card_channel)
   end
-  
-
   
   def edit 
   end 
   
   def update 
-    p "--------------#{@find_card.id}----------------"
-    p "--------------#{@card_item_params}----------------"
     @find_card.update(@card_item_params)
   end 
   
@@ -34,15 +24,17 @@ class CardsController < ApplicationController
   end 
 
   private
-  def  load_list_card_params
-    @card_params = params.require(:card).permit(:board_id, :card_text, :list_name)
-    @board_id = Board.find(@card_params[:board_id])
-    @list_id = @board_id.lists.find_by(title: @card_params[:list_name])
-    @card_title = @card_params[:card_text]
+  def find_board
+    @board = Board.find(params[:board_id])
+  end
+
+  def  card_params
+    params.require(:card).permit(:title, :list_id)
   end
 
   def load_card_items_params
     @find_card = Card.find(params[:id])
     @card_item_params = params.require(:card).permit(:description, :tags, :archived, :due_date)
   end
+  
 end
