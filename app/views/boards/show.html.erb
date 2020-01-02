@@ -20,14 +20,16 @@
           </div>
           
           <div data-role="card-wrapper" class="card-wrapper">
-            <% list.cards.each do |card| %>
-            <div class="card-group">
+
+            <div data-role="card-group" class="card-group">
+              <% list.cards.each do |card| %>
               <div class="cart-item">
                 <input data-role="card-id" type="hidden" val= "<%= card.id %>">
-                <a href=""><%= card.title %></a>
+                <a data-role="card-title" href=""><%= card.title %></a>
               </div>
+              <% end %>
             </div>
-            <% end %>
+
   
             <div data-role="card-input" class="card-create input">
               <textarea name="card-text"></textarea>

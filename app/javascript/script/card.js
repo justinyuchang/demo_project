@@ -2,12 +2,18 @@ import axios from 'helpers/axios';
 
 $(document).on("turbolinks:load", function(){
 //card_create
-    $('[data-role="card-create-btn"]').click(function(event){
+    $('[data-role="card-create-btn"]').on("click", function(event){
       event.preventDefault();
       const board_url = location.pathname.split('/')
       const board_id =  board_url[board_url.length - 1]
-      let list_id = $(this).parents('[data-role="card-wrapper"]').siblings('[data-role= "list-item"]').find('[data-role="list-id"]').attr("val")
-      let card_text = $(this).parents('[data-role="card-btn"]').siblings('[data-role="card-input"]').find("textarea").val()
+      let list_id = $(this).parents('[data-role="card-wrapper"]')
+                                          .siblings('[data-role= "list-item"]')
+                                          .find('[data-role="list-id"]')
+                                          .attr("val")
+      let card_text = $(this).parents('[data-role="card-btn"]')
+                                                  .siblings('[data-role="card-input"]')
+                                                  .find("textarea")
+                                                  .val()
       axios({
           method: 'post',
           url: '/lists/cards',
