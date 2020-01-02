@@ -4,6 +4,9 @@ class BoardsController < ApplicationController
 
   def index
     @boards = current_user.boards.all
+    @board = Board.new()
+    @private_boards = current_user.boards.where(visibility: "Private")
+    @public_boards = current_user.boards.where(visibility: "Team")
     @searchuser = current_user.search_users.all
   end
 
