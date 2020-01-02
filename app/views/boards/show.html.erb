@@ -13,22 +13,27 @@
   <div class="list-group item">
       <div class="list-wrapper">
         <div class='list-content box'>
-          <div id= "list-item" class="list-item" >
-            <input id="list-id" type="hidden" val= "<%= list.id %>">
+          <div data-role= "list-item" class="list-item" >
+            <input data-role="list-id" type="hidden" val= "<%= list.id %>">
             <span data-role="list-title" class="list-view"><%= list.title %></span>
             <span class="list-men"><i class="fas fa-align-justify"></i></span>
           </div>
-
-          <div id="card-wrapper" class="card-wrapper">
+          
+          <div data-role="card-wrapper" class="card-wrapper">
+            <% list.cards.each do |card| %>
             <div class="card-group">
-              <div class="cart-item"><a href="">123</a></div>
+              <div class="cart-item">
+                <input data-role="card-id" type="hidden" val= "<%= card.id %>">
+                <a href=""><%= card.title %></a>
+              </div>
             </div>
+            <% end %>
   
-            <div id="card-input" class="card-create input">
+            <div data-role="card-input" class="card-create input">
               <textarea name="card-text"></textarea>
             </div>
   
-            <div id="card-btn" class="card-create btn">
+            <div data-role="card-btn" class="card-create btn">
                 <a data-role="card-create-btn" class="card-add" href=""><span><i class="fas fa-plus"></i>新增卡片</span></a>
             </div>
           </div>

@@ -9,7 +9,7 @@ class CardsController < ApplicationController
 
   def create
     @card = Card.create(card_params)
-    @card_channel = {id: @card.id, title: @card.title, stats: "card_create"}
+    @card_channel = {id: @card.id, title: @card.title,list_id: @card.list_id ,stats: "card_create"}
     BoardsChannel.broadcast_to(@board, @card_channel)
   end
   
