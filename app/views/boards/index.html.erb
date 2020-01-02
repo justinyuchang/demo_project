@@ -2,7 +2,7 @@
   <%= render 'shared/navbar' %>
 <% end %>
 
-<%= render "boardcreate", board: @board %>
+
 
 <h1 class="d-block" style="margin: 20px; color: #2779BF;">Boards<%= notice %></h1>
 
@@ -18,6 +18,11 @@
     <p class="card-state">
       <%= board.visibility %>
     </p>
+
+    <div class="card-button d-flex justify-content-end">
+      <%= link_to "刪除", board_path(board), method: "delete", data: { confirm: "確認要刪除Board嗎？" }, class: 'btn btn-light btn-sm m-1' %>
+    </div>
+
   </div>
 </div>
 <% end %>

@@ -1,8 +1,6 @@
 class CommentsController < ApplicationController
   before_action :find_card, only: [:create, :destroy]
 
-  
-
   def create 
     @comment = @card.comments.build(comment_params)
     if @comment.save 

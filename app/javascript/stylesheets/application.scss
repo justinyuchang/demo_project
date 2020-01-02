@@ -1,10 +1,8 @@
 @import "reset.scss"; 
+@import "list_add_type.scss"; 
 @import "bootstrap/scss/bootstrap";
-.lists{
-    .btn{
-        width: 300px;
-        margin: 15px;
-    }
-}
 
+body{
+    background-color: rgb(179, 179, 179);
+}
 
