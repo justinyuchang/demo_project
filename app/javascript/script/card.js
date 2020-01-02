@@ -1,33 +1,19 @@
 import axios from 'helpers/axios';
 
 $(document).on("turbolinks:load", function(){
-<<<<<<< HEAD
-// Create card 
-    $('[data-role ="card-button"]').click(function(){
-      console.log("已觸發")
-      let board_url = location.pathname.split('/')
-      let board_id =  board_url[board_url.length - 1]
-      let list_name = $(this).parent().siblings().children("h4").text();
-      let card_text = $(this).siblings("textarea").val();
-      console.log(board_url)
-      console.log(card_text)
-      console.log(list_name)
-      console.log(board_id)
-=======
-//card_create
+//Create new card 
     $('[data-role="card-create-btn"]').on("click", function(event){
       event.preventDefault();
       const board_url = location.pathname.split('/')
       const board_id =  board_url[board_url.length - 1]
       let list_id = $(this).parents('[data-role="card-wrapper"]')
-                                          .siblings('[data-role= "list-item"]')
-                                          .find('[data-role="list-id"]')
-                                          .attr("val")
+                           .siblings('[data-role= "list-item"]')
+                           .find('[data-role="list-id"]')
+                           .attr("val")
       let card_text = $(this).parents('[data-role="card-btn"]')
-                                                  .siblings('[data-role="card-input"]')
-                                                  .find("textarea")
-                                                  .val()
->>>>>>> master
+                             .siblings('[data-role="card-input"]')
+                             .find("textarea")
+                             .val()
       axios({
           method: 'post',
           url: `/lists/cards`,
@@ -40,15 +26,11 @@ $(document).on("turbolinks:load", function(){
           }
         })
     });
-<<<<<<< HEAD
-// Click card and get data from server
-  $('[data-role ="btn card-name"]').click(function(event){
-=======
-//
-  $('[data-role="btn card-name"]').click(function(event){
->>>>>>> master
+// Get card 
+  $('[data-role="card-group"]').on("click", '[data-role="card-title"]', function(event){
     console.log("已觸發")
-    let card_id = $(this).children("span").text().replace(/\s+/g,"");
+    event.preventDefault();
+    let card_id = $(this).siblings('[data-role="card-id"]').attr('val');
     console.log(card_id)
     axios({
       method: 'get',
@@ -64,10 +46,7 @@ $(document).on("turbolinks:load", function(){
 // Get comment's content 
       let comments = response.data.comments.map(comment => comment.content)
       console.log(comments)
-      let comment = comments; 
-        for (var i = 0; i < comments.length; i++) {
-        $('[data-role ="comment-area"]').append(`<div class="bg-light mb-1">${comment[i]}</div>`);
-      }
+      $('[data-role ="comment-area"]').append(`<div class="bg-light mb-1">${comments}</div>`);
       $('[data-role ="card-focus-id"]').text(`${card_item.id}`)
       $('[data-role ="card-title"]').text(`${card_item.title}`)
       $('[data-role ="card-description"]').val(`${card_item.description}`)
@@ -76,13 +55,8 @@ $(document).on("turbolinks:load", function(){
       $('[data-role ="card-tags"]').val(`${card_item.tags}`)
     })
   });
-<<<<<<< HEAD
 // Update card 
-  $('[data-role ="card-update"]').click(function(){
-=======
-//
   $('[data-role="card-update"]').click(function(){
->>>>>>> master
     console.log("已觸發")
     let card_id = $('[data-role ="card-focus-id"]').text()
     let card_description = $('[data-role ="card-description"]').val()
