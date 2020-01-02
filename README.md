@@ -2,6 +2,13 @@
 
 模仿打造自己的Trello。
 
+# Members
+
+* https://github.com/shunfenglee
+* https://github.com/ck100pro
+* https://github.com/justinyuchang
+* https://github.com/shufan951
+
 # Requirements
 
 * Ruby 2.6.3

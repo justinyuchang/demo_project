@@ -1,7 +1,7 @@
 import axios from 'helpers/axios';
 
 $(document).on("turbolinks:load", function(){
-//Create new card 
+
     $('[data-role="card-create-btn"]').on("click", function(event){
       event.preventDefault();
       const board_url = location.pathname.split('/')
