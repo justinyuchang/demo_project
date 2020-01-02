@@ -1,29 +1,32 @@
 import axios from 'helpers/axios';
+
 $(document).on("turbolinks:load", function(){
-  ////////////////////////////////////////
-    $('[data-role="card-button"]').click(function(){
-      console.log("已觸發")
-      let board_url = location.pathname.split('/')
-      let board_id =  board_url[board_url.length - 1]
-      let list_name = $(this).parent().siblings().children("h4").text();
-      let card_text = $(this).siblings("textarea").val();
-      console.log(board_url)
-      console.log(card_text)
-      console.log(list_name)
-      console.log(board_id)
+//card_create
+    $('[data-role="card-create-btn"]').on("click", function(event){
+      event.preventDefault();
+      const board_url = location.pathname.split('/')
+      const board_id =  board_url[board_url.length - 1]
+      let list_id = $(this).parents('[data-role="card-wrapper"]')
+                                          .siblings('[data-role= "list-item"]')
+                                          .find('[data-role="list-id"]')
+                                          .attr("val")
+      let card_text = $(this).parents('[data-role="card-btn"]')
+                                                  .siblings('[data-role="card-input"]')
+                                                  .find("textarea")
+                                                  .val()
       axios({
           method: 'post',
           url: '/lists/cards',
           data: {
+            board_id: board_id,
             card: {
-              card_text: card_text,
-              board_id: board_id,
-              list_name: list_name
+              title: card_text,
+              list_id: list_id,
             }
           }
         })
     });
-/////////////////////////////////////////////
+//
   $('[data-role="btn card-name"]').click(function(event){
     console.log("已觸發")
     let card_id = $(this).children("span").text().replace(/\s+/g,"");
@@ -45,7 +48,7 @@ $(document).on("turbolinks:load", function(){
       $('[data-role="card-tags"]').val(`${card_item.tags}`)
     })
   });
-/////////////////////////////////////////////
+//
   $('[data-role="card-update"]').click(function(){
     console.log("已觸發")
     let card_id = $('[data-role = "card-focus-id"]').text()
