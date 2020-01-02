@@ -49,7 +49,6 @@ $(document).on("turbolinks:load", function(){
       $('[data-role ="card-due-date"]').val(`${card_item.due_date}`)
       $('[data-role ="card-archived"]').val(`${card_item.archived}`)
       $('[data-role ="card-tags"]').val(`${card_item.tags}`)
-      // $('[data-role ="comment-area"]').val(`<div>${comment}</div>`)
     })
   })
 /////////////////////////////////////////////
