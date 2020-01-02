@@ -30,7 +30,7 @@ $(document).on("turbolinks:load", function(){
         })
     });
 // Get card 
-  $('[data-role="card-group"]').on("click", '[data-role="card-title"]', function(event){
+  $('[data-role="js-list"]').on("click", '[data-role="card-title"]', function(event){
     console.log("已觸發")
     event.preventDefault();
     let card_id = $(this).siblings('[data-role="card-id"]').attr('val');
@@ -56,6 +56,7 @@ $(document).on("turbolinks:load", function(){
       $('[data-role ="card-due-date"]').val(`${card_item.due_date}`)
       $('[data-role ="card-archived"]').val(`${card_item.archived}`)
       $('[data-role ="card-tags"]').val(`${card_item.tags}`)
+      $('#Carditem').modal('show')
     })
   });
 // Update card 
