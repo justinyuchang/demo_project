@@ -9,7 +9,8 @@ const list_create = `<div>
                                               </div>
                                               
                                               <div data-role="card-wrapper" class="card-wrapper">
-
+                                                <div data-role="card-group" class="card-group">
+                                                </div>
 
                                                 <div data-role="card-input" class="card-create input">
                                                   <textarea name="card-text"></textarea>

@@ -4,13 +4,18 @@ class CardsController < ApplicationController
   
   def show
     @card_item = Card.find(params[:id])
-    render json: @card_item
+    @comments = @card_item.comments
+    p "="*50
+    p "#{@comments}"
+    p "="*50
+    render json: { card: @card_item, comments: @comments}
   end
 
   def create
     @card = Card.create(card_params)
     @card_channel = {id: @card.id, title: @card.title,list_id: @card.list_id ,stats: "card_create"}
     BoardsChannel.broadcast_to(@board, @card_channel)
+    render json:@card_channel
   end
   
   def edit 

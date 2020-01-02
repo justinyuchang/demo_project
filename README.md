@@ -1,6 +1,14 @@
-# Trello clone
+# Smashello
 
-模仿打造自己的Trello。
+完成屬於自己的Trello，
+以簡潔、即時、高互動性為主要價值！
+
+# Members
+
+* https://github.com/shunfenglee
+* https://github.com/ck100pro
+* https://github.com/justinyuchang
+* https://github.com/shufan951
 
 # Requirements
 
@@ -47,5 +55,5 @@ $ foreman start
 - 可指定任務人員
 
 # Model關聯圖
-![image](https://github.com/justinyuchang/demo_project/blob/master/model%E9%97%9C%E8%81%AF%E5%9C%96.001.jpeg)
+![image](https://github.com/justinyuchang/Smashello/blob/master/reference/model%E9%97%9C%E8%81%AF%E5%9C%96.001.jpeg)
 
