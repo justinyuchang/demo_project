@@ -1,4 +1,5 @@
 class BoardsController < ApplicationController
+  layout "board", :only => :index
   before_action :find_board, only: [:edit, :update, :destroy, :show, :searchuser]
   before_action :search_params, only: [:searchuser]
 
