@@ -1,24 +1,15 @@
 @import "reset.scss"; 
 @import "list_add_type.scss"; 
+@import "devise.scss";
 @import "bootstrap/scss/bootstrap";
 @import "@fortawesome/fontawesome-free";
-
+@import "font.scss";
 .lists {
     .btn{
         width: 300px;
         margin: 15px;
     }
 
-}
-.fullversion{
-    width: 100vw;
-    height: 100vh;
-}
-.rootbg{
-    background: linear-gradient(87deg, rgba(100, 167, 189, 1)36%, rgba(129, 235, 185, 0.8)90%);
-    background: -moz-linear-gradient(87deg, rgba(100, 167, 189, 1)36%, rgba(129, 235, 185, 0.8)90%);
-    background: -webkit-linear-gradient(87deg, rgba(100, 167, 189, 1)36%, rgba(129, 235, 185, 0.8)90%);
-    background: -o-linear-gradient(87deg, rgba(100, 167, 189, 1)36%, rgba(129, 235, 185, 0.8)90%);
 }
 .board-notice {
     margin: 10px 5px 20px;
@@ -72,4 +63,10 @@ p span {
 
 body {
     background-color: rgb(179, 179, 179);
+}
+.navbarcolor{
+    background: linear-gradient(0deg, rgba(16, 40, 127, 0.6)8%, rgba(68, 106, 71, 0.6)100%);
+    background: -moz-linear-gradient(0deg, rgba(16, 40, 127, 0.6)8%, rgba(68, 106, 71, 0.6)100%);
+    background: -webkit-linear-gradient(0deg, rgba(16, 40, 127, 0.6)8%, rgba(68, 106, 71, 0.6)100%);
+    background: -o-linear-gradient(0deg, rgba(16, 40, 127, 0.6)8%, rgba(68, 106, 71, 0.6)100%);
 }
