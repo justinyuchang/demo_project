@@ -49,13 +49,17 @@ $(document).on("turbolinks:load", function(){
 // Get comment's content 
       let comments = response.data.comments.map(comment => comment.content)
       console.log(comments)
-      $('[data-role ="comment-area"]').append(`<div class="bg-light mb-1">${comments}</div>`);
+      $('[data-role ="comment-area"]').html(`<div class="bg-light mb-1">${comments}</div>`);
       $('[data-role ="card-focus-id"]').text(`${card_item.id}`)
       $('[data-role ="card-inner_title"]').text(`${card_item.title}`)
       $('[data-role ="card-description"]').val(`${card_item.description}`)
       $('[data-role ="card-due-date"]').val(`${card_item.due_date}`)
       $('[data-role ="card-archived"]').val(`${card_item.archived}`)
       $('[data-role ="card-tags"]').val(`${card_item.tags}`)
+      $('#Carditem .assign_card_path').each((idx, pathDom) => {
+        let tplPath = $(pathDom).data('path-tpl')
+        $(pathDom).attr('href', tplPath.replace('CARD_ID', card_id))
+      })
       $('#Carditem').modal('show')
     })
   });

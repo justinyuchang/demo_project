@@ -30,6 +30,17 @@
           <!-- Side Bar -->
           <div class="col-3">
             <span class="text-muted small">Add to card</span>
+            <div class="dropdown mr-1">
+              <button type="button" class="btn btn-sm btn-light text-primary mx-1 dropdown-toggle" id="dropdownMenuOffset"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+                    Member
+               </button>
+               <ul class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+                 <% @board.users.each do |member| %>
+                   <li class="dropdown-item"><%= link_to member.email, '###', method: :put, class: 'assign_card_path', data: { 'path-tpl': assign_card_path(id: 'CARD_ID', user_id: member.id) } %></li>
+                 <% end %>
+               </ul>
+            </div>
             <div class="input-group-sm">
               <label for="card-due-date">Due date</label>
               <input data-role="card-due-date" type="date" class="form-control" id="card-due-date">

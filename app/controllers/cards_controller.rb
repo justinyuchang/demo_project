@@ -29,6 +29,20 @@ class CardsController < ApplicationController
   def destroy
   end 
 
+  def assign 
+    p "="*50
+    p "#{params}"
+    p "="*50
+    @card = Card.find(params[:id])
+    @user = User.find(params[:user_id])
+
+    
+    @assign_user = @card.users.push(@user)
+    p "="*50
+    p "#{@assign_user}"
+    p "="*50
+  end 
+
   private
   def find_board
     @board = Board.find(params[:board_id])
