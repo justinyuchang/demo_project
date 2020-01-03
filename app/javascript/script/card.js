@@ -2,7 +2,7 @@ import axios from 'helpers/axios';
 
 $(document).on("turbolinks:load", function(){
 
-    $('[data-role="card-create-btn"]').on("click", function(event){
+    $('[data-role="js-list"]').on("click",'[data-role="card-create-btn"]', function(event){
       event.preventDefault();
       const board_url = location.pathname.split('/')
       const board_id =  board_url[board_url.length - 1]
@@ -25,9 +25,12 @@ $(document).on("turbolinks:load", function(){
             }
           }
         })
+        .then(function(response){
+          console.log(response)
+        })
     });
 // Get card 
-  $('[data-role="card-group"]').on("click", '[data-role="card-title"]', function(event){
+  $('[data-role="js-list"]').on("click", '[data-role="card-title"]', function(event){
     console.log("已觸發")
     event.preventDefault();
     let card_id = $(this).siblings('[data-role="card-id"]').attr('val');
@@ -53,6 +56,7 @@ $(document).on("turbolinks:load", function(){
       $('[data-role ="card-due-date"]').val(`${card_item.due_date}`)
       $('[data-role ="card-archived"]').val(`${card_item.archived}`)
       $('[data-role ="card-tags"]').val(`${card_item.tags}`)
+      $('#Carditem').modal('show')
     })
   });
 // Update card 
