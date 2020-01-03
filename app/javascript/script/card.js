@@ -82,6 +82,12 @@ $(document).on("turbolinks:load", function(){
         tags: card_tags
       }
     })
+    .then(function(response){
+      let status = response.data.status
+      if(status == "ok"){
+        $('#Carditem').modal('hide')
+      }
+    })
   });
 // Send Comment
   $('[data-role ="comment-send"]').click(function(){
