@@ -1,25 +1,16 @@
 @import "reset.scss"; 
 @import "list_add_type.scss"; 
+@import "devise.scss"; 
 @import "bootstrap/scss/bootstrap";
 @import "@fortawesome/fontawesome-free";
-
+body{
+    font-family: Microsoft JhengHei, PingFang, Arial;
+}
 .lists {
     .btn{
         width: 300px;
         margin: 15px;
     }
-
-}
-.fullversion{
-    width: 100vw;
-    height: 100vh;
-}
-.rootbg{
-    background: linear-gradient(87deg, rgba(100, 167, 189, 1)36%, rgba(129, 235, 185, 0.8)90%);
-    background: -moz-linear-gradient(87deg, rgba(100, 167, 189, 1)36%, rgba(129, 235, 185, 0.8)90%);
-    background: -webkit-linear-gradient(87deg, rgba(100, 167, 189, 1)36%, rgba(129, 235, 185, 0.8)90%);
-    background: -o-linear-gradient(87deg, rgba(100, 167, 189, 1)36%, rgba(129, 235, 185, 0.8)90%);
-}
 .board-notice {
     margin: 10px 5px 20px;
     font-size: 24px;
@@ -35,15 +26,14 @@
 p span {
     margin: 5px;
 }
-
 .personal-boards, .team-boards {
     display: inline-block;
     flex-flow: column wrap;
 }
-
 .all-boards-container {
     display: block;
     flex-flow: column wrap; 
+    margin-left: 100px;
 }
 .card-title {
     color: white;
@@ -55,7 +45,7 @@ p span {
     padding: 15px;
     width: 200px;
     height: 100px;
-    background-color: #2068A2;
+    background-color:#2068A3;
 }
 .create-board {
     margin: 6px;
@@ -64,12 +54,23 @@ p span {
     width: 200px;
     height: 100px;
     background-color: #F0F2F4;
+    margin-left: 106px;
 }
 .board-create {
     text-align: center;
     margin: 10px;
 }
-
+.toast{
+    margin-left: 6px;
+    margin-bottom: 20px;
+    width: 200px;
+    height: 100px;
+}
+.board-body {
+    background-color: #FAFBFC;
+}
 body {
     background-color: rgb(179, 179, 179);
 }
+
+
