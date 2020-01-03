@@ -3,6 +3,9 @@
 @import "devise.scss"; 
 @import "bootstrap/scss/bootstrap";
 @import "@fortawesome/fontawesome-free";
+body{
+    font-family: Microsoft JhengHei, PingFang, Arial;
+}
 .lists {
     .btn{
         width: 300px;
