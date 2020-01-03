@@ -16,5 +16,11 @@ $(document).on("turbolinks:load", function(){
             }
           }
         })
+        .then(function(response){
+          let status = response.data.status
+          if(status == "ok"){
+            $('[data-role="api-list-title"]').val(' ')
+          }
+        })
   })
 })

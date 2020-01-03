@@ -23,6 +23,7 @@ class CardsController < ApplicationController
   
   def update 
     @find_card.update(@card_item_params)
+    render json:{status: "ok"}
   end 
   
   def destroy
