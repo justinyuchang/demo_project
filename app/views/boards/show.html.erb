@@ -48,16 +48,22 @@
     <div class="list-wrapper">
       <div class="list-content btn">
         <a class="list-add" href=""><span><i class="fas fa-plus"></i>新增列表</span><a>
-      <form data-role="list-create">
-        <input data-role="api-list-title" class="api-inp" type="text" placeholder= "請輸入標題" maxlength= "100">
-        <input data-role="btn list-create" class="api-btn" type="submit" value="送出">
-        <a class="list-add" href=""><span><i class="fas fa-times"></i></span></a>
-      </form>
+        <%= form_with model: @list, url: board_lists_path(@board) do |list| %>
+          <%= list.text_field :title , class: "api-inp", data_role: "api-list-title", placeholder: "請輸入標題", maxlength: "100"%>
+          <%= list.submit "送出", class: "api-btn", data_role: "btn list-create" %>
+          <a class="list-add" href=""><span><i class="fas fa-times"></i></span></a>
+        <% end %>
     </div>
     </div>
   </div>
 
+  <div>
+
+  </div>
+
 </div>
+
+
 
 
 
