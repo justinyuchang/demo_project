@@ -1,41 +1,68 @@
-<% content_for :navbar do %>
-  <%= render 'shared/navbar' %>
-<% end %>
 
 <%= render "boardcreate", board: @board %>
 
-<h1 class="d-block" style="margin: 20px; color: #2779BF;">Boards<%= notice %></h1>
-
-<% @boards.each do |board| %>
-<div class="card text-white m-3 float-left border-0" style="width: 15rem; height: 10rem">
-  <div class="card-body" style="background-color: #2068A2; ;border-radius:5px">
-    <h5 class="card-title">
-      <%= link_to board.title, board_path(board.id),  class: 'text-white' %>
-    </h5>
-    <p class="card-state">
-      <%= board.visibility %>
-    </p>
-    <div class="card-button d-flex justify-content-end">
-      <%= link_to "編輯", edit_board_path(board), class: 'btn btn-light btn-sm m-1' %>
-      <%= link_to "刪除", board_path(board), method: "delete", data: { confirm: "確認要刪除Board嗎？" }, class: 'btn btn-light btn-sm m-1' %>
-    </div>
-  </div>
-</div>
+<% content_for :navbar do %>
+<%= render 'shared/navbar' %>
 <% end %>
 
-<div class="card m-3 float-left border-0 rounded" style="width: 15rem; height: 10rem; background-color: #F0F2F4">
-  <p class="text-center mt-5">
-    <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#createBoard">新增Board ＋</a>
+<p class="board-notice"><%= notice %></p>
+
+<div class="all-boards-container">
+  <p class="board-title">
+    <span class="fas fa-user-edit"></span>
+    個人看板
+  </p>
+  <% @private_boards.each do |board| %>
+    <ul class="personal-boards">
+      <li>
+        <%= link_to board_path(board.id), class: 'card-body' do %>
+        <span class="card-title">
+          <%= board.title %>
+        </span>
+        <% end %>
+      </li>
+    </ul>
+  <% end %>
+</div>
+
+<div class="all-boards-container">
+  <p class="board-title">
+    <span class="fas fa-users"></span>
+    團隊看板
+  </p>
+  <% @public_boards.each do |board| %>
+    <ul class="team-boards">
+      <li>
+        <%= link_to board_path(board.id), class: 'card-body' do %>
+        <span class="card-title">
+          <%= board.title %>
+        </span>
+        <% end %>
+      </li>
+    </ul>
+  <% end %>
+</div>
+
+<div class="card-create">
+  <p class="board-create">
+    <a href="" class="btn mb-4" data-toggle="modal" data-target="#createBoard">新增Board ＋</a>
   </p>
 </div>
 
-<div>
+
+<div aria-live="polite" aria-atomic="true" style="position: absolute; top: 40px; right: 0;">
   <% @searchuser.each do |invitation| %>
-  <h5>From user:<%= invitation.user_id %></h5>
-  <p><%= invitation.message %></p>
-  <p>Board ID:<%= invitation.board_id %></p>
-  <p>invitation ID:<%= invitation.id %></p>
-  <%= link_to "同意", agree_invite_boards_path(id: invitation.id, board_id: invitation.board_id, agree: true), method: "put", remote: true %>
-  <%= link_to "不同意", agree_invite_boards_path(id: invitation.id, board_id: invitation.board_id, agree: false), method: "put", remote: true %>
+  <div class="toast" role="alert" data-autohide="false" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <img src="..." class="rounded mr-2" alt="...">
+      <strong class="mr-auto"></strong>
+      <small><%= invitation.created_at %></small>
+    </div>
+    <div class="toast-body">
+      <%= invitation.message %>
+      <%= link_to "Agree", agree_invite_boards_path(id: invitation.id, board_id: invitation.board_id, agree: true), method: "put", remote: true, class:"btn btn-success btn-sm" %>
+      <%= link_to 'Disagree', agree_invite_boards_path(id: invitation.id, board_id: invitation.board_id, agree: false), method: "put", remote: true, class:"btn btn-danger btn-sm" %>
+    </div>
+  </div>
   <% end %>
 </div>

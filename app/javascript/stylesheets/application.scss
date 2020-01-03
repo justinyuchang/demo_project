@@ -1,19 +1,66 @@
 @import "reset.scss"; 
-@import "bootstrap/scss/bootstrap";
-@import "@fortawesome/fontawesome-free";
+@import "list_add_type.scss"; 
+@import "devise.scss"; 
+@import "../../../node_modules/bootstrap/scss/bootstrap.scss";
+@import "../../../node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss";
 .lists{
     .btn{
         width: 300px;
         margin: 15px;
     }
 }
-.fullversion{
-    width: 100vw;
-    height: 100vh;
+.board-notice {
+    margin: 10px 5px 20px;
+    font-size: 24px;
+    color: #2068A2;
 }
-.rootbg{
-    background: linear-gradient(87deg, rgba(100, 167, 189, 1)36%, rgba(129, 235, 185, 0.8)90%);
-    background: -moz-linear-gradient(87deg, rgba(100, 167, 189, 1)36%, rgba(129, 235, 185, 0.8)90%);
-    background: -webkit-linear-gradient(87deg, rgba(100, 167, 189, 1)36%, rgba(129, 235, 185, 0.8)90%);
-    background: -o-linear-gradient(87deg, rgba(100, 167, 189, 1)36%, rgba(129, 235, 185, 0.8)90%);
+.board-title {
+    color: #162B4D;
+    line-height: 24px;
+    margin: 4px 0 0;
+    font-size: 16px;
+    font-weight: bold;
 }
+p span {
+    margin: 5px;
+}
+
+.personal-boards, .team-boards {
+    display: inline-block;
+    flex-flow: column wrap;
+}
+
+.all-boards-container {
+    display: block;
+    flex-flow: column wrap; 
+}
+.card-title {
+    color: white;
+}
+.card-body {
+    display: block;
+    margin: 6px;
+    border-radius: 5px;
+    padding: 15px;
+    width: 200px;
+    height: 100px;
+    background-color: #2068A2;
+}
+.card-create {
+    margin: 6px;
+    border-radius: 5px;
+    padding: 15px;
+    width: 200px;
+    height: 100px;
+    background-color: #F0F2F4;
+}
+.board-create {
+    text-align: center;
+    margin: 10px;
+}
+
+body {
+    background-color: rgb(179, 179, 179);
+}
+
+

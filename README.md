@@ -1,24 +1,58 @@
-# README
+# Trello clone
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+模仿打造自己的Trello。
 
-Things you may want to cover:
+# Members
 
-* Ruby version
+* https://github.com/shunfenglee
+* https://github.com/ck100pro
+* https://github.com/justinyuchang
+* https://github.com/shufan951
 
-* System dependencies
+# Requirements
 
-* Configuration
+* Ruby 2.6.3
+* Rails 6.0.1
+* Postgresql 12
 
-* Database creation
+# Installation
 
-* Database initialization
+```
+$ git clone git@github.com:justinyuchang/demo_project.git  
+$ cd demo_project
+$ bundle install   
+$ rails db:migrate
+$ foreman start
+```
 
-* How to run the test suite
+# User stories
+## 使用者註冊
+- 使用者可以註冊、登入 (使用 Devise gem)
+- 可使用google登入
+- 登入後才可看到其他頁面
 
-* Services (job queues, cache servers, search engines, etc.)
+## Board CRUD
+- 看板列表頁列出當前看板
+- 可同一頁新增、刪除
+- 新增後直接進入看板
+- 可看到其他看板協作邀請
 
-* Deployment instructions
+## Profile
+- 可在navbar點入個人頁面進行修改
 
-* ...
+## Board
+- 可修改狀態（團隊或私人）
+- 可邀請其他使用者加入
+- 會顯示當前協作成員
+- 可新增list
+
+## List
+- 新增後可在共同協作者畫面即時更新
+
+## Card
+- 顯示到期日
+- 可指定任務人員
+
+# Model關聯圖
+![image](https://github.com/justinyuchang/demo_project/blob/master/model%E9%97%9C%E8%81%AF%E5%9C%96.001.jpeg)
+

@@ -63,7 +63,6 @@ ActiveRecord::Schema.define(version: 2020_01_02_080844) do
     t.bigint "list_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.date "due_date"
     t.index ["list_id"], name: "index_cards_on_list_id"
   end
 

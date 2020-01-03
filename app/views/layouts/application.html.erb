@@ -13,10 +13,15 @@
 </head>
 
 <body>
-  <%= yield :navbar %>
-  <%= yield :boardheader %>
-  <div class="container">
-    <%= yield %>
+  <div class="wrapper">
+    <div class="navbarDiv">
+      <%= yield :navbar %>
+      <%= yield :boardheader %>
+    </div>
+
+    <div class="parentDiv">
+      <%= yield %>
+    </div>
   </div>
 </body>
 
