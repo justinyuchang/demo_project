@@ -1,6 +1,10 @@
+<div class="fullversion rootbg">
+
+  <%= render 'shared/navbar'%>
+
 <div class="container">
 
-  <div class="row h100vh justify-content-center align-items-center">
+  <div class="row justify-content-center align-items-center">
 
     <div class="col-4">
 
@@ -53,10 +57,7 @@
           <%= button_to "刪除此帳號", registration_path(resource_name), data: { confirm: "你確定要刪掉?" }, method: :delete %>
         </div>
       <% end %>
-
-      <%= link_to '回Board列表', boards_path, class: 'btn btn-light' %>
-
     </div>
-
   </div>
+</div>
 </div>

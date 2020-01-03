@@ -22,7 +22,9 @@
         </div>
     <div>
       <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-        <%= link_to "你～忘記密碼了嗎", new_password_path(resource_name), class: 'btn btn-light'  %>
+        <%= link_to new_password_path(resource_name), class: 'dropdown-item' do %>
+          <%= image_tag "https://ubin.io/fpwd", size: "30" %>你～忘記密碼了嗎
+          <% end %>
       <% end %>
     </div>
     <div>
