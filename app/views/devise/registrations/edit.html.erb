@@ -1,6 +1,10 @@
+<div class="fullversion rootbg">
+
+  <%= render 'shared/navbar'%>
+
 <div class="container">
 
-  <div class="row h100vh justify-content-center align-items-center">
+  <div class="row justify-content-center align-items-center mt-5">
 
     <div class="col-4">
 
@@ -22,13 +26,9 @@
         <div class="form-group">
           <%= f.label :password, "新密碼", class: "display_in"%> 
           <div>
-          <i>(密碼不想更改請空白,密碼長度不能小於6)</i>
+          <i>(密碼不想更改請空白,密碼長度不能低於<%= @minimum_password_length %>位數)</i>
           </div>
           <%= f.password_field :password, autocomplete: "new-password", class: 'form-control' %>
-          <!-- <% if @minimum_password_length %>
-            
-            <em>密碼長度不能小於<%= @minimum_password_length %> </em>
-          <% end %> -->
         </div>
 
         <div class="form-group">
@@ -45,18 +45,15 @@
 
         <div class="form-group">
           <%= f.label :user_avatar, "上傳使用者圖片" %>
-          <%= f.file_field :user_avatar%>
+          <%= f.file_field :user_avatar %>
         </div>
 
-        <div class="form-group">        
-          <%= f.submit "帳號內容變更", class: "btn"%>
-          <%= button_to "刪除此帳號", registration_path(resource_name), data: { confirm: "你確定要刪掉?" }, method: :delete %>
+        <div class="form-group d-flex justify-content-between">
+          <%= f.submit "帳號內容變更", class: "btn btn-light" %>
+          <%= button_to "刪除此帳號", registration_path(resource_name), data: { confirm: "你確定要刪掉?" }, method: :delete, class: "btn btn-light btn-sm " %>
         </div>
       <% end %>
-
-      <%= link_to '回Board列表', boards_path, class: 'btn btn-light' %>
-
     </div>
-
   </div>
+</div>
 </div>

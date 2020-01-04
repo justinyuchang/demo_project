@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary py-0" id="navbar" >
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary py-0 navbarcolor" id="navbar" >
   <%= link_to root_path, class:"btn btn-sm btn-light text-primary mx-1" do %>
   <i class="fas fa-home"></i>
   <% end %>
@@ -9,7 +9,7 @@
   </button>
 
     <%= link_to boards_path, class:"btn btn-sm btn-light text-primary" do %>
-    <i class="fas fa-chalkboard">Boards</i>    
+    <i class="fas fa-chalkboard">Boards</i>
     <% end %>
 
 
@@ -20,26 +20,26 @@
       </li>
       <li class="nav-item"></li>
       <li class="nav-item"></li>
-      <li class="nav-item"></li>      
+      <li class="nav-item"></li>
     </ul>
     <ul class="navbar-nav ml-auto">
           <div class="nav-item dropdown mr-5 col">
           <% if user_signed_in? %>
-            <a class="nav-link btn btn-sm btn-light text-primary" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">              
+            <a class="nav-link btn btn-sm btn-light text-primary" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <%= current_user.email %>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-              <%= link_to "個人檔案", edit_user_registration_path, class: 'dropdown-item' %>  
+              <%# <%= link_to "個人檔案", edit_user_registration_path, class: 'dropdown-item' %>
 
-              <%= link_to "設定", edit_user_registration_path, class: 'dropdown-item' %>   
+              <%= link_to "設定", edit_user_registration_path, class: 'dropdown-item' %>
 
               <div class="dropdown-divider"></div>
                 <%= link_to destroy_user_session_path, method: "delete", data: {confirm: "要登出嘛"} , class: 'dropdown-item' do %>
                 登出　<i class="fas fa-sign-out-alt"></i>
-                <% end %>                             
+                <% end %>
             </div>
-          <% end %>           
+          <% end %>
           </div>
         </ul>
   </div>
