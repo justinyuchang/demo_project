@@ -17,7 +17,7 @@ const list_create = `<div>
                                                 </div>
 
                                                 <div data-role="card-btn" class="card-create btn">
-                                                    <a data-role="card-create-btn" class="card-add" href=""><span><i class="fas fa-plus"></i>新增卡片</span></a>
+                                                    <span data-role="card-create-btn" class="card-add"><i class="fas fa-plus"></i>新增卡片</span>
                                                 </div>
                                               </div>
                                             </div>
