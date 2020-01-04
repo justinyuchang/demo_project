@@ -23,9 +23,9 @@
 
             <div data-role="card-group" class="card-group">
               <% list.cards.each do |card| %>
-              <div class="cart-item">
-                <input data-role="card-id" type="hidden" val= "<%= card.id %>">
-                <a data-role="card-title" href="" ><%= card.title %></a>
+              <div data-role="sortcard" class="cart-item" >
+                  <input data-role="card-id" type="hidden" val= "<%= card.id %>">
+                  <span data-role="card-title" href="" ><%= card.title %></span>
               </div>
               <% end %>
             </div>
@@ -36,7 +36,7 @@
             </div>
   
             <div data-role="card-btn" class="card-create btn">
-                <a data-role="card-create-btn" class="card-add" href=""><span><i class="fas fa-plus"></i>新增卡片</span></a>
+                <span data-role="card-create-btn" class="card-add" href=""><span><i class="fas fa-plus"></i>新增卡片</span></span>
             </div>
           </div>
         </div>
@@ -47,11 +47,11 @@
   <div data-role="input-local" class="list-group item">
     <div class="list-wrapper">
       <div class="list-content btn">
-        <a class="list-add" href=""><span><i class="fas fa-plus"></i>新增列表</span><a>
+        <span class="list-add" href=""><span><i class="fas fa-plus"></i>新增列表</span><a>
       <form data-role="list-create">
         <input data-role="api-list-title" class="api-inp" type="text" placeholder= "請輸入標題" maxlength= "100">
         <input data-role="btn list-create" class="api-btn" type="submit" value="送出">
-        <a class="list-add" href=""><span><i class="fas fa-times"></i></span></a>
+        <span class="list-add" href=""><span><i class="fas fa-times"></i></span></span>
       </form>
     </div>
     </div>
