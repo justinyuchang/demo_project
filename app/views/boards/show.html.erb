@@ -23,10 +23,10 @@
 
             <div data-role="card-group" class="card-group" id="card-sortable">
               <% list.cards.each do |card| %>
-              <div class="cart-item">
-                <input data-role="card-id" type="hidden" val= "<%= card.id %>">
-                <span data-role="card-title"><%= card.title %></span>
-              </div>
+                <div class="cart-item">
+                  <input data-role="card-id" type="hidden" val= "<%= card.id %>">
+                  <span data-role="card-title"><%= card.title %></span>
+                </div>
               <% end %>
             </div>
 
