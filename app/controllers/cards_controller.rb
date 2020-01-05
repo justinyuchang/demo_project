@@ -29,6 +29,10 @@ class CardsController < ApplicationController
   def destroy
   end 
 
+  def sort
+    p "-----------------------#{params}-----------------------------------------------------"
+  end
+
   private
   def find_board
     @board = Board.find(params[:board_id])

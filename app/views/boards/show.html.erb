@@ -22,8 +22,9 @@
           <div data-role="card-wrapper" class="card-wrapper">
 
             <div data-role="card-group" class="card-group" id="card-sortable">
-                <% list.cards.each do |card| %>
-                  <div class="cart-item">
+              <div data-role="sort-able hidden" class="sortable-hidden"></div>
+                <% list.cards.each_with_index do |card, index| %>
+                  <div class="cart-item" id= "<%= card.id %>" >
                     <input data-role="card-id" type="hidden" val= "<%= card.id %>">
                     <span data-role="card-title"><%= card.title %></span>
                   </div>

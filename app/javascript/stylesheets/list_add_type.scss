@@ -68,6 +68,11 @@ html,body{
     .card-group{
       width: 100%;
       height: auto;
+    .sortable-hidden{
+      display: inline-block; 
+      height: 5px;
+      width: 100%;
+    }
         .cart-item{
           height: 45px;
           width: 278px;
