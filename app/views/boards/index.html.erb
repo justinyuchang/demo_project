@@ -41,16 +41,7 @@
       </li>
     </ul>
   <% end %>
-</div>
-
-<div class="create-board">
-  <p class="board-create">
-    <a href="" class="btn mb-4" data-toggle="modal" data-target="#createBoard">新增Board ＋</a>
-  </p>
-</div>
-
-
-<div aria-live="polite" aria-atomic="true" style="position: absolute; top: 40px; right: 0;">
+  <div aria-live="polite" aria-atomic="true">
   <% @searchuser.each do |invitation| %>
   <div class="toast" role="alert" data-autohide="false" aria-live="assertive" aria-atomic="true">
     <div class="toast-header">
@@ -66,3 +57,12 @@
   </div>
   <% end %>
 </div>
+</div>
+
+<div class="create-board">
+  <p class="board-create">
+    <a href="" class="btn mb-4" data-toggle="modal" data-target="#createBoard">新增Board ＋</a>
+  </p>
+</div>
+
+

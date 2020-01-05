@@ -4,6 +4,7 @@ class User < ApplicationRecord
                 :recoverable, :rememberable, :validatable,
                 :omniauthable, omniauth_providers: [:google_oauth2]
 
+
   # ActiveRecord關聯設定
   has_many :user_boards
   has_many :boards, through: :user_boards
