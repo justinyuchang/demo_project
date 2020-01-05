@@ -31,6 +31,9 @@ class CardsController < ApplicationController
 
   def sort
     p "-----------------------#{params}-----------------------------------------------------"
+    # params[:card].each_with_index do |id, index|
+    #   Card.where(id: id).update(position: index + 1)
+    # end
   end
 
   private
