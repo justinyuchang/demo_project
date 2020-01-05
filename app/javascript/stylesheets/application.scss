@@ -3,7 +3,7 @@
 @import "devise.scss";
 @import "bootstrap/scss/bootstrap";
 @import "@fortawesome/fontawesome-free";
-@import "font.scss";
+@import "base.scss";
 .lists {
     .btn{
         width: 300px;
@@ -59,14 +59,4 @@ p span {
 .board-create {
     text-align: center;
     margin: 10px;
-}
-
-body {
-    background-color: rgb(179, 179, 179);
-}
-.navbarcolor{
-    background: linear-gradient(0deg, rgba(16, 40, 127, 0.6)8%, rgba(68, 106, 71, 0.6)100%);
-    background: -moz-linear-gradient(0deg, rgba(16, 40, 127, 0.6)8%, rgba(68, 106, 71, 0.6)100%);
-    background: -webkit-linear-gradient(0deg, rgba(16, 40, 127, 0.6)8%, rgba(68, 106, 71, 0.6)100%);
-    background: -o-linear-gradient(0deg, rgba(16, 40, 127, 0.6)8%, rgba(68, 106, 71, 0.6)100%);
 }
