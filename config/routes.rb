@@ -12,11 +12,12 @@ Rails.application.routes.draw do
     end
   end
 
-
-
   scope :lists do
-    resources :cards, except: [:index] do
+    resources :cards, except: [:index, :new, :edit] do
       resources :comments, only: [:create, :destroy]
+      collection do
+        patch :sort
+      end
     end
   end 
 

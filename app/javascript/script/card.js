@@ -16,7 +16,7 @@ $(document).on("turbolinks:load", function(){
                              .val()
       axios({
           method: 'post',
-          url: `/lists/cards`,
+          url: '/lists/cards',
           data: {
             board_id: board_id,
             card: {
