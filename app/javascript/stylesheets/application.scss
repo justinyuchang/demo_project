@@ -1,16 +1,17 @@
 @import "reset.scss"; 
 @import "list_add_type.scss"; 
-@import "devise.scss"; 
+@import "devise.scss";
 @import "bootstrap/scss/bootstrap";
 @import "@fortawesome/fontawesome-free";
-body{
-    font-family: Microsoft JhengHei, PingFang, Arial;
-}
+@import "font.scss";
+
+
 .lists {
     .btn{
         width: 300px;
         margin: 15px;
     }
+}
 .board-notice {
     margin: 10px 5px 20px;
     font-size: 24px;
@@ -72,4 +73,10 @@ p span {
 body {
     background-color: rgb(179, 179, 179);
 }
+.navbarcolor{
+    background: linear-gradient(0deg, rgba(16, 40, 127, 0.6)8%, rgba(68, 106, 71, 0.6)100%);
+    background: -moz-linear-gradient(0deg, rgba(16, 40, 127, 0.6)8%, rgba(68, 106, 71, 0.6)100%);
+    background: -webkit-linear-gradient(0deg, rgba(16, 40, 127, 0.6)8%, rgba(68, 106, 71, 0.6)100%);
+    background: -o-linear-gradient(0deg, rgba(16, 40, 127, 0.6)8%, rgba(68, 106, 71, 0.6)100%);
 }
+

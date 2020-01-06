@@ -1,11 +1,11 @@
 <body class="container fullversion rootbg">
-    <%= render "devise/shared/logo" %>    
+    # <%= render "devise/shared/logo" %>    
   </div>
   <div class="row justify-content-end align-items-center">
       <%= render "devise/shared/info" %>
     <div class="col-4 shadow p-3 mb-5 bg-white rounded">
     
-      <h2>使用者登錄</h2>      
+      <h2>使用者登錄</h2>
         
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
           <div class="form-group">
@@ -18,7 +18,7 @@
           <div class="form-group">
 
             <%= f.label :password, "使用者密碼" %><br />
-            <%= f.password_field :password, autocomplete: "current-password", class: 'form-control' %>            
+            <%= f.password_field :password, autocomplete: "current-password", class: 'form-control' %>
           </div>
             
           <div class="form-group form-check">
@@ -27,28 +27,21 @@
             <%= f.check_box :remember_me, class: 'form-check-input' %>
                 <%= f.label :remember_me %>
             <% end %>
-              
+
           </div>
-            
+
           <div class="form-grou">
 
-            <%= f.submit "登錄",title: '登錄', class: 'btn btn-light' %>            
-            
-          </div>  
+
+            <%= f.submit "登錄",title: '登錄', class: 'btn btn-light' %> 
+
+          </div>
         <% end %>
 
-        
-              
-      <%= render "devise/shared/links" %>       
+      <%= render "devise/shared/links" %>
+
     
     </div>
    
   </div>
 </body>
-
-
-
-
-
-
-
