@@ -1,10 +1,15 @@
 body{
   font-family: Microsoft JhengHei, PingFang, Arial;
-  background-color: rgb(179, 179, 179);
+}
+.boardbg{
+  background: linear-gradient(180deg, rgba(140, 184, 219, 1)50%, rgba(32, 163, 255, 1)100%);
+  background: -moz-linear-gradient(180deg, rgba(140, 184, 219, 1)50%, rgba(32, 163, 255, 1)100%);
+  background: -webkit-linear-gradient(180deg, rgba(140, 184, 219, 1)50%, rgba(32, 163, 255, 1)100%);
+  background: -o-linear-gradient(180deg, rgba(140, 184, 219, 1)50%, rgba(32, 163, 255, 1)100%);
 }
 .navbarcolor{
   background: linear-gradient(0deg, rgba(16, 40, 127, 0.6)8%, rgba(68, 106, 71, 0.6)100%);
   background: -moz-linear-gradient(0deg, rgba(16, 40, 127, 0.6)8%, rgba(68, 106, 71, 0.6)100%);
   background: -webkit-linear-gradient(0deg, rgba(16, 40, 127, 0.6)8%, rgba(68, 106, 71, 0.6)100%);
   background: -o-linear-gradient(0deg, rgba(16, 40, 127, 0.6)8%, rgba(68, 106, 71, 0.6)100%);
-}
+}                   
