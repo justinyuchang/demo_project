@@ -3,7 +3,7 @@ import list_create from "./template/list_create"
 import card_create from "./template/card_create"
 
 $( document ).on('turbolinks:load', function() {
-    $(function(env){
+    $(function(event){
         let board_url = location.pathname.split('/')
         let board_id =  board_url[board_url.length - 1]
         consumer.subscriptions.create(

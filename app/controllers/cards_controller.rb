@@ -32,24 +32,34 @@ class CardsController < ApplicationController
   def sort
     p "-----------------------#{params}-----------------------------------------------------"
     find_list = List.find(params[:list_id])
-    find_card = Card.find(params.dig(:card, 0, :card_id))
-    next_card = Card.find_by(id: params.dig(:card, 1, :next_card_id))
-    prev_card = Card.find_by(id: params.dig(:card, 2, :prev_card_id))
-    position = if prev_card.blank?
-                            next_card.position / 2
-                          elsif next_card.blank?
-                            prev_card.position + 1000
-                          else
-                            (next_card.position + prev_card.position) / 2
-                          end
-    if (find_card.list_id == find_list.id)
-      find_card.update(position: position)
-    else
-      find_card.update(list_id: find_list.id, position: position)
+    find_card = Card.find_by(id: params[:card])
+    find_card_array = params[:card_array]
+    p "-----------------------#{find_list.id}-----------------------------------------------------"
+    p "-----------------------#{find_card.id}-----------------------------------------------------"
+    p "-----------------------#{find_card_array}-----------------------------------------------------"
+    if find_card_array.include?((find_card.id).to_s)
+      next_card = Card.find_by(id: params[:next_card_id])
+      prev_card = Card.find_by(id: params[:prev_card_id])
+      position = if (prev_card.blank?) && (next_card.blank?)
+                              1.0
+                            elsif prev_card.blank?
+                              next_card.position / 2
+                            elsif next_card.blank?
+                              prev_card.position + 1000
+                            else
+                              (next_card.position + prev_card.position) / 2
+                            end
+        if (find_card.list_id == find_list.id)
+        find_card.update(position: position)
+        else
+        find_card.update(list_id: find_list.id, position: position)
+        end
+      else
+      p "unnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn"
     end
-    # params[:card].each_with_index do |id, index|
-    #   Card.where(id: id).update(position: index + 1)
-    # end
+    # next_card = Card.find_by(id: params.dig(:card, 1, :next_card_id))
+    # prev_card = Card.find_by(id: params.dig(:card, 2, :prev_card_id))
+
   end
 
   private
