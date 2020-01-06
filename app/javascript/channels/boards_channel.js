@@ -19,14 +19,15 @@ $( document ).on('turbolinks:load', function() {
               list_channel.find('[data-role="list-id"]').attr("val", `${data.id}`)
               $('[data-role="input-local"]').before(list_channel)
             }else{
-              let card_template = $(card_create).html()
-              let card_channel = $(card_template).clone(true,true)
+              let card_channel = $(card_create).clone(true,  true)
               card_channel.find('[data-role="card-id"]').attr("val", `${data.id}`)
+              card_channel.find('[data-role="sortable-column"]').attr("id", `${data.id}`)
               card_channel.find('[data-role="card-title"]').text(data.title)
+              let card_template = $(card_channel).html()
               $(`input[val=${data.list_id}]`).parents('[data-role= "list-item"]')
                                                                             .siblings('[data-role="card-wrapper"]')
                                                                             .find('[data-role="card-group"]')
-                                                                            .append(card_channel)
+                                                                            .append(card_template)
 
             }
 

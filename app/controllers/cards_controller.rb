@@ -29,6 +29,13 @@ class CardsController < ApplicationController
   def destroy
   end 
 
+  def sort
+    p "-----------------------#{params}-----------------------------------------------------"
+    # params[:card].each_with_index do |id, index|
+    #   Card.where(id: id).update(position: index + 1)
+    # end
+  end
+
   private
   def find_board
     @board = Board.find(params[:board_id])

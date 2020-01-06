@@ -21,12 +21,13 @@
           
           <div data-role="card-wrapper" class="card-wrapper">
 
-            <div data-role="card-group" class="card-group">
-              <% list.cards.each do |card| %>
-              <div class="cart-item">
-                <input data-role="card-id" type="hidden" val= "<%= card.id %>">
-                <span data-role="card-title"><%= card.title %></span>
-              </div>
+            <div data-role="card-group" class="card-group" id="card-sortable">
+              <div data-role="sort-able hidden" class="sortable-hidden"></div>
+                <% list.cards.each do |card| %>
+                  <div data-role="sortable-column" class="cart-item" id= "<%= card.id %>" val= "123">
+                    <input data-role="card-id" type="hidden" val= "<%= card.id %>">
+                    <span data-role="card-title"><%= card.title %></span>
+                  </div>
               <% end %>
             </div>
 
@@ -56,9 +57,6 @@
     </div>
   </div>
 </div>
-
-
-
 
 
 
