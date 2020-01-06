@@ -5,10 +5,13 @@ class CardsController < ApplicationController
   def show
     @card_item = Card.find(params[:id])
     @comments = @card_item.comments
+    @assignee = @card_item.users
+    p "="*50
+    p "#{@assignee}"
     p "="*50
     p "#{@comments}"
     p "="*50
-    render json: { card: @card_item, comments: @comments}
+    render json: { card: @card_item, comments: @comments, assignee: @assignee}
   end
 
   def create
@@ -35,12 +38,12 @@ class CardsController < ApplicationController
     p "="*50
     @card = Card.find(params[:id])
     @user = User.find(params[:user_id])
-
-    
-    @assign_user = @card.users.push(@user)
-    p "="*50
-    p "#{@assign_user}"
-    p "="*50
+    if @card.users.include?(@user) == false 
+      @assignee = @card.users.push(@user)
+    else
+      @card.users.delete(@user)
+      render json: {status: "ok"}
+    end
   end 
 
   private

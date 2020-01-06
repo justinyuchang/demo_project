@@ -31,7 +31,6 @@ $(document).on("turbolinks:load", function(){
     });
 // Get card 
   $('[data-role="js-list"]').on("click", '[data-role="card-title"]', function(event){
-    console.log("已觸發")
     event.preventDefault();
     let card_id = $(this).siblings('[data-role="card-id"]').attr('val');
     console.log(card_id)
@@ -43,13 +42,21 @@ $(document).on("turbolinks:load", function(){
       console.log(response)
       console.log(response.data)
       let card_item = response.data.card
-      console.log(card_item) 
+      console.log(card_item)
       let card_comment = response.data.comments
       console.log(card_comment)
+      let card_assignee = response.data.assignee
+      console.log(card_assignee)
 // Get comment's content 
-      let comments = response.data.comments.map(comment => comment.content)
-      console.log(comments)
-      $('[data-role ="comment-area"]').html(`<div class="bg-light mb-1">${comments}</div>`);
+      let result = ''
+      card_comment.forEach(function(comment){
+        result = result + `<div class="bg-light mb-1">${comment.content}</div>`
+      })
+      card_assignee.forEach(function(assignee){
+        console.log(assignee.email);
+        $('.assignee').text(`${assignee.email}`)
+      })
+      $('[data-role ="comment-area"]').html(result);
       $('[data-role ="card-focus-id"]').text(`${card_item.id}`)
       $('[data-role ="card-inner_title"]').text(`${card_item.title}`)
       $('[data-role ="card-description"]').val(`${card_item.description}`)
