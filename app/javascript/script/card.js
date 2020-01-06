@@ -1,7 +1,7 @@
 import axios from 'helpers/axios';
 
 $(document).on("turbolinks:load", function(){
-// Get create 
+// Card create 
     $('[data-role="js-list"]').on("click",'[data-role="card-create-btn"]', function(event){
       event.preventDefault();
       const board_url = location.pathname.split('/')
@@ -26,7 +26,7 @@ $(document).on("turbolinks:load", function(){
           }
         })
         .then(function(response){
-          console.log(response)
+          $("textarea").val(" ")
         })
     });
 // Get card 
