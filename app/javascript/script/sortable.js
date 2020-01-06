@@ -15,14 +15,14 @@ $(document).on("turbolinks:load", function(){
                                                .find('[data-role="list-id"]')
                                                .attr("val") 
           let card_id = $(ui.item[0]).attr("id")
-          let card_id_next  = $(ui.item[0]).next().attr("id")
-          let card_id_prev  = $(ui.item[0]).prev().attr("id")
+          let next_card_id  = $(ui.item[0]).next().attr("id") || "no"
+          let prev_card_id  = $(ui.item[0]).prev().attr("id") || "no"
           axios({
             method: 'patch',
             url: '/lists/cards/sort',
             data: {card: [{card_id: card_id},
-                                      {card_id_next: card_id_next},
-                                      {card_id_prev: card_id_prev}],
+                                      {next_card_id: next_card_id},
+                                      {prev_card_id: prev_card_id}],
                          list_id: list_id
             }
           })
