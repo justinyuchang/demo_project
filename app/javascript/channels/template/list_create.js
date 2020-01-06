@@ -10,6 +10,7 @@ const list_create = `<div>
                                               
                                               <div data-role="card-wrapper" class="card-wrapper">
                                                 <div data-role="card-group" class="card-group">
+                                                <div data-role="sort-able hidden" class="sortable-hidden"></div>
                                                 </div>
 
                                                 <div data-role="card-input" class="card-create input">

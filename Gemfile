@@ -12,6 +12,7 @@ gem 'omniauth-google-oauth2', '~> 0.8.0'
 gem 'acts_as_list', '~> 1.0'
 gem 'omniauth-facebook', '~> 5.0'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.5'
+gem 'jquery-ui-rails', '~> 6.0', '>= 6.0.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.1'
