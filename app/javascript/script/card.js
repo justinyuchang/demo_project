@@ -47,15 +47,6 @@ $(document).on("turbolinks:load", function(){
       console.log(card_comment)
       let card_assignee = response.data.assignee
       console.log(card_assignee)
-// Get comment's content 
-      let result = ''
-      card_comment.forEach(function(comment){
-        result = result + `<div class="bg-light mb-1">${comment.content}</div>`
-      })
-      card_assignee.forEach(function(assignee){
-        console.log(assignee.email);
-        $('.assignee').text(`${assignee.email}`)
-      })
       $('[data-role ="comment-area"]').html(result);
       $('[data-role ="card-focus-id"]').text(`${card_item.id}`)
       $('[data-role ="card-inner_title"]').text(`${card_item.title}`)
@@ -63,9 +54,13 @@ $(document).on("turbolinks:load", function(){
       $('[data-role ="card-due-date"]').val(`${card_item.due_date}`)
       $('[data-role ="card-archived"]').val(`${card_item.archived}`)
       $('[data-role ="card-tags"]').val(`${card_item.tags}`)
-      $('#Carditem .assign_card_path').each((idx, pathDom) => {
-        let tplPath = $(pathDom).data('path-tpl')
-        $(pathDom).attr('href', tplPath.replace('CARD_ID', card_id))
+      let result = ''
+      card_comment.forEach(function(comment){
+        result = result + `<div class="bg-light mb-1">${comment.content}</div>`
+      })
+      card_assignee.forEach(function(assignee){
+        console.log(assignee.email);
+        $('.assignee').html(`<div class="assignee">${assignee.email}</div>`)
       })
       $('#Carditem').modal('show')
     })
@@ -113,12 +108,47 @@ $(document).on("turbolinks:load", function(){
         content: card_comment
       }
     })
-    .then(function(){
-      $('[data-role ="comment-area"]').append(`<div class="bg-light mb-1">${card_comment}</div>`)
+    .then(function(response){
+      if (response.status === 200) {
+        return response.data
+      } else {
+        throw 'Error'
+      }
+    })
+    .then(function(data){
+      console.log(data)
+      $('[data-role ="comment-area"]').append(`<div class="bg-light mb-1">${data.content}</div>`)
     })
     .then(function(){
       $('[data-role ="comment-input"]').val("")
     })
   });
+// Card assignee
+  $('.dropdown-item').on("click", function(evt){
+    let cardId = $('[data-role ="card-focus-id"]').text()
+    let userId = $(this).children('a').attr('data-memberid')
+    axios({
+      method: 'put',
+      url: `/lists/cards/${cardId}/assign`,
+      data: {
+        userId: userId,
+      }
+    })
+    .then(function(response){
+      if (response.status === 200){
+        console.log(response.data)
+        return response.data
+      } elseif (response.status === "remove");{
+        throw 'Remove assignee'
+      }
+    })
+    .then(function(data){
+      console.log(data)
+      data.forEach(function(assignee){
+        console.log(assignee.email);
+        $('.assignee-list').append(`<div class="assignee">${assignee.email}</div>`)
+      })
+    })
+  })
 /////////////////////////////////////////////
 })

@@ -37,12 +37,19 @@ class CardsController < ApplicationController
     p "#{params}"
     p "="*50
     @card = Card.find(params[:id])
-    @user = User.find(params[:user_id])
+    p "*"*50
+    p "#{@card}"
+    p "*"*50
+    @user = User.find(params[:userId])
+    p "*"*50
+    p "#{@user}"
+    p "*"*50
     if @card.users.include?(@user) == false 
       @assignee = @card.users.push(@user)
+      render json: @assignee
     else
       @card.users.delete(@user)
-      render json: {status: "ok"}
+      render json: {status: "remove"}
     end
   end 
 

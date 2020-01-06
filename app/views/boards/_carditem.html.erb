@@ -40,7 +40,11 @@
                </button>
                <ul class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
                  <% @board.users.each do |member| %>
-                   <li class="dropdown-item"><%= link_to member.email, '###', method: :put, class: 'assign_card_path', data: { 'path-tpl': assign_card_path(id: 'CARD_ID', user_id: member.id) } %></li>
+                   <li class="dropdown-item">
+                     <a href="" data-memberId="<%= member.id %>"><%= member.email %></a>
+                     <!-- <%= link_to member.email, 'assign_card_path', method: :put, data: { memberId: member.id}, remote: true %> -->
+                     <!-- <%= link_to member.email, '###', method: :put, class: 'assign_card_path', data: { 'path-tpl': assign_card_path(id: 'CARD_ID', user_id: member.id), memberId: member.id } %> -->
+                   </li>
                  <% end %>
                </ul>
             </div>
