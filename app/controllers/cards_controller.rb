@@ -30,36 +30,35 @@ class CardsController < ApplicationController
   end 
 
   def sort
-    p "-----------------------#{params}-----------------------------------------------------"
     find_list = List.find(params[:list_id])
     find_card = Card.find_by(id: params[:card])
     find_card_array = params[:card_array]
-    p "-----------------------#{find_list.id}-----------------------------------------------------"
-    p "-----------------------#{find_card.id}-----------------------------------------------------"
-    p "-----------------------#{find_card_array}-----------------------------------------------------"
     if find_card_array.include?((find_card.id).to_s)
       next_card = Card.find_by(id: params[:next_card_id])
       prev_card = Card.find_by(id: params[:prev_card_id])
       position = if (prev_card.blank?) && (next_card.blank?)
-                              1.0
+                              "position"
                             elsif prev_card.blank?
                               next_card.position / 2
                             elsif next_card.blank?
-                              prev_card.position + 1000
+                              prev_card.position + 1000.0
                             else
                               (next_card.position + prev_card.position) / 2
                             end
-        if (find_card.list_id == find_list.id)
+      if (find_card.list_id == find_list.id)
         find_card.update(position: position)
-        else
-        find_card.update(list_id: find_list.id, position: position)
-        end
       else
-      p "unnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn"
-    end
-    # next_card = Card.find_by(id: params.dig(:card, 1, :next_card_id))
-    # prev_card = Card.find_by(id: params.dig(:card, 2, :prev_card_id))
+        if position == "position"
+          find_card.update(list_id: find_list.id)
+        else
+          find_card.update(list_id: find_list.id, position: position)
+        end
+      end
 
+    else
+      p "unnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn"
+      
+    end
   end
 
   private
