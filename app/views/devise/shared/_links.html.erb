@@ -1,41 +1,39 @@
-<div class="container">
-  <div class="text-center">OR</div>
-  <div class="text-center">
+<div>
+  <div class="text-center mt-3">
     <%- if devise_mapping.omniauthable? %>
       <%- resource_class.omniauth_providers.each do |provider| %>
-        <%= link_to image_tag("googleicon_30.png"), omniauth_authorize_path(resource_name, provider) ,alt:'Google登入', class: 'btn btn-light' %>
+        <%= link_to image_tag("googleicon_30.png"), omniauth_authorize_path(resource_name, provider) ,title: 'Google登入', class: 'btn btn-light my_btn' %>
       <% end %>
     <% end %>
   </div>
-<hr>
-  <div class="d-flex justify-content-center">
+  <hr>
+  <div class="text-center">
 
-    <div>  
       <%- if controller_name != 'sessions' %>
-        <%= link_to "使用者登入", new_session_path(resource_name), title: 'Google login', class: 'btn btn-light' %>
+        <%= link_to "使用者登入", new_session_path(resource_name), title: '使用者登入', class: 'btn btn-light my_btn' %>
       <% end %>
-    </div>
-    <div>
+ 
+
       <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-        <%= link_to "使用者註冊", new_registration_path(resource_name), title:'使用者註冊', class: 'btn btn-light' %>
+        <%= link_to "使用者註冊", new_registration_path(resource_name), title:'使用者註冊', class: 'btn btn-light my_btn' %>
       <% end %>
-        </div>
-    <div>
+
+
       <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-        <%= link_to new_password_path(resource_name), title: '你～忘記密碼了嗎', class: 'dropdown-item' do %>
-          <%= image_tag "forgotpassword_50.png", size: "25" %>你～忘記密碼了嗎
+        <%= link_to new_password_path(resource_name), title: '忘記密碼?', class: 'btn btn-light my_btn mt-3' do %>
+          <%= image_tag "forgotpassword_50.png", size: "25" %>忘記密碼?
           <% end %>
       <% end %>
-    </div>
-    <div>
+
+
       <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
         <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name), class: 'btn btn-light' %>
       <% end %>
-    </div>
-      <div>
+
+
         <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
           <%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name), class: 'btn btn-light' %>
         <% end %>
-      </div>
+
   </div>
 </div>
