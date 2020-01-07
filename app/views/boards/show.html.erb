@@ -10,7 +10,7 @@
 <div data-role="js-list" class="list-container">
   
   <% @lists.each do |list| %>
-  <div class="list-group item">
+  <div class="list-group item" id="<%= list.id %>">
       <div class="list-wrapper">
         <div class='list-content box'>
           <div data-role= "list-item" class="list-item" >
@@ -21,12 +21,13 @@
           
           <div data-role="card-wrapper" class="card-wrapper">
 
-            <div data-role="card-group" class="card-group">
-              <% list.cards.each do |card| %>
-              <div class="cart-item">
-                <input data-role="card-id" type="hidden" val= "<%= card.id %>">
-                <span data-role="card-title"><%= card.title %></span>
-              </div>
+            <div data-role="card-group" class="card-group" id="card-sortable">
+              <div data-role="sort-able hidden" class="sortable-hidden"></div>
+                <% list.cards.each do |card| %>
+                  <div data-role="sortable-column" class="cart-item" id= "<%= card.id %>">
+                    <input data-role="card-id" type="hidden" val= "<%= card.id %>">
+                    <span data-role="card-title"><%= card.title %></span>
+                  </div>
               <% end %>
             </div>
 
@@ -56,9 +57,6 @@
     </div>
   </div>
 </div>
-
-
-
 
 
 

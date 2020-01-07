@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_02_080844) do
+
+ActiveRecord::Schema.define(version: 2020_01_06_040050) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,7 +57,7 @@ ActiveRecord::Schema.define(version: 2020_01_02_080844) do
 
   create_table "cards", force: :cascade do |t|
     t.string "title"
-    t.integer "position"
+    t.float "position", default: 10000.0
     t.text "description"
     t.string "tags"
     t.boolean "archived"
