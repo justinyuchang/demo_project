@@ -15,6 +15,8 @@ $(document).on("turbolinks:load", function(){
                                                .siblings('[data-role= "list-item"]')
                                                .find('[data-role="list-id"]')
                                                .attr("val") 
+          let board_url = location.pathname.split('/')
+          let board_id =  board_url[board_url.length - 1]
           let card_id = $(ui.item[0]).attr("id")
           let card_index = sort_array.indexOf(card_id)
           // let prev_card_id =
@@ -41,7 +43,8 @@ $(document).on("turbolinks:load", function(){
                           next_card_id: next_card_id,
                           prev_card_id: prev_card_id,
                           list_id: list_id,
-                          card_array: sort_array
+                          card_array: sort_array,
+                          board_id: board_id
             }
           })
         }

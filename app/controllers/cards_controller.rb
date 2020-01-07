@@ -1,5 +1,5 @@
 class CardsController < ApplicationController
-  before_action :find_board, only: [:create]
+  before_action :find_board, only: [:create, :sort]
   before_action :load_card_items_params, only: [:update]
   
   def show
@@ -56,8 +56,8 @@ class CardsController < ApplicationController
       end
 
     else
-      p "unnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn"
-      
+      card_delete = {list_id: find_list.id, card_id: find_card.id, status: "sortable_delete"}
+      BoardsChannel.broadcast_to(@board, card_delete)
     end
   end
 
