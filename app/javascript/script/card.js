@@ -47,17 +47,17 @@ $(document).on("turbolinks:load", function(){
       console.log(card_comment)
       let card_assignee = response.data.assignee
       console.log(card_assignee)
+      let result = ''
+      card_comment.forEach(function(comment){
+        result = result + `<div class="bg-light mb-1">${comment.content}</div>`
+      })
       $('[data-role ="comment-area"]').html(result);
       $('[data-role ="card-focus-id"]').text(`${card_item.id}`)
       $('[data-role ="card-inner_title"]').text(`${card_item.title}`)
       $('[data-role ="card-description"]').val(`${card_item.description}`)
       $('[data-role ="card-due-date"]').val(`${card_item.due_date}`)
-      $('[data-role ="card-archived"]').val(`${card_item.archived}`)
+      // $('[data-role ="card-archived"]').val(`${card_item.archived}`)
       $('[data-role ="card-tags"]').val(`${card_item.tags}`)
-      let result = ''
-      card_comment.forEach(function(comment){
-        result = result + `<div class="bg-light mb-1">${comment.content}</div>`
-      })
       card_assignee.forEach(function(assignee){
         console.log(assignee.email);
         $('.assignee').html(`<div class="assignee">${assignee.email}</div>`)
@@ -71,12 +71,12 @@ $(document).on("turbolinks:load", function(){
     let card_id = $('[data-role ="card-focus-id"]').text()
     let card_description = $('[data-role ="card-description"]').val()
     let card_due_date = $('[data-role ="card-due-date"]').val()
-    let card_archived = $('[data-role ="card-archived"]').val()
+    // let card_archived = $('[data-role ="card-archived"]').val()
     let card_tags = $('[data-role ="card-tags"]').val()
     console.log(card_id)
     console.log(card_description)
     console.log(card_due_date)
-    console.log(card_archived)
+    // console.log(card_archived)
     console.log(card_tags)
     axios({
       method: 'patch',
@@ -84,7 +84,7 @@ $(document).on("turbolinks:load", function(){
       data: {
         description: card_description,
         due_date: card_due_date,
-        archived: card_archived,
+        // archived: card_archived,
         tags: card_tags
       }
     })
@@ -110,14 +110,12 @@ $(document).on("turbolinks:load", function(){
     })
     .then(function(response){
       if (response.status === 200) {
+        let data = response.data
+        $('[data-role ="comment-area"]').append(`<div class="bg-light mb-1">${data.content}</div>`)
         return response.data
       } else {
         throw 'Error'
       }
-    })
-    .then(function(data){
-      console.log(data)
-      $('[data-role ="comment-area"]').append(`<div class="bg-light mb-1">${data.content}</div>`)
     })
     .then(function(){
       $('[data-role ="comment-input"]').val("")
@@ -126,7 +124,7 @@ $(document).on("turbolinks:load", function(){
 // Card assignee
   $('.dropdown-item').on("click", function(evt){
     let cardId = $('[data-role ="card-focus-id"]').text()
-    let userId = $(this).children('a').attr('data-memberid')
+    let userId = $(this).children('span').attr('data-memberid')
     axios({
       method: 'put',
       url: `/lists/cards/${cardId}/assign`,
@@ -137,17 +135,13 @@ $(document).on("turbolinks:load", function(){
     .then(function(response){
       if (response.status === 200){
         console.log(response.data)
-        return response.data
-      } elseif (response.status === "remove");{
-        throw 'Remove assignee'
+        let data = response.data
+        data.forEach(function(assignee){
+          $('.assignee-list').html(`<div class="assignee">${assignee.email}</div>`)
+        })
+      } else {
+          $('.assignee').remove()
       }
-    })
-    .then(function(data){
-      console.log(data)
-      data.forEach(function(assignee){
-        console.log(assignee.email);
-        $('.assignee-list').append(`<div class="assignee">${assignee.email}</div>`)
-      })
     })
   })
 /////////////////////////////////////////////

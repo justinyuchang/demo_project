@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   scope :lists do
     resources :cards, except: [:index] do
       put 'assign', on: :member
+      post 'tagging', on: :member
+      delete 'tearing', on: :member 
       resources :comments, only: [:create, :destroy]
     end
   end 

@@ -6,11 +6,6 @@ class CardsController < ApplicationController
     @card_item = Card.find(params[:id])
     @comments = @card_item.comments
     @assignee = @card_item.users
-    p "="*50
-    p "#{@assignee}"
-    p "="*50
-    p "#{@comments}"
-    p "="*50
     render json: { card: @card_item, comments: @comments, assignee: @assignee}
   end
 
@@ -33,32 +28,30 @@ class CardsController < ApplicationController
   end 
 
   def assign 
-    p "="*50
-    p "#{params}"
-    p "="*50
     @card = Card.find(params[:id])
-    p "*"*50
-    p "#{@card}"
-    p "*"*50
     @user = User.find(params[:userId])
-    p "*"*50
-    p "#{@user}"
-    p "*"*50
     if @card.users.include?(@user) == false 
       @assignee = @card.users.push(@user)
       render json: @assignee
     else
       @card.users.delete(@user)
-      render json: {status: "remove"}
     end
   end 
+
+  def tagging 
+  end 
+
+  def tearing
+  end
+
+
 
   private
   def find_board
     @board = Board.find(params[:board_id])
   end
 
-  def  card_params
+  def card_params
     params.require(:card).permit(:title, :list_id)
   end
 

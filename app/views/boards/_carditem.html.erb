@@ -28,8 +28,9 @@
             <div data-role="comment-area">
               <div class="bg-light mb-1"></div>
             </div>
-
           </div>
+
+
           <!-- Side Bar -->
           <div class="col-3">
             <span class="text-muted small">Add to card</span>
@@ -41,13 +42,21 @@
                <ul class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
                  <% @board.users.each do |member| %>
                    <li class="dropdown-item">
-                     <a href="" data-memberId="<%= member.id %>"><%= member.email %></a>
+                     <span data-memberId="<%= member.id %>"><%= member.email %></span>
                      <!-- <%= link_to member.email, 'assign_card_path', method: :put, data: { memberId: member.id}, remote: true %> -->
                      <!-- <%= link_to member.email, '###', method: :put, class: 'assign_card_path', data: { 'path-tpl': assign_card_path(id: 'CARD_ID', user_id: member.id), memberId: member.id } %> -->
                    </li>
                  <% end %>
                </ul>
             </div>
+
+            <div class="input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-sm">Tags</span>
+              </div>
+              <input data-role="card-tags" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+            </div>
+
             <div class="input-group-sm">
               <label for="card-due-date">Due date</label>
               <input data-role="card-due-date" type="date" class="form-control" id="card-due-date">
@@ -61,14 +70,8 @@
               </select>
             </div> -->
 
-            <div class="input-group-sm">
-              <label for="card-tags">Card Tag</label>
-              <select data-role="card-tags" id="card-tags" class="form-control">
-                <option selected>red</option>
-                <option>blue</option>
-              </select>
-            </div>
           </div>
+          
         </div>
       </div>
       <div class="form-group d-flex justify-content-end">
