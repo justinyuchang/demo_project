@@ -34,7 +34,9 @@ $( document ).on('turbolinks:load', function() {
                 case "sortable_delete":
                   console.log(data)
                   $(`div[id=list_${data.list_id}]`).find(`div[id=${data.card_id}]`).remove()
-                  
+                  break;
+                case "sortable_add":
+                  console.log(data)
                   break;
             }
           }

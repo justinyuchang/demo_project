@@ -47,11 +47,15 @@ class CardsController < ApplicationController
                             end
       if (find_card.list_id == find_list.id)
         find_card.update(position: position)
+        sortable_add = {list_id: find_list.id, card_id: find_card.id, prev_id: prev_card, status: "sortable_add"}
+        BoardsChannel.broadcast_to(@board, sortable_add)
       else
         if position == "position"
           find_card.update(list_id: find_list.id)
+
         else
           find_card.update(list_id: find_list.id, position: position)
+
         end
       end
 
