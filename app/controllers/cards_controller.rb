@@ -13,7 +13,7 @@ class CardsController < ApplicationController
 
   def create
     @card = Card.create(card_params)
-    @card_channel = {id: @card.id, title: @card.title,list_id: @card.list_id ,stats: "card_create"}
+    @card_channel = {id: @card.id, title: @card.title,list_id: @card.list_id ,status: "card_create"}
     BoardsChannel.broadcast_to(@board, @card_channel)
     render json:@card_channel
   end
@@ -56,8 +56,8 @@ class CardsController < ApplicationController
       end
 
     else
-      card_delete = {list_id: find_list.id, card_id: find_card.id, status: "sortable_delete"}
-      BoardsChannel.broadcast_to(@board, card_delete)
+      sortable_delete = {list_id: find_list.id, card_id: find_card.id, status: "sortable_delete"}
+      BoardsChannel.broadcast_to(@board, sortable_delete)
     end
   end
 

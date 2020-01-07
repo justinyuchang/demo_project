@@ -1,6 +1,6 @@
 const list_create = `<div>
                                           <div class="list-group item">
-                                          <div class="list-wrapper">
+                                          <div data-role="list-wrapper" class="list-wrapper" id="">
                                             <div class='list-content box'>
                                               <div data-role= "list-item" class="list-item" >
                                                 <input data-role="list-id" type="hidden" val= "輸入">
