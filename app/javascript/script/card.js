@@ -49,7 +49,7 @@ $(document).on("turbolinks:load", function(){
       let card_assignee = response.data.assignee
       console.log(card_assignee)
       let card_tags = card_item.tags
-
+      console.log(card_tags)
       let result = ''
       card_comment.forEach(function(comment){
         result = result + `<div class="bg-light mb-1">${comment.content}</div>`
@@ -60,10 +60,12 @@ $(document).on("turbolinks:load", function(){
       $('[data-role ="card-description"]').val(`${card_item.description}`)
       $('[data-role ="card-due-date"]').val(`${card_item.due_date}`)
       // $('[data-role ="card-archived"]').val(`${card_item.archived}`)
+      let taglist = ''
       card_tags.forEach(function(tag){
         console.log(tag.name);
-        $('.tags').html(`<p class="tags">${tag.name}</p>`)
+        taglist = taglist + `<div class="tags">${tag.name}</div>`
       })
+      $('.tags').html(taglist);
       card_assignee.forEach(function(assignee){
         console.log(assignee.email);
         $('.assignee').html(`<div class="assignee">${assignee.email}</div>`)
@@ -78,7 +80,6 @@ $(document).on("turbolinks:load", function(){
     let card_description = $('[data-role ="card-description"]').val()
     let card_due_date = $('[data-role ="card-due-date"]').val()
     // let card_archived = $('[data-role ="card-archived"]').val()
-    let cardTags = $('[data-role ="card-tags"]').val()
     console.log(card_id)
     console.log(card_description)
     console.log(card_due_date)
@@ -91,7 +92,7 @@ $(document).on("turbolinks:load", function(){
         description: card_description,
         due_date: card_due_date,
         // archived: card_archived,
-        tags_list: cardTags
+        tag_list: cardTags
       }
     })
     .then(function(response){
@@ -148,6 +149,28 @@ $(document).on("turbolinks:load", function(){
       } else {
           $('.assignee').remove()
       }
+    })
+  })
+// Add tags  
+  $('[data-role ="tag-send"]').click(function(){
+    console.log('Ready');
+    let cardId = $('[data-role ="card-focus-id"]').text()
+    let cardTags = $(this).siblings("input").val()
+    axios({
+      method: 'put',
+      url: `/lists/cards/${cardId}/tagging`,
+      data: {
+        cardTags: cardTags, 
+      }
+    })
+    .then(function(response){
+      console.log(response)
+      if (response.status === 200){
+        let data = response.data
+        console.log(data)
+        let tags = data.name
+        console.log(tags)
+      } 
     })
   })
 /////////////////////////////////////////////
