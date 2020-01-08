@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   scope :lists do
     resources :cards, except: [:index, :new, :edit] do
+      put 'assign', on: :member
       resources :comments, only: [:create, :destroy]
       collection do
         patch :sort

@@ -11,8 +11,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         session["devise.google_data"] = request.env["omniauth.auth"]
         redirect_to new_user_registration_url
       end
+    
   end
-
   # def facebook
   #   @user = User.from_omniauth(request.env["omniauth.auth"])
 
@@ -24,8 +24,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   #     redirect_to new_user_registration_url
   #   end
   # end
-
   def failure
-    redirect_to root_path, alert: "無法獲得驗證！"
+    redirect_to root_path, alert: "無法獲得驗證！" 
   end
 end

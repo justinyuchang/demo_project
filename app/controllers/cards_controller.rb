@@ -5,10 +5,8 @@ class CardsController < ApplicationController
   def show
     @card_item = Card.find(params[:id])
     @comments = @card_item.comments
-    p "="*50
-    p "#{@comments}"
-    p "="*50
-    render json: { card: @card_item, comments: @comments}
+    @assignee = @card_item.users
+    render json: { card: @card_item, comments: @comments, assignee: @assignee}
   end
 
   def create
@@ -27,6 +25,17 @@ class CardsController < ApplicationController
   end 
   
   def destroy
+  end 
+
+  def assign 
+    @card = Card.find(params[:id])
+    @user = User.find(params[:userId])
+    if @card.users.include?(@user) == false 
+      @assignee = @card.users.push(@user)
+      render json: @assignee
+    else
+      @card.users.delete(@user)
+    end
   end 
 
   def sort
@@ -66,7 +75,7 @@ class CardsController < ApplicationController
     @board = Board.find(params[:board_id])
   end
 
-  def  card_params
+  def card_params
     params.require(:card).permit(:title, :list_id)
   end
 
