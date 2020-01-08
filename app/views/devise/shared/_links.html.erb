@@ -2,7 +2,13 @@
   <div class="text-center mt-3">
     <%- if devise_mapping.omniauthable? %>
       <%- resource_class.omniauth_providers.each do |provider| %>
+<<<<<<< HEAD
+
+
+        <%= link_to image_tag("googleicon_30.png"), omniauth_authorize_path(resource_name, provider) ,alt:'Google登入', class: 'btn btn-light' %>
+=======
         <%= link_to image_tag("googleicon_30.png"), omniauth_authorize_path(resource_name, provider) ,title: 'Google登入', class: 'btn btn-light my_btn' %>
+>>>>>>> master
       <% end %>
     <% end %>
   </div>
@@ -20,8 +26,15 @@
 
 
       <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+<<<<<<< HEAD
+        <%= link_to new_password_path(resource_name), title: '你～忘記密碼了嗎', class: 'dropdown-item' do %>
+
+
+          <%= image_tag "forgotpassword_50.png", size: "25" %>你～忘記密碼了嗎
+=======
         <%= link_to new_password_path(resource_name), title: '忘記密碼?', class: 'btn btn-light my_btn mt-3' do %>
           <%= image_tag "forgotpassword_50.png", size: "25" %>忘記密碼?
+>>>>>>> master
           <% end %>
       <% end %>
 

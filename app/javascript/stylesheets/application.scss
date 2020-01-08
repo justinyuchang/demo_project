@@ -9,7 +9,6 @@
         width: 300px;
         margin: 15px;
     }
-
 }
 .board-notice {
     margin: 10px 5px 20px;
@@ -26,7 +25,6 @@
 p span {
     margin: 5px;
 }
-
 .personal-boards, .team-boards, .starred-boards {
     display: inline-block;
     flex-flow: column wrap;
@@ -34,6 +32,7 @@ p span {
 .all-boards-container {
     display: block;
     flex-flow: column wrap; 
+    margin-left: 100px;
 }
 .card-title {
     color: white;
@@ -118,4 +117,17 @@ body {
     background: -moz-linear-gradient(0deg, rgba(16, 40, 127, 0.6)8%, rgba(68, 106, 71, 0.6)100%);
     background: -webkit-linear-gradient(0deg, rgba(16, 40, 127, 0.6)8%, rgba(68, 106, 71, 0.6)100%);
     background: -o-linear-gradient(0deg, rgba(16, 40, 127, 0.6)8%, rgba(68, 106, 71, 0.6)100%);
+}
+.ui-state-highlight{
+    margin: 10px 10px 0px 10px;
+    width: 270px;
+    height: 45px; 
+    color: red;
+}
+// modal
+.modal-dialog{
+    max-width: 600px;
+    .modal-content{
+        border-radius: 0.2rem;
+    }
 }
