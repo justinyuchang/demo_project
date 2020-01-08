@@ -45,8 +45,11 @@ $(document).on("turbolinks:load", function(){
       console.log(card_item)
       let card_comment = response.data.comments
       console.log(card_comment)
+      console.log(card_item.tags)
       let card_assignee = response.data.assignee
       console.log(card_assignee)
+      let card_tags = card_item.tags
+
       let result = ''
       card_comment.forEach(function(comment){
         result = result + `<div class="bg-light mb-1">${comment.content}</div>`
@@ -57,7 +60,10 @@ $(document).on("turbolinks:load", function(){
       $('[data-role ="card-description"]').val(`${card_item.description}`)
       $('[data-role ="card-due-date"]').val(`${card_item.due_date}`)
       // $('[data-role ="card-archived"]').val(`${card_item.archived}`)
-      $('[data-role ="card-tags"]').val(`${card_item.tags}`)
+      card_tags.forEach(function(tag){
+        console.log(tag.name);
+        $('.tags').html(`<p class="tags">${tag.name}</p>`)
+      })
       card_assignee.forEach(function(assignee){
         console.log(assignee.email);
         $('.assignee').html(`<div class="assignee">${assignee.email}</div>`)
@@ -72,12 +78,12 @@ $(document).on("turbolinks:load", function(){
     let card_description = $('[data-role ="card-description"]').val()
     let card_due_date = $('[data-role ="card-due-date"]').val()
     // let card_archived = $('[data-role ="card-archived"]').val()
-    let card_tags = $('[data-role ="card-tags"]').val()
+    let cardTags = $('[data-role ="card-tags"]').val()
     console.log(card_id)
     console.log(card_description)
     console.log(card_due_date)
+    console.log(cardTags)
     // console.log(card_archived)
-    console.log(card_tags)
     axios({
       method: 'patch',
       url: `/lists/cards/${card_id}`,
@@ -85,7 +91,7 @@ $(document).on("turbolinks:load", function(){
         description: card_description,
         due_date: card_due_date,
         // archived: card_archived,
-        tags: card_tags
+        tags_list: cardTags
       }
     })
     .then(function(response){

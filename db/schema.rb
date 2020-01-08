@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_06_040050) do
+ActiveRecord::Schema.define(version: 2020_01_07_145131) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,7 +63,6 @@ ActiveRecord::Schema.define(version: 2020_01_06_040050) do
     t.bigint "list_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.date "due_date"
     t.index ["list_id"], name: "index_cards_on_list_id"
   end
 
@@ -75,6 +74,21 @@ ActiveRecord::Schema.define(version: 2020_01_06_040050) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["card_id"], name: "index_comments_on_card_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "labellings", force: :cascade do |t|
+    t.bigint "label_id", null: false
+    t.bigint "card_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["card_id"], name: "index_labellings_on_card_id"
+    t.index ["label_id"], name: "index_labellings_on_label_id"
+  end
+
+  create_table "labels", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "lists", force: :cascade do |t|
@@ -106,6 +120,21 @@ ActiveRecord::Schema.define(version: 2020_01_06_040050) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["session_id"], name: "index_sessions_on_session_id", unique: true
     t.index ["updated_at"], name: "index_sessions_on_updated_at"
+  end
+
+  create_table "taggings", force: :cascade do |t|
+    t.bigint "tag_id", null: false
+    t.bigint "card_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["card_id"], name: "index_taggings_on_card_id"
+    t.index ["tag_id"], name: "index_taggings_on_tag_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "user_boards", force: :cascade do |t|
@@ -150,9 +179,13 @@ ActiveRecord::Schema.define(version: 2020_01_06_040050) do
   add_foreign_key "cards", "lists"
   add_foreign_key "comments", "cards"
   add_foreign_key "comments", "users"
+  add_foreign_key "labellings", "cards"
+  add_foreign_key "labellings", "labels"
   add_foreign_key "lists", "boards"
   add_foreign_key "search_users", "boards"
   add_foreign_key "search_users", "users"
+  add_foreign_key "taggings", "cards"
+  add_foreign_key "taggings", "tags"
   add_foreign_key "user_boards", "boards"
   add_foreign_key "user_boards", "users"
   add_foreign_key "user_cards", "cards"

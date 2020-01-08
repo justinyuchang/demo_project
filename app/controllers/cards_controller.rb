@@ -20,6 +20,9 @@ class CardsController < ApplicationController
   end 
   
   def update 
+    p "="*50
+    p "#{params}"
+    p "="*50
     @find_card.update(@card_item_params)
     render json:{status: "ok"}
   end 
@@ -81,7 +84,7 @@ class CardsController < ApplicationController
 
   def load_card_items_params
     @find_card = Card.find(params[:id])
-    @card_item_params = params.require(:card).permit(:description, :tags, :archived, :due_date)
+    @card_item_params = params.require(:card).permit(:description, :tag_list, :archived, :due_date)
   end
   
 end
