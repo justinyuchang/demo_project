@@ -1,5 +1,5 @@
 @import "reset.scss"; 
-@import "list_add_type.scss"; 
+@import "list_type.scss"; 
 @import "devise.scss";
 @import "bootstrap/scss/bootstrap";
 @import "@fortawesome/fontawesome-free";
@@ -77,9 +77,8 @@ p span {
     display: inline;
     margin: 5px;
 }
-h3 {
+h2 {
     color: #296F8E;
-    margin-top: 3px;
     margin-left: 10px;
 }
 .col-10 {
