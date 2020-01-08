@@ -17,7 +17,7 @@ Rails.application.routes.draw do
       put 'assign', on: :member
       resources :comments, only: [:create, :destroy]
       collection do
-        patch :sort
+        patch :sortcard
       end
     end
   end 

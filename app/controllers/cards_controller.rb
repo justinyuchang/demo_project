@@ -1,5 +1,5 @@
 class CardsController < ApplicationController
-  before_action :find_board, only: [:create]
+  before_action :find_board, only: [:create, :sortcard]
   before_action :load_card_items_params, only: [:update]
   
   def show
@@ -11,7 +11,7 @@ class CardsController < ApplicationController
 
   def create
     @card = Card.create(card_params)
-    @card_channel = {id: @card.id, title: @card.title,list_id: @card.list_id ,stats: "card_create"}
+    @card_channel = {id: @card.id, title: @card.title,list_id: @card.list_id ,status: "card_create"}
     BoardsChannel.broadcast_to(@board, @card_channel)
     render json:@card_channel
   end
@@ -38,13 +38,14 @@ class CardsController < ApplicationController
     end
   end 
 
-  def sort
+  def sortcard
+    p "--------------------------#{params}--------------------------------------"
     find_list = List.find(params[:list_id])
     find_card = Card.find_by(id: params[:card])
     find_card_array = params[:card_array]
-    if find_card_array.include?((find_card.id).to_s)
-      next_card = Card.find_by(id: params[:next_card_id])
-      prev_card = Card.find_by(id: params[:prev_card_id])
+    # if find_card_array.include?((find_card.id).to_s)
+      next_card = Card.find_by(id: params[:next_card_id]) || nil
+      prev_card = Card.find_by(id: params[:prev_card_id]) || nil
       position = if (prev_card.blank?) && (next_card.blank?)
                               "position"
                             elsif prev_card.blank?
@@ -56,18 +57,35 @@ class CardsController < ApplicationController
                             end
       if (find_card.list_id == find_list.id)
         find_card.update(position: position)
+        if (prev_card.blank?) 
+          card_add_prev = {list_id: find_list.id, card_id: find_card, next_id: next_card.id, status: "card_add_prev"}
+          BoardsChannel.broadcast_to(@board, card_add_prev)
+        else
+          card_add_next = {list_id: find_list.id, card_id: find_card, prev_id: prev_card.id, status: "card_add_next"}
+          BoardsChannel.broadcast_to(@board, card_add_next)
+        end
       else
         if position == "position"
           find_card.update(list_id: find_list.id)
+          card_add = {list_id: find_list.id, card_id: find_card, status: "card_add"}
+          BoardsChannel.broadcast_to(@board, card_add)
         else
           find_card.update(list_id: find_list.id, position: position)
+          if (prev_card.blank?) 
+            card_add_prev = {list_id: find_list.id, card_id: find_card, next_id: next_card.id, status: "card_add_prev"}
+            BoardsChannel.broadcast_to(@board, card_add_prev)
+          else
+            card_add_next = {list_id: find_list.id, card_id: find_card, prev_id: prev_card.id, status: "card_add_next"}
+            BoardsChannel.broadcast_to(@board, card_add_next)
+          end
         end
       end
 
-    else
-      p "unnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn"
-      
-    end
+    # else
+    #   card_delete = {list_id: find_list.id, card_id: find_card.id, status: "card_delete"}
+    #   p "nquinbqufnbqunq;qbn;jebqejkwevn;we;vjn;ev"
+    #   BoardsChannel.broadcast_to(@board, card_delete)
+    # end
   end
 
   private
