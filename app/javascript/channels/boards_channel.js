@@ -10,7 +10,6 @@ $( document ).on('turbolinks:load', function() {
           {channel: "BoardsChannel",board: board_id},
           {received: function(data) {
             let status = data.status
-            console.log(data)
             switch (status){
               case "list_create":
                 let list_template = $(list_create).html()
@@ -30,14 +29,39 @@ $( document ).on('turbolinks:load', function() {
                                                                               .siblings('[data-role="card-wrapper"]')
                                                                               .find('[data-role="card-group"]')
                                                                               .append(card_template)
-                  break;
-                case "sortable_delete":
-                  console.log(data)
-                  $(`div[id=list_${data.list_id}]`).find(`div[id=${data.card_id}]`).remove()
-                  break;
-                case "sortable_add":
-                  console.log(data)
-                  break;
+                break;
+              case "card_delete":
+                console.log(data)
+                $(`div[id=list_${data.list_id}]`).find(`div[id=${data.card_id}]`).remove()
+                break;
+              case "card_add_prev":
+                console.log(data)
+                let card_sort_channel_prev = $(card_create).clone(true,  true)
+                card_sort_channel_prev.find('[data-role="card-id"]').attr("val", `${data.card_id.id}`)
+                card_sort_channel_prev.find('[data-role="sortable-column"]').attr("id", `${data.card_id.id}`)
+                card_sort_channel_prev.find('[data-role="card-title"]').text(data.card_id.title)
+                let card_sort_template_prev = $(card_sort_channel_prev).html()
+                $(`div[id=${data.card_id.id}]`).remove()
+                $(`div[id=list_${data.list_id}]`).find(`div[id=${data.next_id}]`).before(card_sort_template_prev)
+                break;
+              case "card_add_next":
+                let card_sort_channel_next = $(card_create).clone(true,  true)
+                card_sort_channel_next.find('[data-role="card-id"]').attr("val", `${data.card_id.id}`)
+                card_sort_channel_next.find('[data-role="sortable-column"]').attr("id", `${data.card_id.id}`)
+                card_sort_channel_next.find('[data-role="card-title"]').text(data.card_id.title)
+                let card_sort_template_next = $(card_sort_channel_next).html()
+                $(`div[id=${data.card_id.id}]`).remove()
+                $(`div[id=list_${data.list_id}]`).find(`div[id=${data.prev_id}]`).after(card_sort_template_next)
+                break;
+              case "card_add":
+                let card_sort_channel_add = $(card_create).clone(true,  true)
+                card_sort_channel_add.find('[data-role="card-id"]').attr("val", `${data.card_id.id}`)
+                card_sort_channel_add.find('[data-role="sortable-column"]').attr("id", `${data.card_id.id}`)
+                card_sort_channel_add.find('[data-role="card-title"]').text(data.card_id.title)
+                let card_sort_template_add = $(card_sort_channel_add).html()
+                $(`div[id=${data.card_id.id}]`).remove()
+                $(`div[id=list_${data.list_id}]`).find('[data-role="sort-able hidden"]').after(card_sort_template_add)
+                break;
             }
           }
         }  

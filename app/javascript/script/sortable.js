@@ -21,11 +21,11 @@ $(document).on("turbolinks:load", function(){
           let card_index = sort_array.indexOf(card_id)
           // let prev_card_id =
           if( card_index == 0 ){
-             var next_card_id = (sort_array[card_index + 1]) || "-1"
-             var  prev_card_id = "-1"
+             var next_card_id = (sort_array[card_index + 1]) || null
+             var  prev_card_id = null
           }else if(card_index == ((sort_array.length) - 1)){
-            var next_card_id = "-1"
-            var  prev_card_id = (sort_array[card_index -1 ]) || "-1"
+            var next_card_id = null
+            var  prev_card_id = (sort_array[card_index -1 ]) || null
           }else{
             var next_card_id = (sort_array[card_index + 1])
             var  prev_card_id = (sort_array[card_index -1 ])
@@ -38,7 +38,7 @@ $(document).on("turbolinks:load", function(){
           console.log(prev_card_id)
           axios({
             method: 'patch',
-            url: '/lists/cards/sort',
+            url: '/lists/cards/sortcard',
             data: {card: card_id,
                           next_card_id: next_card_id,
                           prev_card_id: prev_card_id,
