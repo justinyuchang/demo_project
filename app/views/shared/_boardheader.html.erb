@@ -1,11 +1,15 @@
+<%= render "starboard", board: @board %>
 <nav class="navbar navbar-light bg-white py-0 d-flex justify-content-start">
+
 
     <h3 class="text-info"><%= @board.title %></h3>
 
 <!-- Board archived  -->
-    <%= link_to boards_path, class:"btn btn-sm btn-light text-primary mx-1" do %>
-      <i class="far fa-star"></i>
-    <% end %>
+    <p class="starred-board">
+      <a href="" class="btn" data-toggle="modal" data-target="#starBoard">
+        <i class="far fa-star"></i>
+      </a>
+    </p>
 
     <span>|</span>
 
