@@ -5,37 +5,29 @@
       <%= render "devise/shared/info" %>
     </div>
     <div class="col-4 col-sm align-items-center">
-      <div class="shadow p-3 mb-5 bg-white rounded ">
-      
+      <div class="shadow p-3 mb-5 bg-white rounded >
         <h2 class="text-center">使用者登入</h2>
           
           <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
             <div class="form-group">
-                
               <%= f.label :email, "電子信箱" %><br />
               <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
-
             </div>
               
             <div class="form-group">
-
               <%= f.label :password, "使用者密碼" %><br />
               <%= f.password_field :password, autocomplete: "current-password", class: 'form-control' %>
             </div>
               
             <div class="form-group form-check">
-                
               <% if devise_mapping.rememberable? %>
               <%= f.check_box :remember_me, class: 'form-check-input' %>
                   <%= f.label :remember_me, "記住我" %>
               <% end %>
-
             </div>
 
             <div class="form-grou text-center">
-
               <%= f.submit "登入", title: '登入', class: 'btn btn-light my_btn' %> 
-
             </div>
           <% end %>
 
@@ -43,6 +35,5 @@
 
       </div>
     </div>
-   
-  </div>
+  </div>>
 </body>
