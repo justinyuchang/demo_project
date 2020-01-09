@@ -57,7 +57,7 @@ $(document).on("turbolinks:load", function(){
       // $('[data-role ="card-archived"]').val(`${card_item.archived}`)
       let taglist = ''
       card_tags.forEach(function(tag){
-        taglist = taglist + `<span id="tags"  class="badge badge-light">${tag.name}</span>`
+        taglist = taglist + `<span id="tags"  class="badge badge-info">${tag.name}</span>`
       })
       $('#tags').html(taglist);
       card_assignee.forEach(function(assignee){
@@ -152,7 +152,7 @@ $(document).on("turbolinks:load", function(){
       if (response.status === 200){
         let data = response.data
         data.forEach(function(tag){
-          $('.tag-list').append(`<span id="tags"  class="badge badge-light">${tag.name}</span>`)
+          $('.tag-list').append(`<span id="tags"  class="badge badge-info">${tag.name}</span>`)
         })
       } 
     })

@@ -78,8 +78,10 @@ class CardsController < ApplicationController
     @card = Card.find(params[:id])
     @tags = params[:cardTags].split(', ')
 
+    
+
     @inserted_tags = @tags.map do |tag|
-      @card.tags.where(name: tag.strip).first_or_create!
+      @card.tags.where(name: tag.strip).create!
     end 
     p "#{@inserted_tags}"
     render json: @inserted_tags
