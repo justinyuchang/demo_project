@@ -1,4 +1,4 @@
-# Smashello
+# Smashmello
 
 完成屬於自己的Trello，
 以簡潔、即時、高互動性為主要價值！
@@ -19,8 +19,8 @@
 # Installation
 
 ```
-$ git clone git@github.com:justinyuchang/demo_project.git  
-$ cd demo_project
+$ git clone git@github.com:justinyuchang/Smashmello.git  
+$ cd Smashmello
 $ bundle install   
 $ rails db:migrate
 $ foreman start

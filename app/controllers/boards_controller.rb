@@ -1,4 +1,5 @@
 class BoardsController < ApplicationController
+  layout "board", :only => :index
   before_action :find_board, only: [:edit, :update, :destroy, :show, :searchuser]
   before_action :search_params, only: [:searchuser]
 
@@ -7,6 +8,7 @@ class BoardsController < ApplicationController
     @board = Board.new()
     @private_boards = current_user.boards.where(visibility: "Private")
     @public_boards = current_user.boards.where(visibility: "Team")
+    @star_boards = current_user.boards.where(visibility: "star")
     @searchuser = current_user.search_users.all
   end
 
@@ -14,9 +16,8 @@ class BoardsController < ApplicationController
   end
 
   def show
-    @lists = @board.lists.includes(:cards)
-    # @board_message = BoardMessage.new(board: @board)
-    # @board_messages = @board.board_messages.includes(:user)
+    @lists = @board.lists.sorted.includes(:cards)
+    @list = List.new()
   end
 
   def create

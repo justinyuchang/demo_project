@@ -8,10 +8,10 @@
   <% end %>
 
 <div data-role="js-list" class="list-container">
-  
+  <div class= "list-sortable" id="js-list-sortable">
   <% @lists.each do |list| %>
-  <div class="list-group item">
-      <div class="list-wrapper">
+  <div data-role="list-group-item" class="list-group item"  id="list_<%= list.id %>">
+      <div data-role="list-wrapper" class="list-wrapper">
         <div class='list-content box'>
           <div data-role= "list-item" class="list-item" >
             <input data-role="list-id" type="hidden" val= "<%= list.id %>">
@@ -21,42 +21,46 @@
           
           <div data-role="card-wrapper" class="card-wrapper">
 
-            <div data-role="card-group" class="card-group">
-              <% list.cards.each do |card| %>
-              <div class="cart-item">
-                <input data-role="card-id" type="hidden" val= "<%= card.id %>">
-                <a data-role="card-title" href="" ><%= card.title %></a>
-              </div>
+            <div data-role="card-group" class="card-group" id="card-sortable">
+              <div data-role="sort-able hidden" class="sortable-hidden"></div>
+                <% list.cards.sorted.each do |card| %>
+                  <div data-role="sortable-column" class="cart-item" id= "<%= card.id %>">
+                    <input data-role="card-id" type="hidden" val= "<%= card.id %>">
+                    <span data-role="card-title"><%= card.title %></span>
+                  </div>
               <% end %>
             </div>
 
-  
             <div data-role="card-input" class="card-create input">
               <textarea name="card-text"></textarea>
             </div>
   
             <div data-role="card-btn" class="card-create btn">
-                <a data-role="card-create-btn" class="card-add" href=""><span><i class="fas fa-plus"></i>新增卡片</span></a>
+                <span data-role="card-create-btn" class="card-add"><i class="fas fa-plus"></i>新增卡片</span>
             </div>
           </div>
         </div>
       </div>
   </div>
   <% end %>
+</div>
 
-  <div data-role="input-local" class="list-group item">
+  <div data-role="input-local" class="list-group item" id="input-local">
     <div class="list-wrapper">
       <div class="list-content btn">
-        <a class="list-add" href=""><span><i class="fas fa-plus"></i>新增列表</span><a>
-      <form data-role="list-create">
-        <input data-role="api-list-title" class="api-inp" type="text" placeholder= "請輸入標題" maxlength= "100">
-        <input data-role="btn list-create" class="api-btn" type="submit" value="送出">
-        <a class="list-add" href=""><span><i class="fas fa-times"></i></span></a>
-      </form>
+        <div class="list-add-top" id="js-list-content-btn">
+          <span>
+            <i class="fas fa-plus"></i>
+          </span>新增列表
+        </div>
+        <%= form_with model: @list, url: board_lists_path(@board), id: "js-list-from", class: "list-from" do |list| %>
+          <%= list.text_field :title , class: "api-inp", data_role: "api-list-title", placeholder: "請輸入標題", maxlength: "100"%>
+          <%= list.submit "送出", class: "api-btn", data_role: "btn list-create" %>
+          <span class="list-add-bot"><i class="fas fa-times"></i></span>
+        <% end %>
     </div>
     </div>
   </div>
-
 </div>
 
 

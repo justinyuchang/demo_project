@@ -1,0 +1,26 @@
+body{
+  font-family: Microsoft JhengHei, PingFang, Arial;
+}
+.boardbg{
+  background-color:#fafbfc;
+}
+// uer
+.uer_btn{
+  background-color:rgba(36, 138, 154, 0.8);
+  border-color:opacify($color: rgba(36, 138, 154, 0.8), $amount: .5);
+  color: white;
+}
+// Navbar
+.my_navbarset{
+  background-color:rgba(129, 235, 185, 0.8);  
+}
+.navbar_btn_bgc{
+  background-color:rgba(129, 235, 185, 0.8);
+  border-color:opacify($color: rgba(129, 235, 185, 0.8), $amount: .5);
+}
+.navbar_logo_place{
+  display: block;
+  position: absolute;;
+  top: 0;
+  left: 50%;
+}

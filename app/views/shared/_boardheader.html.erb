@@ -1,24 +1,26 @@
-<nav class="navbar navbar-light bg-white py-0 d-flex justify-content-start">
-
-    <h3 class="text-info"><%= @board.title %></h3>
+<%= render "starboard", board: @board %>
+<nav class="d-inline-flex mb-3">
+    <div class="mx-2 mt-3">
+      <h2><%= @board.title %></h2>
+    </div>
 
 <!-- Board archived  -->
-    <%= link_to boards_path, class:"btn btn-sm btn-light text-primary mx-1" do %>
-      <i class="far fa-star"></i>
-    <% end %>
-
-    <span>|</span>
+    <div class="starred-board">
+      <a href="" class="btn btn-lg mt-1 btn-bh" data-toggle="modal" data-target="#starBoard">
+        <i class="far fa-star"></i>
+      </a>
+    </div>
 
 <!-- Board Visibility  -->
-    <button type="button" class="btn btn-sm btn-light text-primary mx-1 px-3">
-      <%= @board.visibility %>
-    </button>
-
-    <span>|</span>
+    <div>
+      <button type="button" class="btn btn-lg btn-light ml-2 mt-2 btn-bh">
+        <%= @board.visibility %>
+      </button>
+    </div>
 
 <!-- Board member list  -->
-    <div class="dropdown mr-1">
-      <button type="button" class="btn btn-sm btn-light text-primary mx-1 dropdown-toggle" id="dropdownMenuOffset"
+    <div class="dropdown">
+      <button type="button" class="btn btn-lg btn-light ml-2 mt-2 btn-bh dropdown-toggle" id="dropdownMenuOffset"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
             Member
        </button>
@@ -31,7 +33,7 @@
 
 <!-- Form for Invitation to other users -->
     <div class="dropdown">
-      <button class="btn btn-sm btn-light text-primary mx-1 dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
+      <button class="btn btn-lg btn-bh ml-2 mt-2 btn-light dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
             Invite 
       </button>
