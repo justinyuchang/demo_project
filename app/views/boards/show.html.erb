@@ -10,7 +10,7 @@
 <div data-role="js-list" class="list-container">
   <div class= "list-sortable" id="js-list-sortable">
   <% @lists.each do |list| %>
-  <div class="list-group item"  id="list_<%= list.id %>">
+  <div data-role="list-group-item" class="list-group item"  id="list_<%= list.id %>">
       <div data-role="list-wrapper" class="list-wrapper">
         <div class='list-content box'>
           <div data-role= "list-item" class="list-item" >

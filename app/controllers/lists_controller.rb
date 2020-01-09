@@ -28,11 +28,11 @@ class ListsController < ApplicationController
                           end
     @list.update(position: position)
     if (prev_list.blank?) 
-      list_add_prev = {list_id: @list.id, next_id: next_list.id, status: "list_add_prev"}
-      # BoardsChannel.broadcast_to(@board, list_add_prev)
+      list_add_prev = {list: @list.id, next_id: next_list.id, status: "list_add_prev"}
+      BoardsChannel.broadcast_to(@board, list_add_prev)
     else
-      list_add_next = {list_id: @list.id, prev_id: prev_list.id, status: "list_add_next"}
-      # BoardsChannel.broadcast_to(@board, list_add_next)
+      list_add_next = {list: @list.id, prev_id: prev_list.id, status: "list_add_next"}
+      BoardsChannel.broadcast_to(@board, list_add_next)
     end
   end
 
