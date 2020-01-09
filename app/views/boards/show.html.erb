@@ -7,8 +7,8 @@
     <%= render 'shared/boardheader' %>
   <% end %>
 
-<div data-role="js-list" class="list-container" id="list-container">
-  
+<div data-role="js-list" class="list-container">
+  <div class= "list-sortable" id="js-list-sortable">
   <% @lists.each do |list| %>
   <div class="list-group item">
       <div data-role="list-wrapper" class="list-wrapper" id="list_<%= list.id %>">
@@ -43,8 +43,9 @@
       </div>
   </div>
   <% end %>
+</div>
 
-  <div data-role="input-local" class="list-group item">
+  <div data-role="input-local" class="list-group item" id="input-local">
     <div class="list-wrapper">
       <div class="list-content btn">
         <div class="list-add-top" id="js-list-content-btn">
