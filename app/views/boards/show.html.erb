@@ -7,7 +7,7 @@
     <%= render 'shared/boardheader' %>
   <% end %>
 
-<div data-role="js-list" class="list-container">
+<div data-role="js-list" class="list-container" id="list-container">
   
   <% @lists.each do |list| %>
   <div class="list-group item">
@@ -47,11 +47,15 @@
   <div data-role="input-local" class="list-group item">
     <div class="list-wrapper">
       <div class="list-content btn">
-        <span class="list-add"><i class="fas fa-plus"></i>新增列表</span>
-        <%= form_with model: @list, url: board_lists_path(@board) do |list| %>
+        <div class="list-add-top" id="js-list-content-btn">
+          <span>
+            <i class="fas fa-plus"></i>
+          </span>新增列表
+        </div>
+        <%= form_with model: @list, url: board_lists_path(@board), id: "js-list-from", class: "list-from" do |list| %>
           <%= list.text_field :title , class: "api-inp", data_role: "api-list-title", placeholder: "請輸入標題", maxlength: "100"%>
           <%= list.submit "送出", class: "api-btn", data_role: "btn list-create" %>
-          <span class="list-add"><i class="fas fa-times"></i></span>
+          <span class="list-add-bot"><i class="fas fa-times"></i></span>
         <% end %>
     </div>
     </div>
