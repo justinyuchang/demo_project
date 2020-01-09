@@ -4,8 +4,8 @@ $(document).on("turbolinks:load", function(){
 // Card create 
     $('[data-role="js-list"]').on("click",'[data-role="card-create-btn"]', function(event){
       event.preventDefault();
-      const board_url = location.pathname.split('/')
-      const board_id =  board_url[board_url.length - 1]
+      let board_url = location.pathname.split('/')
+      let board_id =  board_url[board_url.length - 1]
       let list_id = $(this).parents('[data-role="card-wrapper"]')
                            .siblings('[data-role= "list-item"]')
                            .find('[data-role="list-id"]')

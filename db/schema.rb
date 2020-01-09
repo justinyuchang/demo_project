@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_07_030546) do
+ActiveRecord::Schema.define(version: 2020_01_07_103421) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,21 +74,6 @@ ActiveRecord::Schema.define(version: 2020_01_07_030546) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["card_id"], name: "index_comments_on_card_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
-  end
-
-  create_table "labellings", force: :cascade do |t|
-    t.bigint "label_id", null: false
-    t.bigint "card_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["card_id"], name: "index_labellings_on_card_id"
-    t.index ["label_id"], name: "index_labellings_on_label_id"
-  end
-
-  create_table "labels", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "lists", force: :cascade do |t|
@@ -171,6 +156,8 @@ ActiveRecord::Schema.define(version: 2020_01_07_030546) do
     t.string "fb_token"
     t.string "google_uid"
     t.string "google_token"
+    t.string "provider"
+    t.string "uid"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -179,8 +166,6 @@ ActiveRecord::Schema.define(version: 2020_01_07_030546) do
   add_foreign_key "cards", "lists"
   add_foreign_key "comments", "cards"
   add_foreign_key "comments", "users"
-  add_foreign_key "labellings", "cards"
-  add_foreign_key "labellings", "labels"
   add_foreign_key "lists", "boards"
   add_foreign_key "search_users", "boards"
   add_foreign_key "search_users", "users"
