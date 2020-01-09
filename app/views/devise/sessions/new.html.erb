@@ -1,11 +1,12 @@
-<body class="container fullversion rootbg">
+<div class="container">
     <%= render "devise/shared/logo" %>
   <div class="row justify-content-center">
     <div class="col align-items-center">
       <%= render "devise/shared/info" %>
     </div>
-    <div class="col-4 col-sm align-items-center">
-      <div class="shadow p-3 mb-5 bg-white rounded >
+    <div class="col col-sm align-items-center">
+      <div class="shadow p-3 mb-5 bg-white rounded" >
+
         <h2 class="text-center">使用者登入</h2>
           
           <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -36,4 +37,4 @@
       </div>
     </div>
   </div>>
-</body>
+</div>

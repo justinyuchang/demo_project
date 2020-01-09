@@ -1,7 +1,3 @@
-.fullversion{
-  width: 100vw;
-  height: 100vh;
-}
 .rootbg{
   background: linear-gradient(87deg, rgba(100, 167, 189, 1)36%, rgba(129, 235, 185, 0.8)90%);
   background: -moz-linear-gradient(87deg, rgba(100, 167, 189, 1)36%, rgba(129, 235, 185, 0.8)90%);
@@ -11,4 +7,21 @@
 .my_btn{
   width: 100%;
   max-width: 380px;
+}
+// login in info pic
+@media only screen and (max-width: 415px) {
+  .info_pic {
+    display: none;
+  }
+  .info_movie{
+    display: block;
+  }
+}
+@media only screen and (min-width: 765px) {
+  .info_pic {
+    display: block;
+  }
+  .info_movie{
+    display: none;
+  }
 }
