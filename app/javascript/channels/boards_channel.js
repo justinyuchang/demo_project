@@ -17,7 +17,7 @@ $( document ).on('turbolinks:load', function() {
                 list_channel.find('[data-role="list-wrapper"]').attr("id", `list_${data.id}`)
                 list_channel.find('[data-role="list-title"]').text(data.title)
                 list_channel.find('[data-role="list-id"]').attr("val", `${data.id}`)
-                $('[data-role="input-local"]').before(list_channel)
+                $("#js-list-sortable").append(list_channel)
                 break;
               case "card_create":
                 let card_channel = $(card_create).clone(true,  true)
@@ -29,10 +29,6 @@ $( document ).on('turbolinks:load', function() {
                                                                               .siblings('[data-role="card-wrapper"]')
                                                                               .find('[data-role="card-group"]')
                                                                               .append(card_template)
-                break;
-              case "card_delete":
-                console.log(data)
-                $(`div[id=list_${data.list_id}]`).find(`div[id=${data.card_id}]`).remove()
                 break;
               case "card_add_prev":
                 console.log(data)

@@ -19,7 +19,6 @@ $(document).on("turbolinks:load", function(){
           let board_id =  board_url[board_url.length - 1]
           let card_id = $(ui.item[0]).attr("id")
           let card_index = sort_array.indexOf(card_id)
-          // let prev_card_id =
           if( card_index == 0 ){
              var next_card_id = (sort_array[card_index + 1]) || null
              var  prev_card_id = null
@@ -30,23 +29,22 @@ $(document).on("turbolinks:load", function(){
             var next_card_id = (sort_array[card_index + 1])
             var  prev_card_id = (sort_array[card_index -1 ])
           }
-          console.log(card_index)
-          console.log(`陣列=${sort_array}`)
-          console.log(list_id)
+          console.log(sort_array)
           console.log(card_id)
-          console.log(next_card_id)
-          console.log(prev_card_id)
-          axios({
-            method: 'patch',
-            url: '/lists/cards/sortcard',
-            data: {card: card_id,
-                          next_card_id: next_card_id,
-                          prev_card_id: prev_card_id,
-                          list_id: list_id,
-                          card_array: sort_array,
-                          board_id: board_id
-            }
-          })
+          console.log(card_index)
+          if(sort_array.includes(card_id)){
+            axios({
+              method: 'patch',
+              url: '/lists/cards/sortcard',
+              data: {card: card_id,
+                            next_card_id: next_card_id,
+                            prev_card_id: prev_card_id,
+                            list_id: list_id,
+                            card_array: sort_array,
+                            board_id: board_id
+              }
+            })
+          }
         }
       })
     })
