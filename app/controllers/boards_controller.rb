@@ -23,6 +23,7 @@ class BoardsController < ApplicationController
 
     if @board.users.size > 1
       @board.visibility = "Team"
+      @board.save
     end
   end
 
