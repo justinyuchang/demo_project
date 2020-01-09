@@ -39,11 +39,9 @@ class CardsController < ApplicationController
   end 
 
   def sortcard
-    p "--------------------------#{params}--------------------------------------"
     find_list = List.find(params[:list_id])
     find_card = Card.find_by(id: params[:card])
     find_card_array = params[:card_array]
-    # if find_card_array.include?((find_card.id).to_s)
       next_card = Card.find_by(id: params[:next_card_id]) || nil
       prev_card = Card.find_by(id: params[:prev_card_id]) || nil
       position = if (prev_card.blank?) && (next_card.blank?)
@@ -80,12 +78,6 @@ class CardsController < ApplicationController
           end
         end
       end
-
-    # else
-    #   card_delete = {list_id: find_list.id, card_id: find_card.id, status: "card_delete"}
-    #   p "nquinbqufnbqunq;qbn;jebqejkwevn;we;vjn;ev"
-    #   BoardsChannel.broadcast_to(@board, card_delete)
-    # end
   end
 
   private
