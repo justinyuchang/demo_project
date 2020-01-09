@@ -3,7 +3,11 @@ Rails.application.routes.draw do
   root "boards#index"
 
   resources :boards, shallow: true do
-    resources :lists, only: [:new, :create, :destroy]
+    resources :lists, only: [:new, :create, :destroy] do
+      collection do
+        patch :sortlist
+      end
+    end
     member  do
       post :searchuser
     end
