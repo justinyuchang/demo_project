@@ -122,7 +122,7 @@ $(document).on("turbolinks:load", function(){
     })
   });
 // Card assignee
-  $('.dropdown-item').on("click", function(evt){
+  $('.dropdown-item.li').on("click", function(evt){
     let cardId = $('[data-role ="card-focus-id"]').text()
     let userId = $(this).children('span').attr('data-memberid')
     axios({
