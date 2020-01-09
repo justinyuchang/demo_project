@@ -60,9 +60,6 @@ $(document).on("turbolinks:load", function(){
         })
         let list_id = parseInt($(ui.item[0]).attr("id").replace(/(list_)/, ""))
         let list_index = list_array.indexOf(list_id)
-        console.log(list_array)
-        console.log(list_id)
-        console.log(list_index)
         if( list_index == 0 ){
           var next_list_id = (list_array[list_index + 1]) || null
           var  prev_list_id = null
@@ -73,8 +70,6 @@ $(document).on("turbolinks:load", function(){
          var next_list_id = (list_array[list_index + 1])
          var  prev_list_id = (list_array[list_index -1 ])
        }
-       console.log()
-       console.log
        axios({
         method: 'patch',
         url: `/boards/${board_id}/lists/sortlist`,
