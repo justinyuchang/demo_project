@@ -1,6 +1,6 @@
 import axios from 'helpers/axios';
 
-$(document).on("turbolinks:load", function(){
+$(document).ready( function() {
     $( '[data-role="js-list"]' ).on("mousemove" ,function(){
       $( '[data-role="card-group"]' ).sortable({
         connectWith: "#card-sortable",
