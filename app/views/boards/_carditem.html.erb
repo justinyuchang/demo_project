@@ -15,6 +15,9 @@
               <div class="assignee-list">
                 <div class="assignee"></div>
               </div>
+              <div class="tag-list">
+                <span id="tags" class="badge badge-light"></span>
+              </div>
               <i class="fas fa-align-left"></i>
               <label class="ml-1 text-dark" for="card-description">Description</label>
               <textarea data-role="card-description" type="text" class="form-control" id="card-description" placeholder="Add more detail..."></textarea>
@@ -51,10 +54,11 @@
             </div>
 
             <div class="input-group input-group-sm mb-3">
-              <div class="input-group-prepend">
+              <!-- <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroup-sizing-sm">Tags</span>
-              </div>
+              </div> -->
               <input data-role="card-tags" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+              <button data-role="tag-send" type="submit" class="btn btn-sm btn-primary mt-1">Send</button>
             </div>
 
             <div class="input-group-sm">

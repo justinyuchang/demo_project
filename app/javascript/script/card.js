@@ -40,14 +40,12 @@ $(document).ready( function() {
       url: `/lists/cards/${card_id}`,
     })
     .then(function (response) {
-      console.log(response)
-      console.log(response.data)
       let card_item = response.data.card
-      console.log(card_item)
       let card_comment = response.data.comments
-      console.log(card_comment)
       let card_assignee = response.data.assignee
-      console.log(card_assignee)
+      console.log(card_item.tags)
+      let card_tags = card_item.tags
+      console.log(card_tags)
       let result = ''
       card_comment.forEach(function(comment){
         result = result + `<div class="bg-light mb-1">${comment.content}</div>`
@@ -58,9 +56,12 @@ $(document).ready( function() {
       $('[data-role ="card-description"]').val(`${card_item.description}`)
       $('[data-role ="card-due-date"]').val(`${card_item.due_date}`)
       // $('[data-role ="card-archived"]').val(`${card_item.archived}`)
-      $('[data-role ="card-tags"]').val(`${card_item.tags}`)
+      let taglist = ''
+      card_tags.forEach(function(tag){
+        taglist = taglist + `<span id="tags"  class="badge badge-light">${tag.name}</span>`
+      })
+      $('#tags').html(taglist);
       card_assignee.forEach(function(assignee){
-        console.log(assignee.email);
         $('.assignee').html(`<div class="assignee">${assignee.email}</div>`)
       })
       $('#Carditem').modal('show')
@@ -68,25 +69,18 @@ $(document).ready( function() {
   });
 // Update card 
   $('[data-role="card-update"]').click(function(){
-    console.log("已觸發")
+    console.log("Update card")
     let card_id = $('[data-role ="card-focus-id"]').text()
     let card_description = $('[data-role ="card-description"]').val()
     let card_due_date = $('[data-role ="card-due-date"]').val()
     // let card_archived = $('[data-role ="card-archived"]').val()
-    let card_tags = $('[data-role ="card-tags"]').val()
-    console.log(card_id)
-    console.log(card_description)
-    console.log(card_due_date)
-    // console.log(card_archived)
-    console.log(card_tags)
     axios({
       method: 'patch',
       url: `/lists/cards/${card_id}`,
       data: {
         description: card_description,
         due_date: card_due_date,
-        // archived: card_archived,
-        tags: card_tags
+        tag_list: cardTags
       }
     })
     .then(function(response){
@@ -100,8 +94,6 @@ $(document).ready( function() {
   $('[data-role ="comment-send"]').click(function(){
     let card_id = $('[data-role ="card-focus-id"]').text()
     let card_comment = $(this).siblings("textarea").val();    
-    console.log(card_id)
-    console.log(card_comment)
     axios({
       method: 'post', 
       url: `/lists/cards/${card_id}/comments`,
@@ -135,7 +127,6 @@ $(document).ready( function() {
     })
     .then(function(response){
       if (response.status === 200){
-        console.log(response.data)
         let data = response.data
         data.forEach(function(assignee){
           $('.assignee-list').html(`<div class="assignee">${assignee.email}</div>`)
@@ -143,6 +134,28 @@ $(document).ready( function() {
       } else {
           $('.assignee').remove()
       }
+    })
+  })
+// Add tags  
+  $('[data-role ="tag-send"]').click(function(){
+    console.log('Add tags');
+    let cardId = $('[data-role ="card-focus-id"]').text()
+    let cardTags = $(this).siblings("input").val()
+    axios({
+      method: 'put',
+      url: `/lists/cards/${cardId}/tagging`,
+      data: {
+        cardTags: cardTags, 
+      }
+    })
+    .then(function(response){
+      console.log(response)
+      if (response.status === 200){
+        let data = response.data
+        data.forEach(function(tag){
+          $('.tag-list').append(`<span id="tags"  class="badge badge-light">${tag.name}</span>`)
+        })
+      } 
     })
   })
 /////////////////////////////////////////////
