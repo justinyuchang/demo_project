@@ -41,10 +41,12 @@ html,body{
   margin: 3px;
   text-align:left;
   background-color: hsla(0, 0%, 81%, 0.44);
+  margin-top: 18px;
   .list-add-top{
    color: rgb(251, 251, 251);
   }
   .list-add-form{
+    display: none;
     width: 100%;
     form{
       input.form-inp{
@@ -57,14 +59,21 @@ html,body{
         height: 35px;
         margin-bottom: 5px;
       }
-      .list-btn.btn{
-        border-radius: 5px;
-        width: 75px;
-        margin-right: 5px;
-      }
-      .list-cle{
-        text-align: center;
-        font-size: 25px;
+      .list-btn.type{
+        display: flex;
+        .list-btn.btn{
+          border-radius: 5px;
+          width: 75px;
+          margin-right: 5px;
+        }
+        span{
+          margin-left: 5px;
+          margin-top: auto;
+          margin-bottom: auto;
+          .list-cle{
+            font-size: 30px;
+          }
+        }
       }
     }
   }
