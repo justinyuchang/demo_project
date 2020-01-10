@@ -8,20 +8,8 @@
   width: 100%;
   max-width: 380px;
 }
-// login in info pic
-@media only screen and (max-width: 415px) {
-  .info_pic {
-    display: none;
-  }
-  .info_movie{
-    display: block;
-  }
-}
-@media only screen and (min-width: 765px) {
-  .info_pic {
-    display: block;
-  }
-  .info_movie{
-    display: none;
-  }
+
+.info_pic img {
+  width: 100%;
+  max-width: 700px;
 }
