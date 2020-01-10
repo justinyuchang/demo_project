@@ -8,7 +8,7 @@ class BoardsController < ApplicationController
     @board = Board.new()
     @private_boards = current_user.boards.where(visibility: "Private")
     @public_boards = current_user.boards.where(visibility: "Team")
-    @star_boards = current_user.boards.where(visibility: "star")
+    @star_boards = current_user.boards.where(integer: "1")
     @searchuser = current_user.search_users.all
   end
 
@@ -16,10 +16,14 @@ class BoardsController < ApplicationController
   end
 
   def show
-    @lists = @board.lists.includes(:cards)
+    @lists = @board.lists.sorted.includes(:cards)
     @list = List.new()
     # @board_message = BoardMessage.new(board: @board)
     # @board_messages = @board.board_messages.includes(:user)
+    if @board.users.size > 1
+      @board.visibility = "Team"
+      @board.save
+    end
   end
 
   def create
