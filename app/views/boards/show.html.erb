@@ -46,16 +46,17 @@
 </div>
 
   <div data-role="input-local" class="list-group item" id="input-local">
-    <div class="list-wrapper">
-      <div class="list-content btn">
+    <div class="list-wrapper mt-3">
+      <div class="list-content btn p-2">
         <div class="list-add-top" id="js-list-content-btn">
           <span>
             <i class="fas fa-plus"></i>
           </span>新增列表
         </div>
-        <%= form_with model: @list, url: board_lists_path(@board), id: "js-list-from", class: "list-from" do |list| %>
+        <%= form_with model: @list, url: board_lists_path(@board), id: "js-list-from", class: "list-from mx-1 mt-2" do |list| %>
           <%= list.text_field :title , class: "api-inp", data_role: "api-list-title", placeholder: "請輸入標題", maxlength: "100"%>
-          <%= list.submit "送出", class: "api-btn", data_role: "btn list-create" %>
+          <%= list.submit "送出", class: "api-btn btn-sm
+           btn-info my-2", data_role: "btn list-create" %>
         <% end %>
     </div>
     </div>
