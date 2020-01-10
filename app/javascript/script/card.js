@@ -1,11 +1,10 @@
 import axios from 'helpers/axios';
 
-$(document).on("turbolinks:load", function(){
+$(document).ready( function() {
 // Card create 
     $('[data-role="js-list"]').on("click",'[data-role="card-create-btn"]', function(event){
-      event.preventDefault();
-      const board_url = location.pathname.split('/')
-      const board_id =  board_url[board_url.length - 1]
+      let board_url = location.pathname.split('/')
+      let board_id =  board_url[board_url.length - 1]
       let list_id = $(this).parents('[data-role="card-wrapper"]')
                            .siblings('[data-role= "list-item"]')
                            .find('[data-role="list-id"]')
@@ -26,7 +25,9 @@ $(document).on("turbolinks:load", function(){
           }
         })
         .then(function(response){
-          $("textarea").val(" ")
+          if (response.status == 200){
+            $("textarea").val(" ")
+          }
         })
     });
 // Get card 
@@ -114,7 +115,7 @@ $(document).on("turbolinks:load", function(){
     })
   });
 // Card assignee
-  $('.dropdown-item').on("click", function(evt){
+  $('.dropdown-item.li').on("click", function(evt){
     let cardId = $('[data-role ="card-focus-id"]').text()
     let userId = $(this).children('span').attr('data-memberid')
     axios({

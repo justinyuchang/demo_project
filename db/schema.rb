@@ -75,24 +75,9 @@ ActiveRecord::Schema.define(version: 2020_01_09_145652) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "labellings", force: :cascade do |t|
-    t.bigint "label_id", null: false
-    t.bigint "card_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["card_id"], name: "index_labellings_on_card_id"
-    t.index ["label_id"], name: "index_labellings_on_label_id"
-  end
-
-  create_table "labels", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "lists", force: :cascade do |t|
     t.string "title"
-    t.integer "position"
+    t.float "position"
     t.boolean "archived"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -180,8 +165,6 @@ ActiveRecord::Schema.define(version: 2020_01_09_145652) do
   add_foreign_key "cards", "lists"
   add_foreign_key "comments", "cards"
   add_foreign_key "comments", "users"
-  add_foreign_key "labellings", "cards"
-  add_foreign_key "labellings", "labels"
   add_foreign_key "lists", "boards"
   add_foreign_key "search_users", "boards"
   add_foreign_key "search_users", "users"

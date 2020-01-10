@@ -1,6 +1,6 @@
 import axios from 'helpers/axios';
 
-$(document).on("turbolinks:load", function(){
+$(document).ready( function() {
     $( '[data-role="js-list"]' ).on("mousemove" ,function(){
       $( '[data-role="card-group"]' ).sortable({
         connectWith: "#card-sortable",
@@ -10,41 +10,74 @@ $(document).on("turbolinks:load", function(){
         delay: 150,
         revert: true,
         update: function(event, ui){
-          let sort_array =$(this).sortable('toArray')
+          let card_array =$(this).sortable('toArray')
           let list_id = $(this).parents('[data-role="card-wrapper"]')
                                                .siblings('[data-role= "list-item"]')
                                                .find('[data-role="list-id"]')
                                                .attr("val") 
+          let board_url = location.pathname.split('/')
+          let board_id =  board_url[board_url.length - 1]
           let card_id = $(ui.item[0]).attr("id")
-          let card_index = sort_array.indexOf(card_id)
-          // let prev_card_id =
+          let card_index = card_array.indexOf(card_id)
           if( card_index == 0 ){
-             var next_card_id = (sort_array[card_index + 1]) || "-1"
-             var  prev_card_id = "-1"
-          }else if(card_index == ((sort_array.length) - 1)){
-            var next_card_id = "-1"
-            var  prev_card_id = (sort_array[card_index -1 ]) || "-1"
+             var next_card_id = (card_array[card_index + 1]) || null
+             var  prev_card_id = null
+          }else if(card_index == ((card_array.length) - 1)){
+            var next_card_id = null
+            var  prev_card_id = (card_array[card_index -1 ]) || null
           }else{
-            var next_card_id = (sort_array[card_index + 1])
-            var  prev_card_id = (sort_array[card_index -1 ])
+            var next_card_id = (card_array[card_index + 1])
+            var  prev_card_id = (card_array[card_index -1 ])
           }
-          console.log(card_index)
-          console.log(`陣列=${sort_array}`)
-          console.log(list_id)
-          console.log(card_id)
-          console.log(next_card_id)
-          console.log(prev_card_id)
-          axios({
-            method: 'patch',
-            url: '/lists/cards/sort',
-            data: {card: card_id,
-                          next_card_id: next_card_id,
-                          prev_card_id: prev_card_id,
-                          list_id: list_id,
-                          card_array: sort_array
-            }
-          })
+          if(card_array.includes(card_id)){
+            axios({
+              method: 'patch',
+              url: '/lists/cards/sortcard',
+              data: {card: card_id,
+                            next_card_id: next_card_id,
+                            prev_card_id: prev_card_id,
+                            list_id: list_id,
+                            card_array: card_array,
+                            board_id: board_id
+              }
+            })
+          }
         }
       })
+    });
+    $( '#js-list-sortable' ).sortable({
+      delay: 150,
+      cursor: "move",
+      revert: true,
+      placeholder: "sortable-placeholder",
+      tolerance: "pointer",
+      update: function(event, ui){
+        let board_url = location.pathname.split('/')
+        let board_id =  board_url[board_url.length - 1]
+        let list_array =$(this).sortable('toArray').map(function(array){
+          let num =array.replace(/(list_)/, "")
+          return parseInt(num)
+        })
+        let list_id = parseInt($(ui.item[0]).attr("id").replace(/(list_)/, ""))
+        let list_index = list_array.indexOf(list_id)
+        if( list_index == 0 ){
+          var next_list_id = (list_array[list_index + 1]) || null
+          var  prev_list_id = null
+       }else if(list_index == ((list_array.length) - 1)){
+         var next_list_id = null
+         var  prev_list_id = (list_array[list_index -1 ]) || null
+       }else{
+         var next_list_id = (list_array[list_index + 1])
+         var  prev_list_id = (list_array[list_index -1 ])
+       }
+       axios({
+        method: 'patch',
+        url: `/boards/${board_id}/lists/sortlist`,
+        data: {list: list_id,
+                      next_list_id: next_list_id,
+                      prev_list_id: prev_list_id,
+        }
+      })
+      }
     })
 })

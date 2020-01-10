@@ -18,7 +18,7 @@
 .board-title {
     color: #162B4D;
     line-height: 24px;
-    margin: 4px 0 0;
+    margin: 5px 0 0;
     font-size: 16px;
     font-weight: bold;
 }
@@ -40,7 +40,7 @@ p span {
 }
 .card-body-starred {
     display: block;
-    margin: 6px;
+    margin: 5px;
     border-radius: 5px;
     padding: 15px;
     width: 180px;
@@ -76,6 +76,13 @@ p span {
     color: #162B4D;
     display: inline;
     margin: 5px;
+}
+h2 {
+    color: #296F8E;
+    margin-left: 10px;
+}
+.col-10 {
+    margin-top: 40px;
 }
 .col-2 {
     position: relative;
@@ -137,4 +144,8 @@ body {
     text-align: left;
     border-radius: 0.15rem;
     color: #6c757d;
+}
+
+.sortable-placeholder{
+    width: 330px;
 }

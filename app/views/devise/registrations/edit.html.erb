@@ -3,15 +3,11 @@
   <%= render 'shared/navbar'%>
 
 <div class="container">
-
   <div class="row justify-content-center align-items-center mt-5">
-
-    <div class="col-4">
-
+    <div class="col-4 shadow p-3 mb-5 bg-white rounded">
       <h2>變更<%= resource_name.to_s.humanize %>資料</h2>
 
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-
         <%= render "devise/shared/error_messages", resource: resource %>
 
         <div class="form-group">
@@ -26,7 +22,7 @@
         <div class="form-group">
           <%= f.label :password, "新密碼", class: "display_in"%> 
           <div>
-          <i>(密碼不想更改請空白,密碼長度不能低於<%= @minimum_password_length %>位數)</i>
+            <i>(密碼不想更改請空白,密碼長度不能低於<%= @minimum_password_length %>位數)</i>
           </div>
           <%= f.password_field :password, autocomplete: "new-password", class: 'form-control' %>
         </div>
@@ -34,7 +30,7 @@
         <div class="form-group">
           <%= f.label :password_confirmation, "再確認一次密碼" %>
           <div>
-          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
           </div>
         </div>
 
@@ -47,15 +43,17 @@
           <%= f.label :user_avatar, "上傳使用者圖片" %>
           <%= f.file_field :user_avatar %>
         </div>
-
-
-
-        <div class="form-group d-flex justify-content-between">
-          <%= f.submit "帳號內容變更", class: "btn btn-light" %>
-          <%= button_to "刪除此帳號", registration_path(resource_name), data: { confirm: "你確定要刪掉?" }, method: :delete, class: "btn btn-light btn-sm " %>
+        
+        <div class="form-group">
+          <%= image_tag current_user.user_avatar.variant(resize_to_limit: [100, 100]) %>
         </div>
-      <% end %>
+
+        <div class="form-group d-flex justify-content-center">
+          <%= f.submit "帳號內容變更", class: "btn btn-light" %>
+        </div>
+
+        <% end %>
+      </div>
     </div>
   </div>
-</div>
 </div>

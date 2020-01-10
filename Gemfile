@@ -14,6 +14,7 @@ gem 'acts_as_list', '~> 1.0'
 gem 'omniauth-facebook', '~> 5.0'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.5'
 gem 'jquery-ui-rails', '~> 6.0', '>= 6.0.1'
+gem 'activerecord-session_store', '~> 1.1', '>= 1.1.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.1'
@@ -26,7 +27,7 @@ gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker', '~> 4.0'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks', '~> 5'
+# gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
