@@ -13,7 +13,7 @@ class CardsController < ApplicationController
     @card = Card.create(card_params)
     @card_channel = {id: @card.id, title: @card.title,list_id: @card.list_id ,status: "card_create"}
     BoardsChannel.broadcast_to(@board, @card_channel)
-    render json:@card_channel
+    render json: {status: 200}
   end
   
   def edit 
