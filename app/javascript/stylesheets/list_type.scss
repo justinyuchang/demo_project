@@ -39,14 +39,35 @@ html,body{
   width: 300px;
   border-radius: 5px;
   margin: 3px;
-  padding: 0 5px;
   text-align:left;
-  background-color: hsla(0, 0%, 100%, 0.24);
+  background-color: hsla(0, 0%, 81%, 0.44);
+  .list-add-top{
+   color: rgb(251, 251, 251);
+  }
+  .list-add-form{
+    width: 100%;
     form{
-      input.api-inp{
+      input.form-inp{
+        display: inline-block;
+        box-sizing: border-box;
+        border-color: rgb(120, 120, 202);
+        padding-left: 10px;
+        border-radius: 5px;
         width: 100%;
+        height: 35px;
+        margin-bottom: 5px;
+      }
+      .list-btn.btn{
+        border-radius: 5px;
+        width: 75px;
+        margin-right: 5px;
+      }
+      .list-cle{
+        text-align: center;
+        font-size: 25px;
       }
     }
+  }
 }
 //list-group
 .list-content.box{
