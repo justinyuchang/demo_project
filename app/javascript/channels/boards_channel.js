@@ -2,7 +2,7 @@ import consumer from "./consumer"
 import list_create from "./template/list_create"
 import card_create from "./template/card_create"
 
-$( document ).on('turbolinks:load', function() {
+$( document ).ready( function() {
     $(function(event){
         let board_url = location.pathname.split('/')
         let board_id =  board_url[board_url.length - 1]
@@ -12,12 +12,12 @@ $( document ).on('turbolinks:load', function() {
             let status = data.status
             switch (status){
               case "list_create":
-                let list_template = $(list_create).html()
-                let list_channel = $(list_template).clone(true,true)
-                list_channel.find('[data-role="list-wrapper"]').attr("id", `list_${data.id}`)
+                let list_channel = $(list_create).clone(true,true)
+                list_channel.find('[data-role="list-group-item"]').attr("id", `list_${data.id}`)
                 list_channel.find('[data-role="list-title"]').text(data.title)
                 list_channel.find('[data-role="list-id"]').attr("val", `${data.id}`)
-                $("#js-list-sortable").append(list_channel)
+                let list_template = $(list_channel).html()
+                $("#js-list-sortable").append(list_template)
                 break;
               case "card_create":
                 let card_channel = $(card_create).clone(true,  true)
@@ -58,6 +58,18 @@ $( document ).on('turbolinks:load', function() {
                 $(`div[id=${data.card_id.id}]`).remove()
                 $(`div[id=list_${data.list_id}]`).find('[data-role="sort-able hidden"]').after(card_sort_template_add)
                 break;
+                case "list_add_next":
+                  console.log(data)
+                  let list_sort_channel_next = $(`div[id=list_${data.list}]`).clone(true,true)
+                  $(`div[id=list_${data.list}]`).remove()
+                  $(`div[id=list_${data.prev_id}]`).after(list_sort_channel_next )
+                  break;
+                case "list_add_prev":
+                  console.log(data)
+                  let list_sort_channel_prev = $(`div[id=list_${data.list}]`).clone(true,true)
+                  $(`div[id=list_${data.list}]`).remove()
+                  $(`div[id=list_${data.next_id}]`).before(list_sort_channel_prev)
+                  break;
             }
           }
         }  
