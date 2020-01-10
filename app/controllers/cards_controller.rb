@@ -6,14 +6,15 @@ class CardsController < ApplicationController
     @card_item = Card.find(params[:id])
     @comments = @card_item.comments
     @assignee = @card_item.users
-    render json: { card: @card_item, comments: @comments, assignee: @assignee}
+    @taglist = @card_item.tags
+    render json: { card: @card_item, comments: @comments, assignee: @assignee, taglist: @taglist}
   end
 
   def create
     @card = Card.create(card_params)
     @card_channel = {id: @card.id, title: @card.title,list_id: @card.list_id ,status: "card_create"}
     BoardsChannel.broadcast_to(@board, @card_channel)
-    render json:@card_channel
+    render json: {status: 200}
   end
   
   def edit 
@@ -80,6 +81,20 @@ class CardsController < ApplicationController
     end
   end
 
+  def tagging
+    p "="*50
+    p "#{params}"
+    p "="*50
+    @card = Card.find(params[:id])
+    @tags = params[:cardTags].split(', ')
+
+    @inserted_tags = @tags.map do |tag|
+      @card.tags.where(name: tag.strip).first_or_create!
+    end 
+    p "#{@inserted_tags}"
+    render json: @inserted_tags
+  end 
+
   private
   def find_board
     @board = Board.find(params[:board_id])
@@ -91,6 +106,6 @@ class CardsController < ApplicationController
 
   def load_card_items_params
     @find_card = Card.find(params[:id])
-    @card_item_params = params.require(:card).permit(:description, :tags, :archived, :due_date)
+    @card_item_params = params.require(:card).permit(:description, :archived, :due_date)
   end
 end
