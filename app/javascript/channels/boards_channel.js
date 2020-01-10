@@ -31,7 +31,6 @@ $( document ).ready( function() {
                                                                               .append(card_template)
                 break;
               case "card_add_prev":
-                console.log(data)
                 let card_sort_channel_prev = $(card_create).clone(true,  true)
                 card_sort_channel_prev.find('[data-role="card-id"]').attr("val", `${data.card_id.id}`)
                 card_sort_channel_prev.find('[data-role="sortable-column"]').attr("id", `${data.card_id.id}`)
@@ -59,13 +58,11 @@ $( document ).ready( function() {
                 $(`div[id=list_${data.list_id}]`).find('[data-role="sort-able hidden"]').after(card_sort_template_add)
                 break;
                 case "list_add_next":
-                  console.log(data)
                   let list_sort_channel_next = $(`div[id=list_${data.list}]`).clone(true,true)
                   $(`div[id=list_${data.list}]`).remove()
                   $(`div[id=list_${data.prev_id}]`).after(list_sort_channel_next )
                   break;
                 case "list_add_prev":
-                  console.log(data)
                   let list_sort_channel_prev = $(`div[id=list_${data.list}]`).clone(true,true)
                   $(`div[id=list_${data.list}]`).remove()
                   $(`div[id=list_${data.next_id}]`).before(list_sort_channel_prev)
