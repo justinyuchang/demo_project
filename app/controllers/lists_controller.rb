@@ -19,18 +19,16 @@ class ListsController < ApplicationController
   def sortlist
     next_list = List.find_by(id: params[:next_list_id]) || nil
     prev_list = List.find_by(id: params[:prev_list_id]) || nil
-    position =  if prev_list.blank?
-                            (next_list.position) - 0.1
-                          elsif next_list.blank?
-                            (prev_list.position) + 0.1
-                          else
-                            (next_list.position + prev_list.position) / 2
-                          end
-    @list.update(position: position)
     if (prev_list.blank?) 
+      @list.move_to_top
       list_add_prev = {list: @list.id, next_id: next_list.id, status: "list_add_prev"}
       BoardsChannel.broadcast_to(@board, list_add_prev)
+    elsif (next_list.blank?)
+      @list.move_to_bottom
+      list_add_next = {list: @list.id, prev_id: prev_list.id, status: "list_add_next"}
+      BoardsChannel.broadcast_to(@board, list_add_next)
     else
+      @list.insert_at(next_list.position)
       list_add_next = {list: @list.id, prev_id: prev_list.id, status: "list_add_next"}
       BoardsChannel.broadcast_to(@board, list_add_next)
     end
