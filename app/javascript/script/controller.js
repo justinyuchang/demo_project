@@ -1,10 +1,14 @@
 $(document).ready( function() {
   $(".parentDiv").on("click", function(event){
-    if ($(event.target).hasClass("list-add-top")){
+    let listHasClassDiv = $(event.target).hasClass("list-add-top")
+    let listHasClassSpan = $(event.target).hasClass("list-add-span")
+    let listHasClassI = $(event.target).hasClass("list-add-i")
+
+    if ( listHasClassDiv || listHasClassSpan || listHasClassI ){
       $(".list-add-form").toggle(function(){
-        $(".form-inp").focus()
+        $(".form-inp").focus()  
       })
-        $(event.target).hide()
+      $(".list-add-top").hide()
     } else if ($(event.target).parents().hasClass("list-wrapper")){
       $(".form-inp").focus()
     } else {
@@ -16,12 +20,26 @@ $(document).ready( function() {
   })
   
   $(".parentDiv").on("click", function(){
-    let cardHasClass =$(event.target).hasClass("card-create-span")
-    if(cardHasClass){
-      $(event.target).parents(".card-wrapper").find(".card-input-controller").toggle()
-      $(event.target).parents(".card-wrapper").find(".card-create-area").focus()
+    let eventTarget = $(event.target)
+    let cardHasClass = $(event.target).hasClass("card-create-span")
+    let cardHasClassI = $(event.target).hasClass("card-add-i")
+    console.log(cardHasClassI)
+    let cardTargetClassBtn = $(event.target).hasClass("card-create btn")
+    let cardTargetClassArea = $(event.target).hasClass("card-create-area")
+    let cardTargetClassBtnArea = $(event.target).hasClass("card-add btn btn-success")
+    if ( cardHasClass || cardHasClassI ) {
+      $(".card-input-controller").hide(function(){
+        $(".card-create-drop").show()
+        eventTarget.parents(".card-wrapper").find(".card-create-drop").hide()
+      })
+      eventTarget.parents(".card-wrapper").find(".card-input-controller").toggle()
+      eventTarget.parents(".card-wrapper").find(".card-create-area").focus()
+    } else if ( cardTargetClassBtn || cardTargetClassArea || cardTargetClassBtnArea){
+      console.log("tyhujik")
+      eventTarget.parents(".card-wrapper").find(".card-create-area").focus()
     } else {
       $(".card-input-controller").hide()
+      $(".card-create-drop").show()
     }
   })
 })
