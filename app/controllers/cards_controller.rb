@@ -55,9 +55,15 @@ class CardsController < ApplicationController
         card_add_next = {list_id: find_list.id, card_id: find_card, prev_id: prev_card.id, status: "card_add_next"}
         BoardsChannel.broadcast_to(@board, card_add_next)
       else
-        find_card.insert_at(next_card.position)
-        card_add_next = {list_id: find_list.id, card_id: find_card, prev_id: prev_card.id, status: "card_add_next"}
-        BoardsChannel.broadcast_to(@board, card_add_next)
+        if ( find_card.position <  prev_card.position )
+          find_card.insert_at(prev_card.position)
+          card_add_prev = {list_id: find_list.id, card_id: find_card, next_id: next_card.id, status: "card_add_prev"}
+          BoardsChannel.broadcast_to(@board, card_add_prev)
+        else
+          find_card.insert_at(next_card.position)
+          card_add_next = {list_id: find_list.id, card_id: find_card, prev_id: prev_card.id, status: "card_add_next"}
+          BoardsChannel.broadcast_to(@board, card_add_next)
+        end
       end
     else
       if (prev_card.blank?) && (next_card.blank?)

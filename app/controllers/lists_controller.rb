@@ -28,9 +28,15 @@ class ListsController < ApplicationController
       list_add_next = {list: @list.id, prev_id: prev_list.id, status: "list_add_next"}
       BoardsChannel.broadcast_to(@board, list_add_next)
     else
-      @list.insert_at(next_list.position)
-      list_add_next = {list: @list.id, prev_id: prev_list.id, status: "list_add_next"}
-      BoardsChannel.broadcast_to(@board, list_add_next)
+      if ( find_list.position <  prev_list.position )
+        @list.insert_at(prev_list.position)
+        list_add_next = {list: @list.id, prev_id: prev_list.id, status: "list_add_next"}
+        BoardsChannel.broadcast_to(@board, list_add_next)
+      else
+        @list.insert_at(next_list.position)
+        list_add_next = {list: @list.id, prev_id: prev_list.id, status: "list_add_next"}
+        BoardsChannel.broadcast_to(@board, list_add_next)
+      end
     end
   end
 
