@@ -31,12 +31,19 @@
               <% end %>
             </div>
 
-            <div data-role="card-input" class="card-create input">
-              <textarea name="card-text"></textarea>
-            </div>
+            <div class="card-input-controller">
+              <div data-role="card-input" class="card-create input">
+                <textarea class="card-create-area" name="card-text"></textarea>
+              </div>
   
-            <div data-role="card-btn" class="card-create btn">
-                <span data-role="card-create-btn" class="card-add"><i class="fas fa-plus"></i>新增卡片</span>
+              <div data-role="card-btn" class="card-create btn">
+                <button data-role="card-create-btn" class="card-add btn btn-success">送出</button>
+                <span class="card-add-bot"><i class="list-cle fas fa-times"></i></span>
+              </div>
+            </div>
+
+            <div class= "card-create-drop">
+              <span class="card-create-span"><i class="card-add-i fas fa-plus"></i>新增卡片</span>
             </div>
           </div>
         </div>
@@ -47,17 +54,21 @@
 
   <div data-role="input-local" class="list-group item" id="input-local">
     <div class="list-wrapper">
-      <div class="list-content btn">
-        <div class="list-add-top" id="js-list-content-btn">
-          <span>
-            <i class="fas fa-plus"></i>
-          </span>新增列表
-        </div>
+      <div class="list-position"></div>
+      <div class="list-add-top" id="js-list-content-btn">
+        <span class="list-add-span">
+          <i class="list-add-i fas fa-plus"></i>新增列表
+        </span>
+      </div>
+      <span class="list-add-form">
         <%= form_with model: @list, url: board_lists_path(@board), id: "js-list-from", class: "list-from" do |list| %>
-          <%= list.text_field :title , class: "api-inp", data_role: "api-list-title", placeholder: "請輸入標題", maxlength: "100"%>
-          <%= list.submit "送出", class: "api-btn", data_role: "btn list-create" %>
-        <% end %>
-    </div>
+          <%= list.text_field :title , class: "form-inp", data_role: "api-list-title", placeholder: "請輸入標題", maxlength: "100", autocomplete: "off"%>
+          <div class="list-btn type">
+            <%= list.submit "送出", class: "list-btn btn btn-success", data_role: "btn list-create" %>
+            <span class="list-add-bot"><i class="fas fa-times"></i></span>
+          </div>
+      <% end %>
+    </span>
     </div>
   </div>
 </div>
