@@ -28,7 +28,7 @@
               <% list.cards.sorted.each do |card| %>
                 <div data-role="sortable-column" class="cart-item" id= "<%= card.id %>">
                   <input data-role="card-id" type="hidden" val= "<%= card.id %>">
-                  <span data-role="card-title"><%= card.title %></span>
+                  <span data-role="card-title" class="card-title-span"><%= card.title %></span>
                 </div>
             <% end %>
           </div>

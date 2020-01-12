@@ -1,12 +1,13 @@
 const list_create = `<div>
-
 <div data-role="list-group-item" class="list-group item"  id="">
     <div data-role="list-wrapper" class="list-wrapper">
       <div class='list-content box'>
         <div data-role= "list-item" class="list-item" >
           <input data-role="list-id" type="hidden" val= "">
           <span data-role="list-title" class="list-view"></span>
-          <span class="list-men"><i class="fas fa-align-justify"></i></span>
+          <div class="list-men">
+            <span class="list-men"><i class="fas fa-align-justify"></i></span>
+          </div>
         </div>
         
         <div data-role="card-wrapper" class="card-wrapper">
@@ -33,7 +34,6 @@ const list_create = `<div>
       </div>
     </div>
 </div>
-
                                         </div>` 
 
 export default list_create;
