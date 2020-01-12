@@ -76,8 +76,8 @@ $(document).ready( function() {
         data: {list: list_id,
                       next_list_id: next_list_id,
                       prev_list_id: prev_list_id,
-        }
-      })
+          }
+        })
       }
     })
 })
