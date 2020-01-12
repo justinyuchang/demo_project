@@ -80,6 +80,27 @@ class CardsController < ApplicationController
         card_add_next = {list_id: find_list.id, card_id: find_card, prev_id: prev_card.id, status: "card_add_next"}
         BoardsChannel.broadcast_to(@board, card_add_next)
       end
+    else
+      if (prev_card.blank?) && (next_card.blank?)
+        find_card.update(list_id: find_list.id )
+        card_add = {list_id: find_list.id, card_id: find_card, status: "card_add"}
+        BoardsChannel.broadcast_to(@board, card_add)
+      elsif (prev_card.blank?)
+        find_card.update(list_id: find_list.id )
+        find_card.move_to_top
+        card_add_prev = {list_id: find_list.id, card_id: find_card, next_id: next_card.id, status: "card_add_prev"}
+        BoardsChannel.broadcast_to(@board, card_add_prev)
+      elsif (next_card.blank?)
+        find_card.update(list_id: find_list.id )
+        find_card.move_to_bottom
+        card_add_next = {list_id: find_list.id, card_id: find_card, prev_id: prev_card.id, status: "card_add_next"}
+        BoardsChannel.broadcast_to(@board, card_add_next)
+      else
+        find_card.update(list_id: find_list.id )
+        find_card.insert_at(next_card.position)
+        card_add_next = {list_id: find_list.id, card_id: find_card, prev_id: prev_card.id, status: "card_add_next"}
+        BoardsChannel.broadcast_to(@board, card_add_next)
+      end
     end
   end
 
