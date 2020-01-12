@@ -32,10 +32,12 @@ class CardsController < ApplicationController
     @card = Card.find(params[:id])
     @user = User.find(params[:userId])
     if @card.users.include?(@user) == false 
-      @assignee = @card.users.push(@user)
-      render json: @assignee
+      @card_member = @card.users.push(@user)
+      @assignee = @card.users.select{|user| user == @user}
+      render json: {status: "ok", assignee: @assignee} 
     else
       @card.users.delete(@user)
+      render json: @user
     end
   end 
 
@@ -108,6 +110,6 @@ class CardsController < ApplicationController
 
   def load_card_items_params
     @find_card = Card.find(params[:id])
-    @card_item_params = params.require(:card).permit(:description, :archived, :due_date)
+    @card_item_params = params.require(:card).permit(:title, :description, :due_date)
   end
 end
