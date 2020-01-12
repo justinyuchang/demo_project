@@ -80,7 +80,7 @@ $(document).ready( function() {
       data: {
         description: card_description,
         due_date: card_due_date,
-        tag_list: cardTags
+        // tag_list: cardTags
       }
     })
     .then(function(response){
