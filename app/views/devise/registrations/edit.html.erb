@@ -1,10 +1,11 @@
-<div class="fullversion boardbg">
-
-  <%= render 'shared/navbar'%>
-
+<div class="board-body">
+  <%= render 'shared/navbar' %>
 <div class="container">
-  <div class="row justify-content-center align-items-center mt-5">
-    <div class="col-4 shadow p-3 mb-5 bg-white rounded">
+    
+  <div class="row justify-content-center">
+    
+    <div class="col col-sm-6 align-items-center">
+      <div class="shadow p-3 mb-5 bg-white rounded my-5">
       <h2>變更<%= resource_name.to_s.humanize %>資料</h2>
 
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
@@ -63,4 +64,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>
