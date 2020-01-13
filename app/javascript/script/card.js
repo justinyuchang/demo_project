@@ -54,24 +54,28 @@ $(document).ready( function() {
       let result = ''
       cardComment.forEach(function(comment){
         result = result + `<div class="comment-container">
-        <span class="author">${comment.user_id}</span>
-        <span class="comment-time">${comment.created_at}</span>
-        <div class="comment-line">${comment.content}</div>
+        <div class="comment-header">
+          <span class="author">${comment.user_id}</span>
+          <span class="comment-time">${comment.created_at}</span>
+        </div>  
+        <div class="comment-body">
+          <p>${comment.content}</p>
+        </div>
       </div>`
       })
       $('[data-role ="comment-area"]').html(result);
 
       let tagList = ''
       cardTags.forEach(function(tag){
-        tagList = tagList + `<span id="tags"  class="badge badge-info">${tag.name}</span>`
+        tagList = tagList + `<span class="tags">${tag.name}</span>`
       })
-      $('#tags').html(tagList);
+      $('.tag-list').html(tagList);
 
       let cardMember = ''
       cardAssignee.forEach(function(assignee){
         cardMember = cardMember + `<span class="assignee">${assignee.email}</span>`
       })
-      $('assignee').html(cardMember);
+      $('.card-member').html(cardMember);
       $('#Carditem').modal('show')
     })
   });
@@ -80,7 +84,7 @@ $(document).ready( function() {
     console.log("Update card")
     let cardId = $('[data-role ="card-focus-id"]').text()
     let cardTitle = $('[data-role ="card-inner_title"]').text()
-    let carDescription = $('[data-role ="card-description"]').val()
+    let carDescription = $('[data-role ="card-description"]').text()
     // let card_due_date = $('[data-role ="card-due-date"]').val()
     axios({
       method: 'patch',
@@ -113,11 +117,15 @@ $(document).ready( function() {
       console.log(response)
       if (response.status === 200) {
         let data = response.data
-        $('[data-role ="comment-area"]').append(`
+        $('[data-role ="comment-area"]').prepend(`
         <div class="comment-container">
-          <span class="author">${data.user_id}</span>
-          <span class="comment-time">${data.created_at}</span>
-          <div class="comment-line">${data.content}</div>
+          <div class="comment-header">
+            <span class="author">${data.user_id}</span>
+            <span class="comment-time">${data.created_at}</span>
+          </div>
+          <div class="comment-body">
+            <p>${data.content}</p> 
+          </div>
         </div>`)
       } else {
         throw 'Error'
@@ -138,7 +146,7 @@ $(document).ready( function() {
         userId: userId,
       }
     })
-    .then(function(response){
+    .then( function(response){
       let data = response.data
       if (data.status === "ok"){
         console.log(data)
@@ -156,8 +164,10 @@ $(document).ready( function() {
 // Add tags  
   $('.tag-item').on('click', '#add-tag', function(){
     console.log('Add tags');
-    let cardId = $('[data-role ="card-focus-id"]').text()
+    let cardId = $('[data-role="card-focus-id"]').text()
     let cardTags = $(this).siblings("div").text()
+    let tagColour = $(this).siblings("div").css('background-color')
+    console.log(tagColour)
     axios({
       method: 'put',
       url: `/lists/cards/${cardId}/tagging`,
@@ -169,11 +179,16 @@ $(document).ready( function() {
       console.log(response)
       if (response.status === 200){
         let data = response.data
+        console.log(data)
         data.forEach(function(tag){
-          $('.tag-list').append(`<span id="tags">${tag.name}</span>`)
+          $('.tag-list').append(`<span style="background-color:${tagColour}">${tag.name}</span>`)
         })
       } 
     })
+  })
+// Date Picker
+  $('.datepicker').click(function(){
+    $(this).datepicker();
   })
 /////////////////////////////////////////////
 })

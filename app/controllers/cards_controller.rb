@@ -4,7 +4,7 @@ class CardsController < ApplicationController
   
   def show
     @card_item = Card.find(params[:id])
-    @comments = @card_item.comments
+    @comments = @card_item.comments.order(id: :DESC)
     @assignee = @card_item.users
     @taglist = @card_item.tags
     render json: { card: @card_item, comments: @comments, assignee: @assignee, taglist: @taglist}
@@ -92,19 +92,21 @@ class CardsController < ApplicationController
   end
 
   def tagging
-    p "="*50
-    p "#{params}"
-    p "="*50
     @card = Card.find(params[:id])
     @tags = params[:cardTags].split(', ')
 
-    
+    @selected_tag = @tags.select{ |tag| !@card.tags.exists?(name: tag) }
 
-    @inserted_tags = @tags.map do |tag|
-      @card.tags.where(name: tag.strip).create!
+    p "+"*50
+    p "#{@selected_tag}"
+    p "+"*50
+
+    if @selected_tag.map { |tag| @card.tags.exists?(name: tag) == false }  
+      @append_tag = @selected_tag.map { |tag| @card.tags.create(name: tag)} 
+    else 
+      p "Do nothing"
     end 
-    p "#{@inserted_tags}"
-    render json: @inserted_tags
+    render json: @append_tag
   end 
 
   private
