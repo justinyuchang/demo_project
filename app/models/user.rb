@@ -17,7 +17,7 @@ class User < ApplicationRecord
 
   has_many :search_users
   
-  has_one_attached :user_avatar
+  has_one_attached :avatar
 
   def self.from_google_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

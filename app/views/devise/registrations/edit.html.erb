@@ -2,63 +2,69 @@
   <%= render 'shared/navbar' %>
 <div class="container">
     
-  <div class="row justify-content-center">
-    
-    <div class="col col-sm-6 align-items-center">
-      <div class="shadow p-3 mb-5 bg-white rounded my-5">
-      <h2>變更<%= resource_name.to_s.humanize %>資料</h2>
+  <div class="row justify-content-center align-items-center">
 
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-        <%= render "devise/shared/error_messages", resource: resource %>
+    <div class="col-lg-6 col-sm-6 my-5">
 
-        <div class="form-group">
-          <%= f.label :username, "使用者名稱" %>
-          <%= f.text_field :username, autofocus: true, autocomplete: "username", class: 'form-control' %>
+      <div class="shadow p-3 mb-5 bg-white rounded">
+
+          <h2 class="d-flex justify-content-center">變更<%= resource_name.to_s.humanize %>資料</h2>
+
+          <div class=" d-flex justify-content-center my-5">
+              <% if resource.avatar.attached? %>
+                <%= image_tag resource.avatar.variant(resize_to_limit: [200, 200]) %>
+              <% else %>
+                <%= image_tag "https://fakeimg.pl/200x200/?text=user Avatar" %>
+              <% end %>
+            </div>
+
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+            <%= render "devise/shared/error_messages", resource: resource %>
+
+            <div class="form-group">
+              <%= f.file_field :avatar%>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :username, "使用者名稱" %>
+              <%= f.text_field :username, autofocus: true, autocomplete: "username", class: 'form-control' %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :email, "電子信箱" %>
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+            </div>
+
+            <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+              <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+            <% end %>
+
+            <div class="form-group">
+              <%= f.label :password, "新密碼", class: "display_in"%> 
+              <div>
+                <i>(密碼不想更改請空白,密碼長度不能低於<%= @minimum_password_length %>位數)</i>
+              </div>
+              <%= f.password_field :password, autocomplete: "new-password", class: 'form-control' %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :password_confirmation, "再確認一次密碼" %>
+              <div>
+                <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :current_password, "請輸入舊密碼", class: "display_in" %> <i>(我們需要舊密碼來進行確認)</i>
+              <%= f.password_field :current_password, autocomplete: "current-password", class: 'form-control' %>
+            </div>
+
+            <div class="form-group d-flex justify-content-center">
+              <%= f.submit "帳號內容變更", class: "btn btn-info" %>
+            </div>
+
+          <% end %>
         </div>
-
-        <div class="form-group">
-          <%= f.label :email, "電子信箱" %>
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
-        </div>
-
-        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-        <% end %>
-
-        <div class="form-group">
-          <%= f.label :password, "新密碼", class: "display_in"%> 
-          <div>
-            <i>(密碼不想更改請空白,密碼長度不能低於<%= @minimum_password_length %>位數)</i>
-          </div>
-          <%= f.password_field :password, autocomplete: "new-password", class: 'form-control' %>
-        </div>
-
-        <div class="form-group">
-          <%= f.label :password_confirmation, "再確認一次密碼" %>
-          <div>
-            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <%= f.label :current_password, "請輸入舊密碼", class: "display_in" %> <i>(我們需要舊密碼來進行確認)</i>
-          <%= f.password_field :current_password, autocomplete: "current-password", class: 'form-control' %>
-        </div>
-
-        <div class="form-group">
-          <%= f.label :user_avatar, "上傳使用者圖片" %>
-          <%= f.file_field :user_avatar %>
-        </div>
-        
-        <div class="form-group">
-          <%= image_tag current_user.user_avatar.variant(resize_to_limit: [100, 100]) if current_user.user_avatar.attached? %>
-        </div>
-
-        <div class="form-group d-flex justify-content-center">
-          <%= f.submit "帳號內容變更", class: "btn btn-info" %>
-        </div>
-
-        <% end %>
       </div>
     </div>
   </div>
