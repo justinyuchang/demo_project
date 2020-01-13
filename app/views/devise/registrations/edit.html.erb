@@ -8,10 +8,10 @@
 
       <div class="shadow p-3 mb-5 bg-white rounded">
 
-          <h2 class="d-flex justify-content-center">變更<%= resource_name.to_s.humanize %>資料</h2>
+          <h2 class="d-flex justify-content-center">變更<%= resource.username.to_s.humanize %>資料</h2>
 
           <div class=" d-flex justify-content-center my-5">
-              <% if resource.avatar.attached? %>
+              <% if resource.avatar.attached? && resource.avatar.content_type.in?(%w(image/png image/jpg image/jpeg image/jfif)) %>
                 <%= image_tag resource.avatar.variant(resize_to_limit: [200, 200]) %>
               <% else %>
                 <%= image_tag "https://fakeimg.pl/200x200/?text=user Avatar" %>
@@ -22,7 +22,7 @@
             <%= render "devise/shared/error_messages", resource: resource %>
 
             <div class="form-group">
-              <%= f.file_field :avatar%>
+              <%= f.file_field :avatar, accept: 'image/png, image/jpg, image/jpeg, image/jfif'%>
             </div>
 
             <div class="form-group">

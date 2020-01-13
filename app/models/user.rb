@@ -19,10 +19,22 @@ class User < ApplicationRecord
   
   has_one_attached :avatar
 
+  validate :correct_avatar_mime_type
+  
   def self.from_google_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
+    end
+  end
+  
+
+  private
+
+  def correct_avatar_mime_type
+    unless avatar.attached? && avatar.content_type.in?(%w(image/png image/jpg image/jpeg image/jfif))
+      avatar.purge if self.new_record? # Only purge the offending blob if the record is new
+      errors.add(:avatar, 'Must be an image file')
     end
   end
 
