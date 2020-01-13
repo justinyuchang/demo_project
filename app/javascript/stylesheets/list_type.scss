@@ -105,6 +105,7 @@ html,body{
       display: inline-block;
       font-weight: bolder;
       font-size: 20px;
+      cursor: default;
     }
     .list-men{
       cursor: pointer;
@@ -130,13 +131,16 @@ html,body{
       .cart-item{
         height: 45px;
         width: 278px;
-        padding: 10px 10px 0px 15px;
         margin: 10px 6px 0px 6px;
         border-radius: 5px;
         background-color: hsla(0, 0%, 100%, 0.94);
         box-shadow: 0px 4px 3px #ccc;
-        span{
+        .card-title-span{
           display: block;
+          height: 100%;
+          line-height: 45px;
+          padding-left: 20px;
+          cursor: pointer;
         }
       }
     }
@@ -196,6 +200,9 @@ html,body{
     background-color: hsla(0, 0%, 77%, 0.5);
   }
   .list-men :hover{
+    background-color: hsla(0, 0%, 77%, 0.5);
+  }
+  .cart-item :hover{
     background-color: hsla(0, 0%, 77%, 0.5);
   }
   // .list-add-top :hover{

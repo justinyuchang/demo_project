@@ -94,6 +94,8 @@ class CardsController < ApplicationController
   def tagging
     @card = Card.find(params[:id])
     @tags = params[:cardTags].split(', ')
+    @tag_color = params[:tagColor]
+    p "#{@tag_color}"
 
     @selected_tag = @tags.select{ |tag| !@card.tags.exists?(name: tag) }
 
@@ -102,7 +104,7 @@ class CardsController < ApplicationController
     p "+"*50
 
     if @selected_tag.map { |tag| @card.tags.exists?(name: tag) == false }  
-      @append_tag = @selected_tag.map { |tag| @card.tags.create(name: tag)} 
+      @append_tag = @selected_tag.map { |tag| @card.tags.create(name: tag, color: @tag_color)} 
     else 
       p "Do nothing"
     end 

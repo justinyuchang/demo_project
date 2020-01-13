@@ -163,14 +163,18 @@ body {
     font-weight: 500;
     margin-bottom: 0.2rem;
 }
-.assignee{
-    border: #51e898;
-    border-radius: 0.15rem;
-    background-color: #51e898;
-    color: #fff;
-    font-weight: 500;
-    padding: 0.35rem;
-    margin-right: 10px;
+.card-member{
+    display: flex;
+    flex-wrap: wrap;
+    .assignee{
+        border: #51e898;
+        border-radius: 0.15rem;
+        background-color: #51e898;
+        color: #fff;
+        font-weight: 500;
+        padding: 0.35rem;
+        margin: 0 5px 5px 0;
+    }
 }
 .desc-header, .comment-header{
     color:#172b4d;

@@ -46,6 +46,7 @@ $(document).ready( function() {
       let cardComment = carData.comments
       let cardAssignee = carData.assignee
       let cardTags = carData.taglist
+      console.log(cardTags)
 
       $('[data-role ="card-focus-id"]').text(`${cardItem.id}`)
       $('[data-role ="card-inner_title"]').text(`${cardItem.title}`)
@@ -67,7 +68,7 @@ $(document).ready( function() {
 
       let tagList = ''
       cardTags.forEach(function(tag){
-        tagList = tagList + `<span class="tags">${tag.name}</span>`
+        tagList = tagList + `<span style="background-color:${tag.color}" class="tags">${tag.name}</span>`
       })
       $('.tag-list').html(tagList);
 
@@ -166,13 +167,14 @@ $(document).ready( function() {
     console.log('Add tags');
     let cardId = $('[data-role="card-focus-id"]').text()
     let cardTags = $(this).siblings("div").text()
-    let tagColour = $(this).siblings("div").css('background-color')
-    console.log(tagColour)
+    let tagColor = $(this).siblings("div").css('background-color')
+    console.log(tagColor)
     axios({
       method: 'put',
       url: `/lists/cards/${cardId}/tagging`,
       data: {
         cardTags: cardTags, 
+        tagColor: tagColor
       }
     })
     .then(function(response){
@@ -181,7 +183,7 @@ $(document).ready( function() {
         let data = response.data
         console.log(data)
         data.forEach(function(tag){
-          $('.tag-list').append(`<span style="background-color:${tagColour}">${tag.name}</span>`)
+          $('.tag-list').append(`<span style="background-color:${tagColor}" class="tags">${tag.name}</span>`)
         })
       } 
     })
