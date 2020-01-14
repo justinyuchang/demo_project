@@ -8,7 +8,7 @@ class BoardsController < ApplicationController
     @board = Board.new()
     @private_boards = current_user.boards.where(visibility: "Private")
     @public_boards = current_user.boards.where(visibility: "Team")
-    @star_boards = current_user.boards.where(visibility: "star")
+    @star_boards = current_user.starred_boards.all
     @searchuser = current_user.search_users.all
   end
 

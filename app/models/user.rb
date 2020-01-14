@@ -13,6 +13,9 @@ class User < ApplicationRecord
   has_many :user_cards
   has_many :cards, through: :user_cards
 
+  has_many :star_boards
+  has_many :starred_boards, through: :star_boards, source: :board
+
   has_many :board_message
 
   has_many :search_users

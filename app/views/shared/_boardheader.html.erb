@@ -1,12 +1,11 @@
-<%= render "starboard", board: @board %>
 <nav class="d-inline-flex mb-3">
     <div class="mx-2 mt-3">
       <h2><%= @board.title %></h2>
     </div>
 
 <!-- Board archived  -->
-    <div class="starred-board">
-      <a href="" class="btn btn-lg mt-1 btn-bh" data-toggle="modal" data-target="#starBoard">
+    <div class="starred-board" data-controller="star">
+      <a href="" class="btn btn-lg mt-1 btn-bh" data-action="star#toggle" data-target="star.icon">
         <i class="far fa-star"></i>
       </a>
     </div>
@@ -26,7 +25,7 @@
        </button>
        <ul class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
          <% @board.users.each do |member| %>
-         <li class="dropdown-item"><%= member.email %></li>
+         <li class="dropdown-item"><%= member.username %></li>
          <% end %>
        </ul>
     </div>
