@@ -32,7 +32,7 @@ class User < ApplicationRecord
   private
 
   def correct_avatar_mime_type
-    unless avatar.attached? && avatar.content_type.in?(%w(image/png image/jpg image/jpeg image/jfif))
+    if avatar.attached? && !avatar.content_type.in?(%w(image/png image/jpg image/jpeg image/jfif))
       avatar.purge if self.new_record? # Only purge the offending blob if the record is new
       errors.add(:avatar, 'Must be an image file')
     end
