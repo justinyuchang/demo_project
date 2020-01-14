@@ -10,6 +10,7 @@ $(document).ready( function() {
       })
       $(".list-add-top").hide()
     } else if ($(event.target).parents().hasClass("list-wrapper")){
+      $(".form-inp").val("")
       $(".form-inp").focus()
     } else {
       $(event.target).show("slow",function(){
