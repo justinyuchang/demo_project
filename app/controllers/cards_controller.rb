@@ -4,6 +4,7 @@ class CardsController < ApplicationController
   
   def show
     @card_item = Card.find(params[:id])
+    @card_item.description = @card_item.description.to_s.strip
     @comments = @card_item.comments.order(id: :DESC)
     @assignee = @card_item.users
     @taglist = @card_item.tags
@@ -95,13 +96,8 @@ class CardsController < ApplicationController
     @card = Card.find(params[:id])
     @tags = params[:cardTags].split(', ')
     @tag_color = params[:tagColor]
-    p "#{@tag_color}"
 
     @selected_tag = @tags.select{ |tag| !@card.tags.exists?(name: tag) }
-
-    p "+"*50
-    p "#{@selected_tag}"
-    p "+"*50
 
     if @selected_tag.map { |tag| @card.tags.exists?(name: tag) == false }  
       @append_tag = @selected_tag.map { |tag| @card.tags.create(name: tag, color: @tag_color)} 
