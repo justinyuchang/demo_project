@@ -33,54 +33,67 @@ $(document).ready( function() {
 // Get card 
   $('[data-role="js-list"]').on("click", '[data-role="card-title"]', function(event){
     event.preventDefault();
-    let card_id = $(this).siblings('[data-role="card-id"]').attr('val');
-    console.log(card_id)
+    let cardId = $(this).siblings('[data-role="card-id"]').attr('val');
+    console.log(cardId)
     axios({
       method: 'get',
-      url: `/lists/cards/${card_id}`,
+      url: `/lists/cards/${cardId}`,
     })
     .then(function (response) {
-      let card_item = response.data.card
-      let card_comment = response.data.comments
-      let card_assignee = response.data.assignee
-      console.log(card_item.tags)
-      let card_tags = card_item.tags
-      console.log(card_tags)
+      console.log(response)
+      let carData = response.data
+      let cardItem = carData.card
+      let cardComment = carData.comments
+      let cardAssignee = carData.assignee
+      let cardTags = carData.taglist
+      console.log(cardTags)
+
+      $('[data-role ="card-focus-id"]').text(`${cardItem.id}`)
+      $('[data-role ="card-inner_title"]').text(`${cardItem.title}`)
+      $('[data-role ="card-description"]').text(`${cardItem.description}`)
+
       let result = ''
-      card_comment.forEach(function(comment){
-        result = result + `<div class="bg-light mb-1">${comment.content}</div>`
+      cardComment.forEach(function(comment){
+        result = result + `<div class="comment-container">
+        <div class="comment-header">
+          <span class="author">${comment.user_id}</span>
+          <span class="comment-time">${comment.created_at}</span>
+        </div>  
+        <div class="comment-body">
+          <p>${comment.content}</p>
+        </div>
+      </div>`
       })
       $('[data-role ="comment-area"]').html(result);
-      $('[data-role ="card-focus-id"]').text(`${card_item.id}`)
-      $('[data-role ="card-inner_title"]').text(`${card_item.title}`)
-      $('[data-role ="card-description"]').val(`${card_item.description}`)
-      $('[data-role ="card-due-date"]').val(`${card_item.due_date}`)
-      // $('[data-role ="card-archived"]').val(`${card_item.archived}`)
-      let taglist = ''
-      card_tags.forEach(function(tag){
-        taglist = taglist + `<span id="tags"  class="badge badge-light">${tag.name}</span>`
+
+      let tagList = ''
+      cardTags.forEach(function(tag){
+        tagList = tagList + `<span style="background-color:${tag.color}" class="tags">${tag.name}</span>`
       })
-      $('#tags').html(taglist);
-      card_assignee.forEach(function(assignee){
-        $('.assignee').html(`<div class="assignee">${assignee.email}</div>`)
+      $('.tag-list').html(tagList);
+
+      let cardMember = ''
+      cardAssignee.forEach(function(assignee){
+        cardMember = cardMember + `<span class="assignee">${assignee.email}</span>`
       })
+      $('.card-member').html(cardMember);
       $('#Carditem').modal('show')
     })
   });
 // Update card 
   $('[data-role="card-update"]').click(function(){
     console.log("Update card")
-    let card_id = $('[data-role ="card-focus-id"]').text()
-    let card_description = $('[data-role ="card-description"]').val()
-    let card_due_date = $('[data-role ="card-due-date"]').val()
-    // let card_archived = $('[data-role ="card-archived"]').val()
+    let cardId = $('[data-role ="card-focus-id"]').text()
+    let cardTitle = $('[data-role ="card-inner_title"]').text()
+    let carDescription = $('[data-role ="card-description"]').text()
+    // let card_due_date = $('[data-role ="card-due-date"]').val()
     axios({
       method: 'patch',
-      url: `/lists/cards/${card_id}`,
+      url: `/lists/cards/${cardId}`,
       data: {
-        description: card_description,
-        due_date: card_due_date,
-        // tag_list: cardTags
+        title: cardTitle,
+        description: carDescription
+        // due_date: card_due_date,
       }
     })
     .then(function(response){
@@ -92,20 +105,29 @@ $(document).ready( function() {
   });
 // Send Comment
   $('[data-role ="comment-send"]').click(function(){
-    let card_id = $('[data-role ="card-focus-id"]').text()
-    let card_comment = $(this).siblings("textarea").val();    
+    let cardId = $('[data-role ="card-focus-id"]').text()
+    let cardComment = $(this).siblings("textarea").val();    
     axios({
       method: 'post', 
-      url: `/lists/cards/${card_id}/comments`,
+      url: `/lists/cards/${cardId}/comments`,
       data: {
-        content: card_comment
+        content: cardComment
       }
     })
     .then(function(response){
+      console.log(response)
       if (response.status === 200) {
         let data = response.data
-        $('[data-role ="comment-area"]').append(`<div class="bg-light mb-1">${data.content}</div>`)
-        return response.data
+        $('[data-role ="comment-area"]').prepend(`
+        <div class="comment-container">
+          <div class="comment-header">
+            <span class="author">${data.user_id}</span>
+            <span class="comment-time">${data.created_at}</span>
+          </div>
+          <div class="comment-body">
+            <p>${data.content}</p> 
+          </div>
+        </div>`)
       } else {
         throw 'Error'
       }
@@ -115,7 +137,7 @@ $(document).ready( function() {
     })
   });
 // Card assignee
-  $('.dropdown-item.li').on("click", function(evt){
+  $('.member-list').on("click",  function(evt){
     let cardId = $('[data-role ="card-focus-id"]').text()
     let userId = $(this).children('span').attr('data-memberid')
     axios({
@@ -125,38 +147,50 @@ $(document).ready( function() {
         userId: userId,
       }
     })
-    .then(function(response){
-      if (response.status === 200){
-        let data = response.data
-        data.forEach(function(assignee){
-          $('.assignee-list').html(`<div class="assignee">${assignee.email}</div>`)
+    .then( function(response){
+      let data = response.data
+      if (data.status === "ok"){
+        console.log(data)
+        let assignMember = data.assignee
+        assignMember.map(function(assignee){
+          $('.card-member').append(`<span class="assignee">${assignee.email}</span>`)
         })
       } else {
-          $('.assignee').remove()
+        let data = response.data
+        console.log(data)
+        $('.assignee').remove(`:contains(${data.email})`)
       }
     })
   })
 // Add tags  
-  $('[data-role ="tag-send"]').click(function(){
+  $('.tag-item').on('click', '#add-tag', function(){
     console.log('Add tags');
-    let cardId = $('[data-role ="card-focus-id"]').text()
-    let cardTags = $(this).siblings("input").val()
+    let cardId = $('[data-role="card-focus-id"]').text()
+    let cardTags = $(this).siblings("div").text()
+    let tagColor = $(this).siblings("div").css('background-color')
+    console.log(tagColor)
     axios({
       method: 'put',
       url: `/lists/cards/${cardId}/tagging`,
       data: {
         cardTags: cardTags, 
+        tagColor: tagColor
       }
     })
     .then(function(response){
       console.log(response)
       if (response.status === 200){
         let data = response.data
+        console.log(data)
         data.forEach(function(tag){
-          $('.tag-list').append(`<span id="tags"  class="badge badge-light">${tag.name}</span>`)
+          $('.tag-list').append(`<span style="background-color:${tagColor}" class="tags">${tag.name}</span>`)
         })
       } 
     })
+  })
+// Date Picker
+  $('.datepicker').click(function(){
+    $(this).datepicker();
   })
 /////////////////////////////////////////////
 })

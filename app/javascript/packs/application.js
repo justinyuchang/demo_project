@@ -7,3 +7,5 @@ require("bootstrap")
 
 import '../stylesheets'
 import '../script'
+
+

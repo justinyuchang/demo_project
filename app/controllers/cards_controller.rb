@@ -4,7 +4,7 @@ class CardsController < ApplicationController
   
   def show
     @card_item = Card.find(params[:id])
-    @comments = @card_item.comments
+    @comments = @card_item.comments.order(id: :DESC)
     @assignee = @card_item.users
     @taglist = @card_item.tags
     render json: { card: @card_item, comments: @comments, assignee: @assignee, taglist: @taglist}
@@ -32,10 +32,12 @@ class CardsController < ApplicationController
     @card = Card.find(params[:id])
     @user = User.find(params[:userId])
     if @card.users.include?(@user) == false 
-      @assignee = @card.users.push(@user)
-      render json: @assignee
+      @card_member = @card.users.push(@user)
+      @assignee = @card.users.select{|user| user == @user}
+      render json: {status: "ok", assignee: @assignee} 
     else
       @card.users.delete(@user)
+      render json: @user
     end
   end 
 
@@ -90,17 +92,23 @@ class CardsController < ApplicationController
   end
 
   def tagging
-    p "="*50
-    p "#{params}"
-    p "="*50
     @card = Card.find(params[:id])
     @tags = params[:cardTags].split(', ')
+    @tag_color = params[:tagColor]
+    p "#{@tag_color}"
 
-    @inserted_tags = @tags.map do |tag|
-      @card.tags.where(name: tag.strip).first_or_create!
+    @selected_tag = @tags.select{ |tag| !@card.tags.exists?(name: tag) }
+
+    p "+"*50
+    p "#{@selected_tag}"
+    p "+"*50
+
+    if @selected_tag.map { |tag| @card.tags.exists?(name: tag) == false }  
+      @append_tag = @selected_tag.map { |tag| @card.tags.create(name: tag, color: @tag_color)} 
+    else 
+      p "Do nothing"
     end 
-    p "#{@inserted_tags}"
-    render json: @inserted_tags
+    render json: @append_tag
   end 
 
   private
@@ -114,6 +122,6 @@ class CardsController < ApplicationController
 
   def load_card_items_params
     @find_card = Card.find(params[:id])
-    @card_item_params = params.require(:card).permit(:description, :archived, :due_date)
+    @card_item_params = params.require(:card).permit(:title, :description, :due_date)
   end
 end

@@ -4,83 +4,123 @@
       <div class="container">
         <div class="row">
           <div class="col-12">
-            <i class="far fa-window-maximize"></i>
-            <h5 data-role="card-inner_title" class="d-inline-block mb-3 ml-1 font-weight-bold text-dark"></h5>
+            <i class="far fa-window-maximize fa-lg"></i>
+            <h5 data-role="card-inner_title" id="card-title" class="d-inline-block mb-3 ml-1 font-weight-bold text-dark"
+              contenteditable="true"></h5>
             <span data-role="card-focus-id" class="d-none"></span>
           </div>
         </div>
+
+        <!-- Card assignee & tags -->
         <div class="row">
           <div class="col-9">
-            <div class="form-group">
-              <div class="assignee-list">
-                <div class="assignee"></div>
-              </div>
+            <div class="card-detail">
               <div class="tag-list">
-                <span id="tags" class="badge badge-light"></span>
               </div>
-              <i class="fas fa-align-left"></i>
-              <label class="ml-1 text-dark" for="card-description">Description</label>
-              <textarea data-role="card-description" type="text" class="form-control" id="card-description" placeholder="Add more detail..."></textarea>
-            </div>
-            <!-- Comment Area -->
-            <div class="form-group">
-              <textarea data-role="comment-input" class="form-control" placeholder="Write a comment..."></textarea>
-              <button data-role="comment-send" type="submit" class="btn btn-sm btn-primary mt-1">Send</button>
+              <h5 class="assignee-header">MEMBER</h5>
+              <div class="card-member">
+              </div>
             </div>
 
+            <!-- Card description -->
+            <div class="form-group my-2">
+              <div class="description-title mb-1">
+                <i class="fas fa-align-left"></i>
+                <label class="desc-header ml-1" for="card-description">Description</label>
+              </div>
+              <textarea data-role="card-description" id="card-description" class="form-control"
+                placeholder="Add more detail..."></textarea>
+            </div>
+
+
+
+            <!-- Comment text -->
+            <div class="form-group my-2">
+              <div class="comment-title mt-3 mb-1">
+                <i class="far fa-comment-alt"></i>
+                <label class="comment-header ml-1" for="card-comment">Comment</label>
+              </div>
+              <textarea data-role="comment-input" id="card-comment" class="form-control"
+                placeholder="Write a comment..."></textarea>
+              <button data-role="comment-send" id="comment-send" type="submit"
+                class="btn btn-sm btn-success mt-1">Send</button>
+            </div>
+            <!-- Comment area -->
             <div data-role="comment-area">
-              <div class="bg-light mb-1"></div>
+              <!-- Comment list -->
+              <div class="comment-container">
+                <div class="comment-header">
+                  <span class="author"></span>
+                  <span class="comment-time"></span>
+                </div>
+                <div class="comment-body">
+                </div>
+              </div>
+
             </div>
           </div>
+
+
+
 
 
           <!-- Side Bar -->
           <div class="col-3">
-            <span class="text-muted small">Add to card</span>
+            <span class="add-to">ADD TO CARD</span>
+
+            <!-- Assign member -->
             <div class="dropdown mr-1">
-              <button type="button" class="btn btn-sm btn-light text-primary mx-1 dropdown-toggle" id="dropdownMenuOffset"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
-                    Member
-               </button>
-               <ul class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
-                 <% @board.users.each do |member| %>
-                   <li class="dropdown-item li">
-                     <span data-memberId="<%= member.id %>"><%= member.email %></span>
-                     <!-- <%= link_to member.email, 'assign_card_path', method: :put, data: { memberId: member.id}, remote: true %> -->
-                     <!-- <%= link_to member.email, '###', method: :put, class: 'assign_card_path', data: { 'path-tpl': assign_card_path(id: 'CARD_ID', user_id: member.id), memberId: member.id } %> -->
-                   </li>
-                 <% end %>
-               </ul>
+              <label class="assign btn btn-light my-1" id="dLabel" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                <i class="fas fa-user-friends fa-sm"></i>
+                Members
+              </label>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+                <% @board.users.each do |member| %>
+                <li class="member-list dropdown-item">
+                  <span data-memberId="<%= member.id %>"><%= member.email %></span>
+                </li>
+                <% end %>
+              </ul>
             </div>
 
-            <div class="input-group input-group-sm mb-3">
-              <!-- <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-sm">Tags</span>
-              </div> -->
-              <input data-role="card-tags" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-              <button data-role="tag-send" type="submit" class="btn btn-sm btn-primary mt-1">Send</button>
+            <!-- Add tags -->
+            <div class="dropdown mr-1">
+              <label class="tag btn btn-light my-1" id="dLabel" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                <i class="fas fa-tags fa-sm"></i>
+                Tag
+              </label>
+              <form class="tag-menu dropdown-menu text-center" aria-labelledby="dropdownMenuOffset">
+                <h5 class="tag-header">TAGS</h5>
+                <li class="tag-item form-group">
+                  <div contenteditable="true" class="yellow-tag"></div>
+                  <i id="add-tag" class="far fa-plus-square fa-sm btn"></i>
+                </li>
+                <li class="tag-item form-group">
+                  <div contenteditable="true" class="blue-tag"></div>
+                  <i id="add-tag" class="far fa-plus-square fa-sm btn"></i>
+                </li>
+                <li class="tag-item form-group">
+                  <div contenteditable="true" class="green-tag"></div>
+                  <i id="add-tag" class="far fa-plus-square fa-sm btn"></i>
+                </li>
+              </form>
             </div>
 
-            <div class="input-group-sm">
-              <label for="card-due-date">Due date</label>
-              <input data-role="card-due-date" type="date" class="form-control" id="card-due-date">
+            <!-- Due date -->
+            <div class="datepicker btn btn-light my-1">
+              <i class="far fa-clock fa-sm"></i>
+              Due date
             </div>
-
-            <!-- <div class="form-group">
-              <label for="card-archived">card-archived</label>
-              <select data-role="card-archived" id="card-archived" class="form-control">
-                <option selected>true</option>
-                <option>false</option>
-              </select>
-            </div> -->
-
           </div>
-          
         </div>
       </div>
+
+
       <div class="form-group d-flex justify-content-end">
-        <button data-role="card-update" type="submit" class="btn btn-primary">儲存</button>
-      </div>      
+        <button data-role="card-update" type="submit" class="card-update btn btn-primary">Save</button>
+      </div>
     </div>
   </div>
 </div>
