@@ -8,7 +8,7 @@ class BoardsController < ApplicationController
     @board = Board.new()
     @private_boards = current_user.boards.where(visibility: "Private")
     @public_boards = current_user.boards.where(visibility: "Team")
-    @star_boards = current_user.boards.where(integer: "1")
+    @star_boards = current_user.boards.where(visibility: "star")
     @searchuser = current_user.search_users.all
   end
 
@@ -34,7 +34,7 @@ class BoardsController < ApplicationController
     if @board.save
       redirect_to board_path(@board.id), notice: "新增成功!"
     else
-      render :new, notice: "請填寫標題及狀態"
+      render :index, notice: "請填寫標題及狀態"
     end
   end
 
