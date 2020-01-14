@@ -18,6 +18,7 @@ $( document ).ready( function() {
                 list_channel.find('[data-role="list-id"]').attr("val", `${data.id}`)
                 let list_template = $(list_channel).html()
                 $("#js-list-sortable").append(list_template)
+                $(".form-inp").val("")
                 break;
               case "card_create":
                 let card_channel = $(card_create).clone(true,  true)
