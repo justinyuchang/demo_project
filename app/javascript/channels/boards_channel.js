@@ -12,7 +12,7 @@ $( document ).ready( function() {
             let status = data.status
             switch (status){
               case "list_create":
-                let list_channel = $(list_create).clone(true,true)
+                let list_channel = $(list_create).clone()
                 list_channel.find('[data-role="list-group-item"]').attr("id", `list_${data.id}`)
                 list_channel.find('[data-role="list-title"]').text(data.title)
                 list_channel.find('[data-role="list-id"]').attr("val", `${data.id}`)
@@ -21,18 +21,18 @@ $( document ).ready( function() {
                 $(".form-inp").val("")
                 break;
               case "card_create":
-                let card_channel = $(card_create).clone(true,  true)
+                let card_channel = $(card_create).clone()
                 card_channel.find('[data-role="card-id"]').attr("val", `${data.id}`)
                 card_channel.find('[data-role="sortable-column"]').attr("id", `${data.id}`)
                 card_channel.find('[data-role="card-title"]').text(data.title)
                 let card_template = $(card_channel).html()
                 $(`input[val=${data.list_id}]`).parents('[data-role= "list-item"]')
-                                                                              .siblings('[data-role="card-wrapper"]')
-                                                                              .find('[data-role="card-group"]')
-                                                                              .append(card_template)
+                                                .siblings('[data-role="card-wrapper"]')
+                                                .find('[data-role="card-group"]')
+                                                .append(card_template)
                 break;
               case "card_add_prev":
-                let card_sort_channel_prev = $(card_create).clone(true,  true)
+                let card_sort_channel_prev = $(card_create).clone()
                 card_sort_channel_prev.find('[data-role="card-id"]').attr("val", `${data.card_id.id}`)
                 card_sort_channel_prev.find('[data-role="sortable-column"]').attr("id", `${data.card_id.id}`)
                 card_sort_channel_prev.find('[data-role="card-title"]').text(data.card_id.title)
@@ -41,7 +41,7 @@ $( document ).ready( function() {
                 $(`div[id=list_${data.list_id}]`).find(`div[id=${data.next_id}]`).before(card_sort_template_prev)
                 break;
               case "card_add_next":
-                let card_sort_channel_next = $(card_create).clone(true,  true)
+                let card_sort_channel_next = $(card_create).clone()
                 card_sort_channel_next.find('[data-role="card-id"]').attr("val", `${data.card_id.id}`)
                 card_sort_channel_next.find('[data-role="sortable-column"]').attr("id", `${data.card_id.id}`)
                 card_sort_channel_next.find('[data-role="card-title"]').text(data.card_id.title)
@@ -50,7 +50,7 @@ $( document ).ready( function() {
                 $(`div[id=list_${data.list_id}]`).find(`div[id=${data.prev_id}]`).after(card_sort_template_next)
                 break;
               case "card_add":
-                let card_sort_channel_add = $(card_create).clone(true,  true)
+                let card_sort_channel_add = $(card_create).clone()
                 card_sort_channel_add.find('[data-role="card-id"]').attr("val", `${data.card_id.id}`)
                 card_sort_channel_add.find('[data-role="sortable-column"]').attr("id", `${data.card_id.id}`)
                 card_sort_channel_add.find('[data-role="card-title"]').text(data.card_id.title)
@@ -58,16 +58,16 @@ $( document ).ready( function() {
                 $(`div[id=${data.card_id.id}]`).remove()
                 $(`div[id=list_${data.list_id}]`).find('[data-role="sort-able hidden"]').after(card_sort_template_add)
                 break;
-                case "list_add_next":
-                  let list_sort_channel_next = $(`div[id=list_${data.list}]`).clone(true,true)
-                  $(`div[id=list_${data.list}]`).remove()
-                  $(`div[id=list_${data.prev_id}]`).after(list_sort_channel_next )
-                  break;
-                case "list_add_prev":
-                  let list_sort_channel_prev = $(`div[id=list_${data.list}]`).clone(true,true)
-                  $(`div[id=list_${data.list}]`).remove()
-                  $(`div[id=list_${data.next_id}]`).before(list_sort_channel_prev)
-                  break;
+              case "list_add_next":
+                let list_sort_channel_next = $(`div[id=list_${data.list}]`).clone()
+                $(`div[id=list_${data.list}]`).remove()
+                $(`div[id=list_${data.prev_id}]`).after(list_sort_channel_next )
+                break;
+              case "list_add_prev":
+                let list_sort_channel_prev = $(`div[id=list_${data.list}]`).clone()
+                $(`div[id=list_${data.list}]`).remove()
+                $(`div[id=list_${data.next_id}]`).before(list_sort_channel_prev)
+                break;
             }
           }
         }  
