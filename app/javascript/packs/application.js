@@ -10,3 +10,5 @@ import '../script'
 global.$ = jQuery;
 
 
+
+import "controllers"

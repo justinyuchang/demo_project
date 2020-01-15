@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root "boards#index"
 
   resources :boards, shallow: true do
+    post :star_board, to: 'boards#star'
     resources :lists, only: [:new, :create, :destroy] do
       collection do
         patch :sortlist

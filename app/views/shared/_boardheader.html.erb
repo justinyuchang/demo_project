@@ -1,11 +1,14 @@
-<%= render "starboard", board: @board %>
 <nav class="navbar navbar-expand-sm navbar-light bg-light py-0 py-md-0">
 
   <h2 class="mt-2"><%= @board.title %></h2>
 <!-- Board archived  -->
-  <div class="nav-item active starred-board">
-    <a href="" class="btn btn-lg btn-bh" data-toggle="modal" data-target="#starBoard">
-      <i class="far fa-star"></i>
+  <div class="nav-item active starred-board" data-controller="star" data-star-id="<%= @board.id %>">
+    <a href="" class="btn btn-lg btn-bh" data-action="star#toggle">
+      <% if @board.starred_by?(current_user) %>
+        <i class="fas fa-star" data-target="star.icon"></i>
+      <% else %>
+        <i class="far fa-star" data-target="star.icon"></i>
+      <% end %>
     </a>
   </div>
 
