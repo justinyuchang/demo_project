@@ -56,14 +56,16 @@ class BoardsController < ApplicationController
 
   def searchuser
     @user = User.find_by(email: @email)
+    p "----------#{@user.id}-----------------"
     if @board.user_ids.include?(@user.id) == false 
        @invitation = SearchUser.create(user: @user,
                                        board: @board,
                                        email: @email, 
                                        message: @message)
-      # respond_to do |format|
-      #   format.js { render :json => }
-      # end
+      respond_to do |format|
+        format.js
+      end
+      ActionCable.server.broadcast "notifications:#{@user.id}", @invitation
     else
       render :template => "shared/_navbarboard"
     end
