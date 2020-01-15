@@ -34,7 +34,6 @@ class BoardsController < ApplicationController
     if @board.save
       redirect_to board_path(@board.id), notice: "新增成功!"
     else
-      render :index, notice: "請填寫標題及狀態"
     end
   end
 
@@ -47,6 +46,21 @@ class BoardsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def star
+    board = Board.find(params[:board_id])
+    star = StarBoard.find_by(user: current_user, board: board)
+    starred = false
+
+    if star
+      star.destroy
+      starred = false
+    else
+      current_user.star_boards.create(board: board)
+      starred = true
+    end
+    render json: {status: 'ok', starred: starred}
   end
 
   def destroy

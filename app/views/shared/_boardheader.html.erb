@@ -4,9 +4,13 @@
     </div>
 
 <!-- Board archived  -->
-    <div class="starred-board" data-controller="star">
-      <a href="" class="btn btn-lg mt-1 btn-bh" data-action="star#toggle" data-target="star.icon">
-        <i class="far fa-star"></i>
+    <div class="starred-board" data-controller="star" data-star-id="<%= @board.id %>">
+      <a href="" class="btn btn-lg mt-1 btn-bh" data-action="star#toggle">
+        <% if @board.starred_by?(current_user) %>
+          <i class="fas fa-star" data-target="star.icon"></i>
+        <% else %>
+          <i class="far fa-star" data-target="star.icon"></i>
+        <% end %>
       </a>
     </div>
 

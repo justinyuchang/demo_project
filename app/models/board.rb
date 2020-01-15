@@ -15,4 +15,8 @@ class Board < ApplicationRecord
   has_many :board_messages, inverse_of: :board
 
   has_many :search_users
+
+   def starred_by?(user)
+    star_boards.exists?(user: user)
+   end
 end
