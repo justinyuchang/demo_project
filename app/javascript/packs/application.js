@@ -9,3 +9,5 @@ import '../stylesheets'
 import '../script'
 
 
+
+import "controllers"
