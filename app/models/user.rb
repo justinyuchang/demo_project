@@ -20,6 +20,8 @@ class User < ApplicationRecord
   has_one_attached :avatar
 
   validate :correct_avatar_mime_type
+  validates :username, :email, presence: true
+  validates :username, :email, uniqueness: true
   
   def self.from_google_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

@@ -17,7 +17,8 @@ body{
 }
 .navbar_logo_place{
   display: block;
-  position: absolute;;
+  position: absolute;
+  transform: translateX(-50%);
   top: 0;
   left: 50%;
 }
