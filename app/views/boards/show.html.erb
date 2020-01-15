@@ -24,7 +24,7 @@
         
         <div data-role="card-wrapper" class="card-wrapper">
 
-          <div data-role="card-group" class="card-group" id="card-sortable">
+          <div data-role="card-group" class="card-group card-sortable">
             <div data-role="sort-able hidden" class="sortable-hidden"></div>
               <% list.cards.sorted.each do |card| %>
                 <div data-role="sortable-column" class="cart-item" id= "<%= card.id %>">
