@@ -1,19 +1,22 @@
 <%= render "starboard", board: @board %>
-<nav class="navbar navbar-expand-sm navbar-light bg-light">
+<nav class="navbar navbar-expand-sm navbar-light bg-light py-0 py-md-0">
+
   <h2 class="mt-2"><%= @board.title %></h2>
+<!-- Board archived  -->
+  <div class="nav-item active starred-board">
+    <a href="" class="btn btn-lg btn-bh" data-toggle="modal" data-target="#starBoard">
+      <i class="far fa-star"></i>
+    </a>
+  </div>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-<!-- Board archived  -->
+
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active starred-board">
-        <a href="" class="btn btn-lg mt-1 btn-bh" data-toggle="modal" data-target="#starBoard">
-          <i class="far fa-star"></i>
-        </a>
 <!-- Board Visibility  -->
-      <li class="nav-item dropdown btn btn-bh ml-2 mt-2 btn-light">
+      <li class="nav-item dropdown btn btn-bh ml-2 btn-light">
         <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <%= @board.visibility %>
         </a>
@@ -26,8 +29,9 @@
             <div>私人:</div>
             <div>團隊:</div>
           </div>
+      </li>
 <!-- Board member list  -->
-      <li class="nav-item dropdown btn btn-bh ml-2 mt-2 btn-light">
+      <li class="nav-item dropdown btn btn-bh ml-2 btn-light">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Member
         </a>
@@ -41,11 +45,11 @@
         </div>
       </li>
 <!-- Form for Invitation to other users -->
-      <li class="nav-item dropdown btn btn-bh ml-2 mt-2 btn-light">
+      <li class="nav-item dropdown btn btn-bh ml-2 btn-light">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Invite
         </a>
-        <div class="dropdown-menu dropdown_menu_add" 
+        <div class="dropdown-menu dropdown_menu_add dropdown_menu_size" 
         aria-labelledby="navbarDropdown">
           <div class="p-2">
             <div class="text-info">
