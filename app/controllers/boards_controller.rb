@@ -70,18 +70,21 @@ class BoardsController < ApplicationController
 
   def searchuser
     @user = User.find_by(email: @email)
-    p "----------#{@user.id}-----------------"
-    if @board.user_ids.include?(@user.id) == false 
-       @invitation = SearchUser.create(user: @user,
-                                       board: @board,
-                                       email: @email, 
-                                       message: @message)
-      respond_to do |format|
-        format.js
-      end
-      ActionCable.server.broadcast "notifications:#{@user.id}", @invitation
+    if @user.blank?
+      render :js => "alert('沒有這位使用者，請重新輸入')"
     else
-      render :template => "shared/_navbarboard"
+      if @board.user_ids.include?(@user.id) == false 
+        @invitation = SearchUser.create(user: @user,
+                                        board: @board,
+                                        email: @email, 
+                                        message: @message)
+       respond_to do |format|
+         format.js
+       end
+       ActionCable.server.broadcast "notifications:#{@user.id}", @invitation
+     else
+      render :js => "alert('使用者已加入此表單，請重新輸入')"
+     end
     end
   end
 
