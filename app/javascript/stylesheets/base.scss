@@ -1,6 +1,10 @@
 body{
   font-family: Microsoft JhengHei, PingFang, Arial;
 }
+.boardbg{
+  background-color: #FAFBFC;
+  background-size:cover;
+}
 // user
 .uer_btn{
   background-color:rgba(36, 138, 154, 0.8);
@@ -17,7 +21,19 @@ body{
 }
 .navbar_logo_place{
   display: block;
-  position: absolute;;
+  position: absolute;
+  transform: translateX(-50%);
   top: 0;
   left: 50%;
+}
+.clickhand{
+  cursor: pointer;
+}
+@media (min-width: 768px) {
+  .dropdown_menu_size {
+    width: 300px;  
+  }
+}
+.dropdown_menu_add{
+  text-align: center;
 }
