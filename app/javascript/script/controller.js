@@ -42,4 +42,9 @@ $(document).ready( function() {
       $(".card-create-drop").show()
     }
   })
+  $("#invite-create-btn").on("click", function(){
+    $("#dropdownMenu2").dropdown('toggle')
+    $("#dropdownMenu2_email").val("")
+    $("#dropdownMenu2_message").val("")
+  })
 })

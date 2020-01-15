@@ -61,6 +61,9 @@ class BoardsController < ApplicationController
                                        board: @board,
                                        email: @email, 
                                        message: @message)
+      # respond_to do |format|
+      #   format.js { render :json => }
+      # end
     else
       render :template => "shared/_navbarboard"
     end
