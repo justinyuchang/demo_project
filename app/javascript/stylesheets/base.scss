@@ -37,3 +37,8 @@ body{
 .dropdown_menu_add{
   text-align: center;
 }
+.scrollable_menu {
+  height: auto;
+  max-height: 200px;
+  overflow-x: hidden;
+}
