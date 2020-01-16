@@ -78,13 +78,13 @@ class BoardsController < ApplicationController
                                         board: @board,
                                         email: @email, 
                                         message: @message)
-       respond_to do |format|
-         format.js
-       end
        ActionCable.server.broadcast "notifications:#{@user.id}", @invitation
      else
       render :js => "alert('使用者已加入此表單，請重新輸入')"
      end
+    end
+    respond_to do |format|
+      format.js
     end
   end
 
