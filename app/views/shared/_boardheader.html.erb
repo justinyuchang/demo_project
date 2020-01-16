@@ -66,10 +66,10 @@
               <p class=" d-inline-flex">寄送邀請訊息</p>
                 <%=  form_with scope: :search, url: searchuser_board_path do |f| %>
               <div class="form-group">
-                <%= f.text_field :email, class:"form-control", placeholder:"請輸入Email" %>
+                <%= f.text_field :email, class:"form-control", id: "navbarDropdown_email", placeholder:"請輸入Email" %>
               </div>
               <div class="form-group">
-                <%= f.text_area :message, class:"form-control", placeholder:"邀請內容..." %>
+                <%= f.text_area :message, class:"form-control", id: "navbarDropdown_message", placeholder:"邀請內容..." %>
               </div>
               <%= f.submit "送出邀請", class:"btn btn-sm btn-info" %>
               <% end %>

@@ -7,6 +7,7 @@ require("bootstrap")
 
 import '../stylesheets'
 import '../script'
+global.$ = jQuery;
 
 
 

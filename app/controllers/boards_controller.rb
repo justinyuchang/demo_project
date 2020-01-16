@@ -20,10 +20,10 @@ class BoardsController < ApplicationController
     @list = List.new()
     # @board_message = BoardMessage.new(board: @board)
     # @board_messages = @board.board_messages.includes(:user)
-    if @board.users.size > 1
-      @board.visibility = "Team"
-      @board.save
-    end
+    # if @board.users.size > 1
+    #   @board.visibility = "Team"
+    #   @board.save
+    # end
   end
 
   def create
@@ -70,13 +70,21 @@ class BoardsController < ApplicationController
 
   def searchuser
     @user = User.find_by(email: @email)
-    if @board.user_ids.include?(@user.id) == false 
-       @invitation = SearchUser.create(user: @user,
-                                       board: @board,
-                                       email: @email, 
-                                       message: @message)
+    if @user.blank?
+      render :js => "alert('沒有這位使用者，請重新輸入')"
     else
-      render :template => "shared/_navbarboard"
+      if @board.user_ids.include?(@user.id) == false 
+        @invitation = SearchUser.create(user: @user,
+                                        board: @board,
+                                        email: @email, 
+                                        message: @message)
+       respond_to do |format|
+         format.js
+       end
+       ActionCable.server.broadcast "notifications:#{@user.id}", @invitation
+     else
+      render :js => "alert('使用者已加入此表單，請重新輸入')"
+     end
     end
   end
 
@@ -84,12 +92,15 @@ class BoardsController < ApplicationController
     @invitation = SearchUser.find(params[:id])
     @reply = params[:agree] 
     @board = Board.find(params[:board_id])
-
     if @reply == "true"
       @board.users << [current_user]
+      @board.update(visibility: "Team")
       @invitation.destroy
     else
       @invitation.destroy
+    end
+    respond_to do |form|
+      form.js
     end
   end
   
