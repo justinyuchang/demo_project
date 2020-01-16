@@ -1,5 +1,5 @@
 const invite_create = `<div>
-<div class="toast fade show" role="alert" data-autohide="false" aria-live="assertive"   aria-atomic="true">
+<div class="toast fade show" id="" role="alert" data-autohide="false" aria-live="assertive"   aria-atomic="true">
 <div class="toast-header">
   <div class="welcome far fa-paper-plane">
     <div class="welcome-message">有人邀請您加入他的看板</div> 

@@ -20,10 +20,10 @@ class BoardsController < ApplicationController
     @list = List.new()
     # @board_message = BoardMessage.new(board: @board)
     # @board_messages = @board.board_messages.includes(:user)
-    if @board.users.size > 1
-      @board.visibility = "Team"
-      @board.save
-    end
+    # if @board.users.size > 1
+    #   @board.visibility = "Team"
+    #   @board.save
+    # end
   end
 
   def create
@@ -92,12 +92,15 @@ class BoardsController < ApplicationController
     @invitation = SearchUser.find(params[:id])
     @reply = params[:agree] 
     @board = Board.find(params[:board_id])
-
     if @reply == "true"
       @board.users << [current_user]
+      @board.update(visibility: "Team")
       @invitation.destroy
     else
       @invitation.destroy
+    end
+    respond_to do |form|
+      form.js
     end
   end
   
