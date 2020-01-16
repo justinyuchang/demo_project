@@ -4,7 +4,6 @@
 @import "bootstrap/scss/bootstrap";
 @import "@fortawesome/fontawesome-free";
 @import "base.scss";
-
 .lists {
     .btn{
         width: 300px;
@@ -130,7 +129,6 @@ body {
     height: 45px; 
     color: red;
 }
-//
 .sortable-placeholder{
     width: 330px;
 }
@@ -144,6 +142,14 @@ body {
     }
 }
 // Card item
+.picked-date{
+    font-size: 14px;
+    border-radius: 0.15rem;
+    background-color: rgba(9,30,66,.04);
+    color: #172b4d;
+    font-weight: 500;
+    padding: 0.35rem;
+}
 .card-detail{
     margin-left: 1.5rem;
 }
@@ -207,15 +213,18 @@ body {
     border-radius: 0.15rem;
     color: #6c757d;
     background-color:rgba(9,30,66,.04); 
+    cursor: pointer;
 }
 .comment-container{
     margin: 0.5rem 0 0.5rem 1.5rem;
 }
 .author{
+    font-size: 14px;
     color: #172b4d;
     font-weight: 700;
 }
 .comment-time{
+    color: #5e6c84;
     font-size: 8px;
 }
 .comment-body{
@@ -230,6 +239,9 @@ body {
 }
 .member-list{
     cursor: pointer;
+}
+.member-title, .tag-title, .date-title{
+    margin-left: 0.15rem;
 }
 .tag-header{
     color: #5e6c84;
@@ -271,6 +283,21 @@ body {
 }
 .fa-plus-square{
     color:#42526e;
+}
+.date-header{
+    color: #5e6c84;
+    font-size: 12px;
+    font-weight: 500;
+    margin-left: 1rem;
+}
+.date-form{
+    padding: 0.5rem 0 0 0;
+    .date-input{
+        width: 80%;
+        height: 30px;
+        padding: 6px;
+        margin: auto;
+    }
 }
 .card-update{
     margin-right: 15px;

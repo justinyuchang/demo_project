@@ -4,11 +4,7 @@ class CardsController < ApplicationController
   
   def show
     @card_item = Card.find(params[:id])
-    @card_item.description = @card_item.description.to_s.strip
-    @comments = @card_item.comments.order(id: :DESC)
-    @assignee = @card_item.users
-    @taglist = @card_item.tags
-    render json: { card: @card_item, comments: @comments, assignee: @assignee, taglist: @taglist}
+    render json: @card_item.get_card_hash
   end
 
   def create
@@ -23,7 +19,7 @@ class CardsController < ApplicationController
   
   def update 
     @find_card.update(@card_item_params)
-    render json:{status: "ok"}
+    render json: @card_item_params
   end 
   
   def destroy
@@ -37,7 +33,7 @@ class CardsController < ApplicationController
       @assignee = @card.users.select{|user| user == @user}
       render json: {status: "ok", assignee: @assignee} 
     else
-      @card.users.delete(@user)
+      @card.users.delete(@user) if @user
       render json: @user
     end
   end 
@@ -96,13 +92,10 @@ class CardsController < ApplicationController
     @card = Card.find(params[:id])
     @tags = params[:cardTags].split(', ')
     @tag_color = params[:tagColor]
-
     @selected_tag = @tags.select{ |tag| !@card.tags.exists?(name: tag) }
-
     if @selected_tag.map { |tag| @card.tags.exists?(name: tag) == false }  
       @append_tag = @selected_tag.map { |tag| @card.tags.create(name: tag, color: @tag_color)} 
     else 
-      p "Do nothing"
     end 
     render json: @append_tag
   end 
