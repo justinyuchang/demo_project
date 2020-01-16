@@ -26,14 +26,12 @@
           <%= f.label :password, "請輸入密碼" %>
           <% if @minimum_password_length %>        
           <% end %>  
-          <div>
-          <em>密碼長度不能低於<%= @minimum_password_length %>位數 </em>
-          </div>       
+          <em>(密碼長度不能低於<%= @minimum_password_length %>位數)</em>      
           <%= f.password_field :password, autocomplete: "new-password" , class: 'form-control' %>        
         </div>
 
         <div class="form-group">
-          <%= f.label :password_confirmation, "請再輸入一次密碼" %>
+          <%= f.label :password_confirmation, "再輸入一次密碼" %>
           <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control'  %>
         </div>
 

@@ -4,8 +4,6 @@
 
     <div class="col shadow p-3 mb-5 bg-white rounded">  
       
-      <h2>你忘記你的密碼了嗎？</h2>
-
       <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
 
