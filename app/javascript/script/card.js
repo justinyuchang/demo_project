@@ -202,6 +202,7 @@ $(document).ready(function () {
         .then(function (response) {
           let data = response.data
           $('.picked-date').text(`${data.due_date}`)
+          $('.picked-date').show()
         })
     },
     inline: true,
