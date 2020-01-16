@@ -10,6 +10,11 @@
         margin: 15px;
     }
 }
+
+// user
+
+
+// index
 .board-notice {
     margin: 10px 5px 20px;
     font-size: 20px;
@@ -72,18 +77,9 @@ p span {
     margin-top: 40px;
     border-radius: 5px;
 }
-.dropdown-menu.p-2 {
-    width: 300px;
-
-}
 .board-create {
     color: #162B4D;
     display: inline;
-    margin: 5px;
-}
-h2 {
-    color: #296F8E;
-    margin-left: 10px;
 }
 .col-10 {
     margin-top: 40px;
@@ -113,6 +109,18 @@ h2 {
 .answer {
    text-align: right;
    font-size: 12px;
+}
+.dropdown-item {
+    padding: 8px;
+}
+
+// show
+.dropdown-menu.p-2 {
+    width: 300px;
+}
+.board-inside-title {
+    color: #296F8E;
+    margin-left: 10px;
 }
 .starred-board {
     margin-top: 5px;

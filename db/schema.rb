@@ -107,6 +107,15 @@ ActiveRecord::Schema.define(version: 2020_01_13_165809) do
     t.index ["updated_at"], name: "index_sessions_on_updated_at"
   end
 
+  create_table "star_boards", force: :cascade do |t|
+    t.bigint "board_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["board_id"], name: "index_star_boards_on_board_id"
+    t.index ["user_id"], name: "index_star_boards_on_user_id"
+  end
+
   create_table "taggings", force: :cascade do |t|
     t.bigint "tag_id", null: false
     t.bigint "card_id", null: false
@@ -170,6 +179,8 @@ ActiveRecord::Schema.define(version: 2020_01_13_165809) do
   add_foreign_key "lists", "boards"
   add_foreign_key "search_users", "boards"
   add_foreign_key "search_users", "users"
+  add_foreign_key "star_boards", "boards"
+  add_foreign_key "star_boards", "users"
   add_foreign_key "taggings", "cards"
   add_foreign_key "taggings", "tags"
   add_foreign_key "user_boards", "boards"
