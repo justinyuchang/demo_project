@@ -14,13 +14,19 @@
             <%= image_tag "https://fakeimg.pl/38x38/?text=?", class: 'rounded-circle clickhand' %>
           <% end %>
         </span>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+        <div class="dropdown-menu dropdown-menu-right aria-labelledby="navbarDropdown">
+          <div class="username"></div>
+          <i class="fas fa-user ml-2 mt-1"></i>
           <span class="mx-2"><%= current_user.username %></span>
-          <span class="mx-2"><%= current_user.email %></span>
 
           <div class="dropdown-divider"></div>
+          <div class="useremail d-inline-flex">
+            <i class="fas fa-envelope ml-2 mt-1"></i>
+            <span class="mx-2"><%= current_user.email %></span>
+          </div> 
+          
+          <div class="dropdown-divider"></div>
           <%= link_to "使用者設定", edit_user_registration_path, class: 'dropdown-item btn-info' %>
-
           <div class="dropdown-divider"></div>
           <%= link_to destroy_user_session_path, method: "delete", data: {confirm: "要登出嘛"} , class: 'dropdown-item btn-info' do %>
             登出　<i class="fas fa-sign-out-alt"></i>

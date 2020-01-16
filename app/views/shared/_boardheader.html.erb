@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-sm navbar-light bg-light py-0 py-md-0">
 
-  <h2 class="mt-2"><%= @board.title %></h2>
+  <h2 class="board-inside-title mt-2"><%= @board.title %></h2>
 <!-- Board archived  -->
   <div class="nav-item active starred-board" data-controller="star" data-star-id="<%= @board.id %>">
     <a href="" class="btn btn-lg btn-bh" data-action="star#toggle">
