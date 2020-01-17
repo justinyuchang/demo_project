@@ -29,6 +29,10 @@ body{
 .clickhand{
   cursor: pointer;
 }
+.user_dropdown_menu_size{
+  width: 22rem;
+  word-wrap: break-word;
+}
 @media (min-width: 768px) {
   .dropdown_menu_size {
     width: 300px;  
@@ -36,4 +40,9 @@ body{
 }
 .dropdown_menu_add{
   text-align: center;
+}
+.scrollable_menu {
+  height: auto;
+  max-height: 200px;
+  overflow-x: hidden;
 }

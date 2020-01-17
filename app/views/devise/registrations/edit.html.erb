@@ -14,7 +14,7 @@
               <% if resource.avatar.attached? && resource.avatar.content_type.in?(%w(image/png image/jpg image/jpeg image/jfif)) %>
                 <%= image_tag resource.avatar.variant(resize_to_limit: [200, 200]) %>
               <% else %>
-                <%= image_tag "https://fakeimg.pl/200x200/?text=user Avatar" %>
+                <%= image_tag "user avatar default.png" %>
               <% end %>
             </div>
 
