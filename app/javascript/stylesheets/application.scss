@@ -80,6 +80,10 @@ p span {
     color: #162B4D;
     display: inline;
 }
+.overview{
+    overflow-x: auto;
+    overflow-y: hidden;
+}
 .col-10 {
     margin-top: 40px;
 }
