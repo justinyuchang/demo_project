@@ -48,6 +48,7 @@ $(document).ready(function () {
         $('[data-role ="comment-input"]').val("")
         $('[data-role ="card-focus-id"]').text(`${cardData.id}`)
         $('[data-role ="card-inner_title"]').text(`${cardData.title}`)
+        console.log(cardData)
         if (cardData.description == null) {
           $('[data-role ="card-description"]').val("");
         } else {
@@ -106,7 +107,7 @@ $(document).ready(function () {
   $('[data-role="card-update"]').click(function () {
     let cardId = $('[data-role ="card-focus-id"]').text()
     let cardTitle = $('[data-role ="card-inner_title"]').text()
-    let carDescription = $('[data-role ="card-description"]').text()
+    let carDescription = $('[data-role ="card-description"]').val()
     axios({
       method: 'patch',
       url: `/lists/cards/${cardId}`,
