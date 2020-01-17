@@ -6,8 +6,8 @@ class BoardsController < ApplicationController
   def index
     @boards = current_user.boards.all
     @board = Board.new()
-    @private_boards = current_user.boards.where(visibility: "Private")
-    @public_boards = current_user.boards.where(visibility: "Team")
+    @private_boards = current_user.boards.where(visibility: "私人")
+    @public_boards = current_user.boards.where(visibility: "團隊")
     @star_boards = current_user.starred_boards.all
     @searchuser = current_user.search_users.all
   end
