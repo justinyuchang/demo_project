@@ -1,15 +1,13 @@
 if(<%= @reply %>){
-  let inviteBoardCreate = `<div>
-    <ul class="team-boards">
-      <li>
-        <a class="card-body-public" href="/boards/<%= @board.id %>">
-          <span class="card-title">
-            <%= @board.title %>
-          </span>
-        </a>
-      </li>
-    </ul>
-  </div>`
+  let inviteBoardCreate = `<ul class="team-boards">
+                            <li>
+                              <a class="card-body-public" href="/boards/<%= @board.id %>">
+                                <span class="card-title">
+                                  <%= @board.title %>
+                                </span>
+                              </a>
+                            </li>
+                          </ul>`
   $("#team-boards-container").append(inviteBoardCreate)
   $("#invite_<%= @invitation.id %>").remove()
   console.log(inviteBoardCreate)
