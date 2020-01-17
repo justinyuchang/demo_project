@@ -34,6 +34,6 @@ const list_create = `<div>
       </div>
     </div>
 </div>
-                                        </div>` 
+                                        </div>`
 
 export default list_create;

@@ -3,10 +3,11 @@
     <div class="modal-content col pt-3 px-1 text-secondary">
       <div class="container">
         <div class="row">
-          <div class="col-12">
+          <div class="card-head col-12">
             <i class="far fa-window-maximize fa-lg"></i>
-            <h5 data-role="card-inner_title" id="card-title" class="d-inline-block mb-3 ml-1 font-weight-bold text-dark"
+            <h5 data-role="card-inner_title" id="card-title" class="d-inline-block mb-3 font-weight-bold text-dark"
               contenteditable="true"></h5>
+            <span class="picked-date"></span>
             <span data-role="card-focus-id" class="d-none"></span>
           </div>
         </div>
@@ -17,7 +18,6 @@
             <div class="card-detail">
               <div class="tag-list">
               </div>
-              <h5 class="assignee-header">MEMBER</h5>
               <div class="card-member">
               </div>
             </div>
@@ -26,10 +26,10 @@
             <div class="form-group my-2">
               <div class="description-title mb-1">
                 <i class="fas fa-align-left"></i>
-                <label class="desc-header ml-1" for="card-description">Description</label>
+                <label class="desc-header ml-1" for="card-description">內容</label>
               </div>
               <textarea data-role="card-description" id="card-description" class="form-control"
-                placeholder="Add more detail..."></textarea>
+                placeholder="加入更多細節..."></textarea>
             </div>
 
 
@@ -38,12 +38,12 @@
             <div class="form-group my-2">
               <div class="comment-title mt-3 mb-1">
                 <i class="far fa-comment-alt"></i>
-                <label class="comment-header ml-1" for="card-comment">Comment</label>
+                <label class="comment-header ml-1" for="card-comment">留言</label>
               </div>
               <textarea data-role="comment-input" id="card-comment" class="form-control"
-                placeholder="Write a comment..."></textarea>
+                placeholder="留下訊息..."></textarea>
               <button data-role="comment-send" id="comment-send" type="submit"
-                class="btn btn-sm btn-success mt-1">Send</button>
+                class="btn btn-sm btn-success mt-1">送出</button>
             </div>
             <!-- Comment area -->
             <div data-role="comment-area">
@@ -66,19 +66,19 @@
 
           <!-- Side Bar -->
           <div class="col-3">
-            <span class="add-to">ADD TO CARD</span>
+            <span class="add-to">加入至卡片</span>
 
             <!-- Assign member -->
             <div class="dropdown mr-1">
               <label class="assign btn btn-light my-1" id="dLabel" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">
-                <i class="fas fa-user-friends fa-sm"></i>
-                Members
+                <span><i class="fas fa-user-friends fa-sm"></i></span>
+                <span class="member-title">成員</span>
               </label>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+              <ul class="member-menu dropdown-menu" aria-labelledby="dropdownMenuOffset">
                 <% @board.users.each do |member| %>
                 <li class="member-list dropdown-item">
-                  <span data-memberId="<%= member.id %>"><%= member.email %></span>
+                  <span class="member" data-memberId="<%= member.id %>"><%= member.username %></span>
                 </li>
                 <% end %>
               </ul>
@@ -88,11 +88,11 @@
             <div class="dropdown mr-1">
               <label class="tag btn btn-light my-1" id="dLabel" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">
-                <i class="fas fa-tags fa-sm"></i>
-                Tag
+                <span><i class="fas fa-tags fa-sm"></i></span>
+                <span class="tag-title">標籤</span>
               </label>
               <form class="tag-menu dropdown-menu text-center" aria-labelledby="dropdownMenuOffset">
-                <h5 class="tag-header">TAGS</h5>
+                <h5 class="tag-header">建立新標籤</h5>
                 <li class="tag-item form-group">
                   <div contenteditable="true" class="yellow-tag"></div>
                   <i id="add-tag" class="far fa-plus-square fa-sm btn"></i>
@@ -109,17 +109,25 @@
             </div>
 
             <!-- Due date -->
-            <div class="datepicker btn btn-light my-1">
-              <i class="far fa-clock fa-sm"></i>
-              Due date
+            <div class="dropdown mr-1">
+              <label class="datepicker btn btn-light my-1" d="dLabel" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="flase">
+                <span><i class="far fa-clock fa-sm"></i></span>
+                <span class="date-title">截止日</span>
+              </label>
+              <form class="date-form dropdown-menu">
+                <input type="date" class="date-input form-control" placeholder="設定日期">
+              </form>
             </div>
+
+
           </div>
         </div>
       </div>
 
 
       <div class="form-group d-flex justify-content-end">
-        <button data-role="card-update" type="submit" class="card-update btn btn-primary">Save</button>
+        <button data-role="card-update" type="submit" class="card-update btn btn-primary">儲存</button>
       </div>
     </div>
   </div>
