@@ -31,7 +31,11 @@ body{
 }
 .user_dropdown_menu_size{
   width: 22rem;
-  word-wrap: break-word;
+  max-width: calc(100vw - 32px);
+  word-break: break-all;
+}
+.user_name_d{
+  word-break: break-all;
 }
 @media (min-width: 768px) {
   .dropdown_menu_size {

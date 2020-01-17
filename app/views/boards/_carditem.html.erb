@@ -1,6 +1,6 @@
 <div class="modal fade" id="Carditem" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
-    <div class="modal-content col pt-3 px-1 text-secondary">
+    <div class="modal-content col pt-3 px-1 text-secondary overview">
       <div class="container">
         <div class="row">
           <div class="card-head col-12">
@@ -71,8 +71,15 @@
               </label>
               <ul class="member-menu dropdown-menu" aria-labelledby="dropdownMenuOffset">
                 <% @board.users.each do |member| %>
-                <li class="member-list dropdown-item">
-                  <span class="member" data-memberId="<%= member.id %>"><%= member.username %></span>
+                <li class="member-list dropdown-item">                
+                  <span class="member" data-memberId="<%= member.id %>">
+                    <% if member.avatar.attached? %>
+                      <%= image_tag member.avatar.variant(resize_to_limit: [48, 48]),height:48, width:48, class: 'rounded-circle mr-2' %>
+                    <% else %>
+                      <%= image_tag "user avatar default.png", height:48, width:48, class: 'rounded-circle clickhand mr-2' %>
+                    <% end %>
+                    <%= member.username %>
+                  </span>
                 </li>
                 <% end %>
               </ul>
@@ -119,7 +126,7 @@
       </div>
 
       <div class="form-group d-flex justify-content-end">
-        <button data-role="card-update" type="submit" class="card-update btn btn-primary">儲存</button>
+        <button data-role="card-update" type="submit" class="card-update btn btn-info">儲存</button>
       </div>
     </div>
   </div>
