@@ -1,6 +1,6 @@
 <div class="modal fade" id="Carditem" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
-    <div class="modal-content col pt-3 px-1 text-secondary">
+    <div class="modal-content col pt-3 px-1 text-secondary overview">
       <div class="container">
         <div class="row">
           <div class="card-head col-12">
@@ -14,12 +14,12 @@
 
         <!-- Card assignee & tags -->
         <div class="row">
-          <div class="col-9 col-sm-9">
+          <div class="col-9">
             <div class="card-detail">
-              <div class="tag-list">
-              </div>
-              <div class="card-member">
-              </div>
+              <p class="p-tag-list">標籤:</p>
+              <div class="tag-list"></div>
+              <p class="p-card-member">成員:</p>
+              <div class="card-member"></div>
             </div>
 
             <!-- Card description -->
@@ -31,8 +31,6 @@
               <textarea data-role="card-description" id="card-description" class="form-control"
                 placeholder="加入更多細節..."></textarea>
             </div>
-
-
 
             <!-- Comment text -->
             <div class="form-group my-2">
@@ -60,12 +58,8 @@
             </div>
           </div>
 
-
-
-
-
           <!-- Side Bar -->
-          <div class="col col-sm-3">
+          <div class="col-3">
             <span class="add-to">加入至卡片</span>
 
             <!-- Assign member -->
@@ -77,14 +71,13 @@
               </label>
               <ul class="member-menu dropdown-menu" aria-labelledby="dropdownMenuOffset">
                 <% @board.users.each do |member| %>
-                <li class="member-list dropdown-item">
-                  <span class="member" data-memberId="
-                    <%= member.id %>">
-                      <% if member.avatar.attached? %>
-                        <%= image_tag member.avatar.variant(resize_to_limit: [48, 48]),height:48, width:48, class: 'rounded-circle mr-2' %>
-                      <% else %>
-                        <%= image_tag "user avatar default.png", height:48, width:48, class: 'rounded-circle mr-2' %>
-                      <% end %>
+                <li class="member-list dropdown-item">                
+                  <span class="member" data-memberId="<%= member.id %>">
+                    <% if member.avatar.attached? %>
+                      <%= image_tag member.avatar.variant(resize_to_limit: [48, 48]),height:48, width:48, class: 'rounded-circle mr-2' %>
+                    <% else %>
+                      <%= image_tag "user avatar default.png", height:48, width:48, class: 'rounded-circle clickhand mr-2' %>
+                    <% end %>
                     <%= member.username %>
                   </span>
                 </li>
@@ -119,7 +112,7 @@
             <!-- Due date -->
             <div class="dropdown mr-1">
               <label class="datepicker btn btn-light my-1" d="dLabel" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="flase">
+                aria-expanded="flase">
                 <span><i class="far fa-clock fa-sm"></i></span>
                 <span class="date-title">截止日</span>
               </label>
@@ -128,11 +121,9 @@
               </form>
             </div>
 
-
           </div>
         </div>
       </div>
-
 
       <div class="form-group d-flex justify-content-end">
         <button data-role="card-update" type="submit" class="card-update btn btn-info">儲存</button>
