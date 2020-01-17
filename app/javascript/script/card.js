@@ -201,6 +201,7 @@ $(document).ready(function () {
         if (response.status === 200) {
           let data = response.data
           data.forEach(function (tag) {
+            $(".p-tag-list").show()
             $('.tag-list').append(`<span style="background-color:${tagColor}" class="tags">${tag.name}</span>`)
           })
         }
