@@ -1,143 +1,143 @@
 import axios from 'helpers/axios';
+import 'flatpickr/dist/flatpickr.min.css'
+import flatpickr from 'flatpickr'
 
-$(document).ready( function() {
-// Card create 
-    $('[data-role="js-list"]').on("click",'[data-role="card-create-btn"]', function(event){
-      let board_url = location.pathname.split('/')
-      let board_id =  board_url[board_url.length - 1]
-      let list_id = $(this).parents('[data-role="card-wrapper"]')
-                           .siblings('[data-role= "list-item"]')
-                           .find('[data-role="list-id"]')
-                           .attr("val")
-      let card_text = $(this).parents('[data-role="card-btn"]')
-                             .siblings('[data-role="card-input"]')
-                             .find("textarea")
-                             .val()
-      axios({
-          method: 'post',
-          url: '/lists/cards',
-          data: {
-            board_id: board_id,
-            card: {
-              title: card_text,
-              list_id: list_id,
-            }
-          }
-        })
-        .then(function(response){
-          if (response.status == 200){
-            $("textarea").val(" ")
-          }
-        })
-    });
-// Get card 
-  $('[data-role="js-list"]').on("click", '[data-role="card-title"]', function(event){
+
+$(document).ready(function () {
+  // Card create 
+  $('[data-role="js-list"]').on("click", '[data-role="card-create-btn"]', function (event) {
+    let board_url = location.pathname.split('/')
+    let board_id = board_url[board_url.length - 1]
+    let list_id = $(this).parents('[data-role="card-wrapper"]')
+      .siblings('[data-role= "list-item"]')
+      .find('[data-role="list-id"]')
+      .attr("val")
+    let card_text = $(this).parents('[data-role="card-btn"]')
+      .siblings('[data-role="card-input"]')
+      .find("textarea")
+      .val()
+    axios({
+      method: 'post',
+      url: '/lists/cards',
+      data: {
+        board_id: board_id,
+        card: {
+          title: card_text,
+          list_id: list_id,
+        }
+      }
+    })
+      .then(function (response) {
+        if (response.status == 200) {
+          $("textarea").val(" ")
+        }
+      })
+  });
+  // Get card 
+  $('[data-role="js-list"]').on("click", '[data-role="card-title"]', function (event) {
     event.preventDefault();
     let cardId = $(this).siblings('[data-role="card-id"]').attr('val');
-    console.log(cardId)
     axios({
       method: 'get',
       url: `/lists/cards/${cardId}`,
     })
-    .then(function (response) {
-      console.log(response)
-      let carData = response.data
-      let cardItem = carData.card
-      let cardComment = carData.comments
-      let cardAssignee = carData.assignee
-      let cardTags = carData.taglist
-      console.log(cardTags)
+      .then(function (response) {
+        let cardData = response.data
+        let cardTags = cardData.tag
+        let cardComment = cardData.comments 
+        let cardAssignee = cardData.card_member
+        $('[data-role ="card-focus-id"]').text(`${cardData.id}`)
+        $('[data-role ="card-inner_title"]').text(`${cardData.title}`)
+        $('[data-role ="card-description"]').text(`${cardData.description}`)
+        if (cardData.due_date == null ){
+          $('.picked-date').text("")
+          $('.picked-date').hide()
+        }else {
+          let format_date = flatpickr.formatDate(new Date(cardData.due_date),"Y-m-d")
+          $('.picked-date').text(`${format_date}`)
+        }
 
-      $('[data-role ="card-focus-id"]').text(`${cardItem.id}`)
-      $('[data-role ="card-inner_title"]').text(`${cardItem.title}`)
-      $('[data-role ="card-description"]').text(`${cardItem.description}`)
-
-      let result = ''
-      cardComment.forEach(function(comment){
-        result = result + `<div class="comment-container">
+        let result = ''
+        cardComment.forEach(function (comment) {
+          result = result + `<div class="comment-container">
         <div class="comment-header">
-          <span class="author">${comment.user_id}</span>
+          <span class="author">${comment.author}</span>
           <span class="comment-time">${comment.created_at}</span>
         </div>  
         <div class="comment-body">
           <p>${comment.content}</p>
         </div>
       </div>`
-      })
-      $('[data-role ="comment-area"]').html(result);
+        })
+        $('[data-role ="comment-area"]').html(result);
 
-      let tagList = ''
-      cardTags.forEach(function(tag){
-        tagList = tagList + `<span style="background-color:${tag.color}" class="tags">${tag.name}</span>`
-      })
-      $('.tag-list').html(tagList);
+        let tagList = ''
+        cardTags.forEach(function (tag) {
+          tagList = tagList + `<span style="background-color:${tag.color}" class="tags">${tag.name}</span>`
+        })
+        $('.tag-list').html(tagList);
 
-      let cardMember = ''
-      cardAssignee.forEach(function(assignee){
-        cardMember = cardMember + `<span class="assignee">${assignee.email}</span>`
+        let cardMember = ''
+        cardAssignee.forEach(function (assignee) {
+          cardMember = cardMember + `<span class="assignee">${assignee}</span>`
+        })
+        $('.card-member').html(cardMember);
+        $('#Carditem').modal('show')
       })
-      $('.card-member').html(cardMember);
-      $('#Carditem').modal('show')
-    })
   });
-// Update card 
-  $('[data-role="card-update"]').click(function(){
-    console.log("Update card")
+  // Update card 
+  $('[data-role="card-update"]').click(function () {
     let cardId = $('[data-role ="card-focus-id"]').text()
     let cardTitle = $('[data-role ="card-inner_title"]').text()
     let carDescription = $('[data-role ="card-description"]').text()
-    // let card_due_date = $('[data-role ="card-due-date"]').val()
     axios({
       method: 'patch',
       url: `/lists/cards/${cardId}`,
       data: {
         title: cardTitle,
-        description: carDescription
-        // due_date: card_due_date,
+        description: carDescription,
       }
     })
-    .then(function(response){
-      let status = response.data.status
-      if(status == "ok"){
-        $('#Carditem').modal('hide')
-      }
-    })
+      .then(function (response) {
+        if (response.status === 200) {
+          $('#Carditem').modal('hide')
+        }
+      })
   });
-// Send Comment
-  $('[data-role ="comment-send"]').click(function(){
+  // Send Comment
+  $('[data-role ="comment-send"]').click(function () {
     let cardId = $('[data-role ="card-focus-id"]').text()
-    let cardComment = $(this).siblings("textarea").val();    
+    let cardComment = $(this).siblings("textarea").val();
     axios({
-      method: 'post', 
+      method: 'post',
       url: `/lists/cards/${cardId}/comments`,
       data: {
         content: cardComment
       }
     })
-    .then(function(response){
-      console.log(response)
-      if (response.status === 200) {
-        let data = response.data
-        $('[data-role ="comment-area"]').prepend(`
+      .then(function (response) {
+        if (response.status === 200) {
+          let data = response.data
+          $('[data-role ="comment-area"]').prepend(`
         <div class="comment-container">
           <div class="comment-header">
-            <span class="author">${data.user_id}</span>
+            <span class="author">${data.author}</span>
             <span class="comment-time">${data.created_at}</span>
           </div>
           <div class="comment-body">
             <p>${data.content}</p> 
           </div>
         </div>`)
-      } else {
-        throw 'Error'
-      }
-    })
-    .then(function(){
-      $('[data-role ="comment-input"]').val("")
-    })
+        } else {
+          throw 'Error'
+        }
+      })
+      .then(function () {
+        $('[data-role ="comment-input"]').val("")
+      })
   });
-// Card assignee
-  $('.member-list').on("click",  function(evt){
+  // Card assignee
+  $('.member-list').on("click", function (evt) {
     let cardId = $('[data-role ="card-focus-id"]').text()
     let userId = $(this).children('span').attr('data-memberid')
     axios({
@@ -147,50 +147,66 @@ $(document).ready( function() {
         userId: userId,
       }
     })
-    .then( function(response){
-      let data = response.data
-      if (data.status === "ok"){
-        console.log(data)
-        let assignMember = data.assignee
-        assignMember.map(function(assignee){
-          $('.card-member').append(`<span class="assignee">${assignee.email}</span>`)
-        })
-      } else {
+      .then(function (response) {
         let data = response.data
-        console.log(data)
-        $('.assignee').remove(`:contains(${data.email})`)
-      }
-    })
+        if (data.status === "ok") {
+          $('.card-member').show()
+          let assignMember = data.assignee
+            for(let memberTag = 0; memberTag < assignMember.length; memberTag ++){
+              $('.card-member').append(`<span class="assignee">${assignMember[memberTag].username}</span>`)
+            }
+
+        } else {
+          let data = response.data
+          $('.assignee').remove(`:contains(${data.username})`)
+          if ($('.assignee').length === 0){
+            $('.card-member').hide()
+          }
+        }
+      })
   })
-// Add tags  
-  $('.tag-item').on('click', '#add-tag', function(){
-    console.log('Add tags');
+  // Add tags  
+  $('.tag-item').on('click', '#add-tag', function () {
     let cardId = $('[data-role="card-focus-id"]').text()
     let cardTags = $(this).siblings("div").text()
     let tagColor = $(this).siblings("div").css('background-color')
-    console.log(tagColor)
     axios({
       method: 'put',
       url: `/lists/cards/${cardId}/tagging`,
       data: {
-        cardTags: cardTags, 
+        cardTags: cardTags,
         tagColor: tagColor
       }
     })
-    .then(function(response){
-      console.log(response)
-      if (response.status === 200){
-        let data = response.data
-        console.log(data)
-        data.forEach(function(tag){
-          $('.tag-list').append(`<span style="background-color:${tagColor}" class="tags">${tag.name}</span>`)
+      .then(function (response) {
+        if (response.status === 200) {
+          let data = response.data
+          data.forEach(function (tag) {
+            $('.tag-list').append(`<span style="background-color:${tagColor}" class="tags">${tag.name}</span>`)
+          })
+        }
+      })
+  })
+  // Shows datepickr   
+  flatpickr('.date-input', {
+    onChange: function (selectedDates, dateStr, instance) {
+      console.log(selectedDates, dateStr, instance)
+      let cardId = $('[data-role ="card-focus-id"]').text()
+      axios({
+        method: 'patch',
+        url: `/lists/cards/${cardId}`,
+        data: {
+          due_date: dateStr,
+        }
+      })
+        .then(function (response) {
+          let data = response.data
+          $('.picked-date').text(`${data.due_date}`)
+          $('.picked-date').show()
         })
-      } 
-    })
+    },
+    inline: true,
+    minDate: "today",
+    dateFormat: "Y-m-d",
   })
-// Date Picker
-  $('.datepicker').click(function(){
-    $(this).datepicker();
-  })
-/////////////////////////////////////////////
 })
