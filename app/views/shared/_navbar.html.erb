@@ -7,22 +7,25 @@
 
     <div class="dropdown mr-auto">
       <% if user_signed_in? %>
-        <span id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span id="navbar_user_Dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <% if current_user.avatar.attached? %>
-            <%= image_tag current_user.avatar.variant(resize_to_limit: [32, 32]),height:38, width:48, class: 'rounded-circle btn-sm navbar_btn_bgc clickhand' %>
+            <%= image_tag current_user.avatar.variant(resize_to_limit: [48, 48]),height:38, width:48, class: 'rounded-circle btn-sm navbar_btn_bgc clickhand' %>
           <% else %>
-            <%= image_tag "https://fakeimg.pl/38x38/?text=?", class: 'rounded-circle clickhand' %>
+            <%= image_tag "user avatar default.png", height:38, width:38, class: 'rounded-circle clickhand' %>
           <% end %>
         </span>
-        <div class="dropdown-menu dropdown-menu-right aria-labelledby="navbarDropdown">
+        <div class="dropdown-menu user_dropdown_menu_size dropdown-menu-right" aria-labelledby="navbar_user_Dropdown">
           <div class="username"></div>
-          <i class="fas fa-user ml-2 mt-1"></i>
-          <span class="mx-2"><%= current_user.username %></span>
-
+            <i class="fas fa-user ml-2 mt-1"></i>
+          <div class="mx-2 text_wrap">
+            <%= current_user.username %>
+          </div>
           <div class="dropdown-divider"></div>
           <div class="useremail d-inline-flex">
             <i class="fas fa-envelope ml-2 mt-1"></i>
-            <span class="mx-2"><%= current_user.email %></span>
+            <div class="mx-2 text_wrap">
+              <%= current_user.email %>
+            </div>
           </div> 
           
           <div class="dropdown-divider"></div>
