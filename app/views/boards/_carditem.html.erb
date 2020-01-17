@@ -14,7 +14,7 @@
 
         <!-- Card assignee & tags -->
         <div class="row">
-          <div class="col-9">
+          <div class="col-9 col-sm-9">
             <div class="card-detail">
               <div class="tag-list">
               </div>
@@ -65,7 +65,7 @@
 
 
           <!-- Side Bar -->
-          <div class="col-3">
+          <div class="col col-sm-3">
             <span class="add-to">加入至卡片</span>
 
             <!-- Assign member -->
@@ -78,7 +78,15 @@
               <ul class="member-menu dropdown-menu" aria-labelledby="dropdownMenuOffset">
                 <% @board.users.each do |member| %>
                 <li class="member-list dropdown-item">
-                  <span class="member" data-memberId="<%= member.id %>"><%= member.username %></span>
+                  <span class="member" data-memberId="
+                    <%= member.id %>">
+                      <% if member.avatar.attached? %>
+                        <%= image_tag member.avatar.variant(resize_to_limit: [48, 48]),height:48, width:48, class: 'rounded-circle mr-2' %>
+                      <% else %>
+                        <%= image_tag "user avatar default.png", height:48, width:48, class: 'rounded-circle mr-2' %>
+                      <% end %>
+                    <%= member.username %>
+                  </span>
                 </li>
                 <% end %>
               </ul>
@@ -127,7 +135,7 @@
 
 
       <div class="form-group d-flex justify-content-end">
-        <button data-role="card-update" type="submit" class="card-update btn btn-primary">儲存</button>
+        <button data-role="card-update" type="submit" class="card-update btn btn-info">儲存</button>
       </div>
     </div>
   </div>

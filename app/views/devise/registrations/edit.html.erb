@@ -8,7 +8,7 @@
 
       <div class="shadow p-3 mb-5 bg-white rounded">
 
-          <h2 class="d-flex justify-content-center">變更<%= resource.username.to_s.humanize %>資料</h2>
+          <h2 class="d-flex justify-content-center user_name_d">變更<%= resource.username.to_s.humanize %>資料</h2>
 
           <div class=" d-flex justify-content-center my-5">
               <% if resource.avatar.attached? && resource.avatar.content_type.in?(%w(image/png image/jpg image/jpeg image/jfif)) %>
