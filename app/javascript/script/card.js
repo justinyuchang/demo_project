@@ -45,11 +45,16 @@ $(document).ready(function () {
         let cardTags = cardData.tag
         let cardComment = cardData.comments
         let cardAssignee = cardData.card_member
+        $('[data-role ="comment-input"]').val("")
         $('[data-role ="card-focus-id"]').text(`${cardData.id}`)
         $('[data-role ="card-inner_title"]').text(`${cardData.title}`)
-        $('[data-role ="card-description"]').text(`${cardData.description}`)
+        if (cardData.description == null) {
+          $('[data-role ="card-description"]').val("");
+        } else {
+          $('[data-role ="card-description"]').text(`${cardData.description}`)
+        }
         if (cardData.due_date == null) {
-          $('.picked-date').text("")
+          $('.picked-date').val("")
           $('.picked-date').hide()
         } else {
           let format_date = flatpickr.formatDate(new Date(cardData.due_date), "Y-m-d")
@@ -58,7 +63,7 @@ $(document).ready(function () {
 
         let result = ''
         cardComment.forEach(function (comment) {
-          result = result + `<div class="comment-container">
+          result = `<div class="comment-container"> 
         <div class="comment-header">
           <span class="author">${comment.author}</span>
           <span class="comment-time">${comment.created_at}</span>
@@ -66,7 +71,7 @@ $(document).ready(function () {
         <div class="comment-body">
           <p>${comment.content}</p>
         </div>
-      </div>`
+      </div>` + result
         })
         $('[data-role ="comment-area"]').html(result);
 
