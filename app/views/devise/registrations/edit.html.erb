@@ -42,7 +42,7 @@
             <div class="form-group">
               <%= f.label :password, "新密碼", class: "display_in"%> 
               <div>
-                <i>(密碼不想更改請空白,密碼長度不能低於<%= @minimum_password_length %>位數)</i>
+                <i>(密碼長度不能低於<%= @minimum_password_length %>位數)</i>
               </div>
               <%= f.password_field :password, autocomplete: "new-password", class: 'form-control' %>
             </div>

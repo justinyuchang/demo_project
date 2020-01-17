@@ -4,5 +4,5 @@ const card_create = `<div>
                         <span data-role="card-title" class="card-title-span"></span>
                       </div>
                     </div>`
-                                            
+
 export default card_create;

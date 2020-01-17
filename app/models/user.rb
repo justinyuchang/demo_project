@@ -1,5 +1,4 @@
 class User < ApplicationRecord
-  # gem_include
   devise :database_authenticatable,
          :registerable,
          :recoverable, 

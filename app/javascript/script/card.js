@@ -2,7 +2,6 @@ import axios from 'helpers/axios';
 import 'flatpickr/dist/flatpickr.min.css'
 import flatpickr from 'flatpickr'
 
-
 $(document).ready(function () {
   // Card create 
   $('[data-role="js-list"]').on("click", '[data-role="card-create-btn"]', function (event) {
@@ -44,22 +43,27 @@ $(document).ready(function () {
       .then(function (response) {
         let cardData = response.data
         let cardTags = cardData.tag
-        let cardComment = cardData.comments 
+        let cardComment = cardData.comments
         let cardAssignee = cardData.card_member
+        $('[data-role ="comment-input"]').val("")
         $('[data-role ="card-focus-id"]').text(`${cardData.id}`)
         $('[data-role ="card-inner_title"]').text(`${cardData.title}`)
-        $('[data-role ="card-description"]').text(`${cardData.description}`)
-        if (cardData.due_date == null ){
-          $('.picked-date').text("")
+        if (cardData.description == null) {
+          $('[data-role ="card-description"]').val("");
+        } else {
+          $('[data-role ="card-description"]').text(`${cardData.description}`)
+        }
+        if (cardData.due_date == null) {
+          $('.picked-date').val("")
           $('.picked-date').hide()
-        }else {
-          let format_date = flatpickr.formatDate(new Date(cardData.due_date),"Y-m-d")
+        } else {
+          let format_date = flatpickr.formatDate(new Date(cardData.due_date), "Y-m-d")
           $('.picked-date').text(`${format_date}`)
         }
 
         let result = ''
         cardComment.forEach(function (comment) {
-          result = result + `<div class="comment-container">
+          result = `<div class="comment-container"> 
         <div class="comment-header">
           <span class="author">${comment.author}</span>
           <span class="comment-time">${comment.created_at}</span>
@@ -67,7 +71,7 @@ $(document).ready(function () {
         <div class="comment-body">
           <p>${comment.content}</p>
         </div>
-      </div>`
+      </div>` + result
         })
         $('[data-role ="comment-area"]').html(result);
 
@@ -152,14 +156,14 @@ $(document).ready(function () {
         if (data.status === "ok") {
           $('.card-member').show()
           let assignMember = data.assignee
-            for(let memberTag = 0; memberTag < assignMember.length; memberTag ++){
-              $('.card-member').append(`<span class="assignee">${assignMember[memberTag].username}</span>`)
-            }
+          for (let memberTag = 0; memberTag < assignMember.length; memberTag++) {
+            $('.card-member').append(`<span class="assignee">${assignMember[memberTag].username}</span>`)
+          }
 
         } else {
           let data = response.data
           $('.assignee').remove(`:contains(${data.username})`)
-          if ($('.assignee').length === 0){
+          if ($('.assignee').length === 0) {
             $('.card-member').hide()
           }
         }
@@ -190,7 +194,6 @@ $(document).ready(function () {
   // Shows datepickr   
   flatpickr('.date-input', {
     onChange: function (selectedDates, dateStr, instance) {
-      console.log(selectedDates, dateStr, instance)
       let cardId = $('[data-role ="card-focus-id"]').text()
       axios({
         method: 'patch',
