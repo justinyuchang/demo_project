@@ -13,4 +13,12 @@ class Card < ApplicationRecord
 
   has_many :taggings
   has_many :tags, through: :taggings
+
+  def get_card_hash
+    attributes.merge({
+      tag: tags, 
+      comments: comments.map { |comment| comment.comment_to_h },
+      card_member: users.pluck(:username)
+    })
+  end
 end
