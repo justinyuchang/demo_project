@@ -5,27 +5,25 @@
 @import "@fortawesome/fontawesome-free";
 @import "base.scss";
 .lists {
-    .btn{
-        width: 300px;
-        margin: 15px;
-    }
+  .btn{
+      width: 300px;
+      margin: 15px;
+  }
 }
 
-// user
-
-
+//
 // index
 .board-notice {
-    margin: 10px 5px 20px;
-    font-size: 20px;
-    color: #64A7BD;
+  margin: 10px 5px 20px;
+  font-size: 20px;
+  color: #64A7BD;
 }
 .board-title {
-    color: #162B4D;
-    line-height: 24px;
-    margin: 5px 0 0;
-    font-size: 16px;
-    font-weight: bold;
+  color: #162B4D;
+  line-height: 24px;
+  margin: 5px 0 0;
+  font-size: 16px;
+  font-weight: bold;
 }
 p span {
     margin: 5px;
@@ -303,4 +301,8 @@ p span {
 }
 .card-update{
     margin-right: 15px;
+}
+
+.card-detail p{
+  margin-bottom: 0;
 }

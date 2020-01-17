@@ -75,17 +75,30 @@ $(document).ready(function () {
         })
         $('[data-role ="comment-area"]').html(result);
 
-        let tagList = ''
-        cardTags.forEach(function (tag) {
-          tagList = tagList + `<span style="background-color:${tag.color}" class="tags">${tag.name}</span>`
-        })
-        $('.tag-list').html(tagList);
+        if (cardTags.length == 0) {
+          $(".p-tag-list").hide()
+          $('.tag-list').html("");
+        } else {
+          let tagList = ''
+          cardTags.forEach(function (tag) {
+            tagList = tagList + `<span style="background-color:${tag.color}" class="tags">${tag.name}</span>`
+          })
+          $(".p-tag-list").show()
+          $('.tag-list').html(tagList);
+        }
 
-        let cardMember = ''
-        cardAssignee.forEach(function (assignee) {
-          cardMember = cardMember + `<span class="assignee">${assignee}</span>`
-        })
-        $('.card-member').html(cardMember);
+        if (cardAssignee == 0) {
+          $(".p-card-member").hide()
+          $('.card-member').html("");
+        } else {
+          let cardMember = ''
+          cardAssignee.forEach(function (assignee) {
+            cardMember = cardMember + `<span class="assignee">${assignee}</span>`
+          })
+          $(".p-card-member").show()
+          $('.card-member').html(cardMember);
+        }
+
         $('#Carditem').modal('show')
       })
   });
@@ -157,6 +170,7 @@ $(document).ready(function () {
           $('.card-member').show()
           let assignMember = data.assignee
           for (let memberTag = 0; memberTag < assignMember.length; memberTag++) {
+            $(".p-card-member").show()
             $('.card-member').append(`<span class="assignee">${assignMember[memberTag].username}</span>`)
           }
 
@@ -164,6 +178,7 @@ $(document).ready(function () {
           let data = response.data
           $('.assignee').remove(`:contains(${data.username})`)
           if ($('.assignee').length === 0) {
+            $(".p-card-member").hide()
             $('.card-member').hide()
           }
         }
