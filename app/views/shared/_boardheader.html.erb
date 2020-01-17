@@ -45,7 +45,7 @@
                 <% if member.avatar.attached? %>
                   <%= image_tag member.avatar.variant(resize_to_limit: [48, 48]),height:48, width:48, class: 'rounded-circle mr-2' %>
                 <% else %>
-                  <%= image_tag "https://fakeimg.pl/48x48/?text=?", class: 'rounded-circle clickhand mr-2' %>
+                  <%= image_tag "user avatar default.png", height:48, width:48, class: 'rounded-circle clickhand mr-2' %>
                  <% end %>
                 <%= member.username %>
               </span>
@@ -66,10 +66,10 @@
               <p class=" d-inline-flex">寄送邀請訊息</p>
                 <%=  form_with scope: :search, url: searchuser_board_path do |f| %>
               <div class="form-group">
-                <%= f.text_field :email, class:"form-control", placeholder:"請輸入Email" %>
+                <%= f.text_field :email, class:"form-control", id: "navbarDropdown_email", placeholder:"請輸入Email" %>
               </div>
               <div class="form-group">
-                <%= f.text_area :message, class:"form-control", placeholder:"邀請內容..." %>
+                <%= f.text_area :message, class:"form-control", id: "navbarDropdown_message", placeholder:"邀請內容..." %>
               </div>
               <%= f.submit "送出邀請", class:"btn btn-sm btn-info" %>
               <% end %>

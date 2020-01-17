@@ -44,7 +44,7 @@
         <% end %>
       </div>
       
-      <div class="all-boards-container">
+      <div class="all-boards-container" id="team-boards-container">
         <p class="board-title">
           <span class="fas fa-users"></span>
           團隊看板
@@ -70,16 +70,16 @@
         </p>
       </div>
 
-      <div aria-live="polite" aria-atomic="true">
+      <div aria-live="polite" aria-atomic="true" class="invite-create-group">
       <% @searchuser.each do |invitation| %>
-      <div class="toast" role="alert" data-autohide="false" aria-live="assertive"   aria-atomic="true">
+      <div class="toast" id="invite_<%= invitation.id %>" role="alert" data-autohide="false" aria-live="assertive"   aria-atomic="true">
         <div class="toast-header">
           <div class="welcome far fa-paper-plane">
             <!-- <i class="far fa-paper-plane"></i> -->
             <div class="welcome-message">有人邀請您加入他的看板</div> 
           </div>
           <div class="invited-time">
-            <small><%= invitation.created_at %></small>
+            <small class="js-invited-small"><%= invitation.created_at %></small>
           </div> 
         </div>
         <div class="toast-body">
