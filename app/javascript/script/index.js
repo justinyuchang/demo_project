@@ -1,6 +1,5 @@
 import './application.js'
 
-
-$(document).ready(function(){
+$(document).ready(function () {
   $('.toast').toast('show');
 });

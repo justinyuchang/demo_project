@@ -19,5 +19,5 @@ const invite_create = `<div>
 </div>
 </div>
                       </div>`
-                                            
+
 export default invite_create;

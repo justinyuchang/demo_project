@@ -18,12 +18,6 @@ class BoardsController < ApplicationController
   def show
     @lists = @board.lists.sorted.includes(:cards)
     @list = List.new()
-    # @board_message = BoardMessage.new(board: @board)
-    # @board_messages = @board.board_messages.includes(:user)
-    # if @board.users.size > 1
-    #   @board.visibility = "Team"
-    #   @board.save
-    # end
   end
 
   def create

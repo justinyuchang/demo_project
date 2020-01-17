@@ -1,8 +1,6 @@
 class Board < ApplicationRecord
-  # validates
   validates :title, :visibility, presence: true
 
-  # ActiveRecord關聯設定
   has_many :lists
   has_many :cards
   
