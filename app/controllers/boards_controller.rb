@@ -88,7 +88,7 @@ class BoardsController < ApplicationController
     @board = Board.find(params[:board_id])
     if @reply == "true"
       @board.users << [current_user]
-      @board.update(visibility: "Team")
+      @board.update(visibility: "團隊")
       @invitation.destroy
     else
       @invitation.destroy
