@@ -6,8 +6,9 @@
 <% end %>
 
 <div class="container">
-  <div class="row">
-    <div class="col-10">
+
+  <div class="row justify-content-center overview">
+    <div class="col-8 col-sm-8">
       <div class="all-boards-container">
         <p class="board-title">
           <span class="fas fa-star"></span>
@@ -63,37 +64,42 @@
       </div>
     </div>
 
-    <div class="col-2">
-      <div class="create-board fab fa-flipboard">
-        <p class="board-create">
-          <a href="" class="btn new-board" data-toggle="modal" data-target="#createBoard">新增看板＋</a>
-        </p>
-      </div>
+<div class="col-4 col-sm-4">
+  <div class="create-board fab fa-flipboard d-flex justify-content-center">
+    <p class="board-create">
+      <a href="" class="btn new-board" data-toggle="modal" data-target="#createBoard">新增看板＋</a>
+    </p>
+  </div>
 
-      <div aria-live="polite" aria-atomic="true" class="invite-create-group">
-      <% @searchuser.each do |invitation| %>
-      <div class="toast" id="invite_<%= invitation.id %>" role="alert" data-autohide="false" aria-live="assertive"   aria-atomic="true">
-        <div class="toast-header">
-          <div class="welcome far fa-paper-plane">
-            <!-- <i class="far fa-paper-plane"></i> -->
-            <div class="welcome-message">有人邀請您加入他的看板</div> 
+  <%#.. 邀請協作.. %>
+    <div aria-live="polite" aria-atomic="true" class="invite-create-group mx-5">
+        <% @searchuser.each do |invitation| %>
+          <div class="toast" id="invite_<%= invitation.id %>" role="alert" data-autohide="false" aria-live="assertive"   aria-atomic="true">
+            <div class="toast-header">
+              <div class="welcome far fa-paper-plane">
+                 <!-- <i class="far fa-paper-plane"></i> -->
+                <div class="welcome-message">有人邀請您加入他的看板</div> 
+              </div>
+                <div class="invited-time">
+                  <small class="js-invited-small"><%= invitation.created_at %></small>
+                </div> 
+              <div class="toast-body">
+                <div class="invitation-message">
+                  <%= invitation.message %>
+                </div>
+                <div class="answer">
+                  <%= link_to "同意", agree_invite_boards_path(id: invitation.id, board_id:   invitation.board_id, agree: true), method: "put", remote: true, class:"btn btn-info btn-sm" %>
+                <%= link_to '拒絕', agree_invite_boards_path(id: invitation.id, board_id:   invitation.board_id, agree: false), method: "put", remote: true, class:"btn btn-dark btn-sm" %>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="invited-time">
-            <small class="js-invited-small"><%= invitation.created_at %></small>
-          </div> 
-        </div>
-        <div class="toast-body">
-          <div class="invitation-message">
-            <%= invitation.message %>
-          </div>
-          <div class="answer">
-            <%= link_to "同意", agree_invite_boards_path(id: invitation.id, board_id:   invitation.board_id, agree: true), method: "put", remote: true, class:"btn btn-info btn-sm" %>
-            <%= link_to '拒絕', agree_invite_boards_path(id: invitation.id, board_id:   invitation.board_id, agree: false), method: "put", remote: true, class:"btn btn-dark btn-sm" %>
-          </div>
-        </div>
+        <% end %>
       </div>
-      <% end %>
-      </div>
+<%# ....%>
+
+</div>
+
     </div>
   </div>
 </div>
