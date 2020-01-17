@@ -175,6 +175,7 @@ html,body{
           margin-left: 10px;
           font-size: 25px;
           color: rgb(112, 112, 112);
+          cursor: pointer;
         }
       }
     }
@@ -206,6 +207,6 @@ html,body{
   .cart-item :hover{
     background-color: hsla(0, 0%, 77%, 0.5);
   }
-  // .list-add-top :hover{
-  //   background-color: hsla(0, 0%, 77%, 0.5);
-  // }
+  .card-add-bot :hover{
+    background-color: hsla(0, 0%, 77%, 0.5);
+  }

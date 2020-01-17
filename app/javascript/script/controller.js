@@ -29,6 +29,8 @@ $(document).ready(function () {
       $(".card-input-controller").hide(function () {
         $(".card-create-drop").show()
         eventTarget.parents(".card-wrapper").find(".card-create-drop").hide()
+        $("#js-list-content-btn").show()
+        $(".list-add-form").hide()
       })
       eventTarget.parents(".card-wrapper").find(".card-input-controller").toggle()
       eventTarget.parents(".card-wrapper").find(".card-create-area").focus()
