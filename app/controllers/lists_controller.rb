@@ -25,34 +25,31 @@ class ListsController < ApplicationController
 
   def list_prev_nil
     @list.move_to_top
-    list_boardschannel(list_add_next)
+    list_add_front
   end
 
   def list_next_nil
     @list.move_to_bottom
-    list_boardschannel(list_add_prev)
+    list_add_after
   end
 
   def list_not_nil
     if ( @list.position < @prev_list.position )
       @list.insert_at(@prev_list.position)
-      list_boardschannel(list_add_prev)
     else
       @list.insert_at(@next_list.position)
-      list_boardschannel(list_add_prev)
     end
+    list_add_after
   end
 
-  def list_add_next
-    {list: @list.id, next_id: @next_list.id, status: "list_add_prev"}
+  def list_add_front
+    add_front = {list: @list.id, next_id: @next_list.id, status: "list_add_prev"}
+    BoardsChannel.broadcast_to(@board, add_front)
   end
 
-  def list_add_prev
-    {list: @list.id, prev_id: @prev_list.id, status: "list_add_next"}
-  end
-
-  def list_boardschannel(message)
-    BoardsChannel.broadcast_to(@board, message)
+  def list_add_after
+    add_after = {list: @list.id, prev_id: @prev_list.id, status: "list_add_next"}
+    BoardsChannel.broadcast_to(@board, add_after)
   end
 
   private 
