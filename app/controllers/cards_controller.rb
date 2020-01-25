@@ -4,14 +4,14 @@ class CardsController < ApplicationController
   before_action :load_card_items_params, only: [:update]
   
   def show
-    @card_item = Card.find(params[:id])
-    render json: @card_item.get_card_hash
+    card_item = Card.find(params[:id])
+    render json: card_item.get_card_hash
   end
 
   def create
-    @card = Card.create(card_params)
-    @card_channel = {id: @card.id, title: @card.title,list_id: @card.list_id ,status: "card_create"}
-    BoardsChannel.broadcast_to(@board, @card_channel)
+    card = Card.create(card_params)
+    card_channel = {id: card.id, title: card.title,list_id: card.list_id ,status: "card_create"}
+    BoardsChannel.broadcast_to(@board, card_channel)
     render json: {status: 200}
   end
   
@@ -19,20 +19,17 @@ class CardsController < ApplicationController
     @find_card.update(@card_item_params)
     render json: @card_item_params
   end 
-  
-  def destroy
-  end 
 
   def assign 
-    @card = Card.find(params[:id])
-    @user = User.find(params[:userId])
-    if @card.users.include?(@user) == false 
-      @card_member = @card.users.push(@user)
-      @assignee = @card.users.select{|user| user == @user}
-      render json: {status: "ok", assignee: @assignee} 
+    card = Card.find(params[:id])
+    user = User.find(params[:userId])
+    if card.users.include?(user) == false 
+      card_member = card.users.push(user)
+      assignee = card.users.select{|user| user == user}
+      render json: {status: "ok", assignee: assignee} 
     else
-      @card.users.delete(@user) if @user
-      render json: @user
+      @card.users.delete(user) if @user
+      render json: user
     end
   end 
 
