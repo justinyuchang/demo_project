@@ -12,26 +12,14 @@ class BoardsController < ApplicationController
     @searchuser = current_user.search_users.all
   end
 
-  def new
-  end
-
   def show
     @lists = @board.lists.sorted.includes(:cards)
     @list = List.new()
   end
 
   def create
-    # @board = current_user.boards.build(board_params)
-    @board = Board.new(board_params)
-    @board.users = [current_user] 
-
-    if @board.save
-      redirect_to board_path(@board.id), notice: "新增成功!"
-    else
-    end
-  end
-
-  def edit
+    board = current_user.boards.create(board_params)
+    redirect_to board_path(board.id), notice: "新增成功!" unless board.blank?
   end
 
   def update
@@ -63,16 +51,16 @@ class BoardsController < ApplicationController
   end
 
   def searchuser
-    @user = User.find_by(email: @email)
-    if @user.blank?
+    user = User.find_by(email: @email)
+    if user.blank?
       render :js => "alert('沒有這位使用者，請重新輸入')"
     else
-      if @board.user_ids.include?(@user.id) == false 
-        @invitation = SearchUser.create(user: @user,
+      if @board.user_ids.include?(user.id) == false 
+        invitation = SearchUser.create(user: user,
                                         board: @board,
                                         email: @email, 
                                         message: @message)
-       ActionCable.server.broadcast "notifications:#{@user.id}", @invitation
+       ActionCable.server.broadcast "notifications:#{user.id}", invitation
      else
       render :js => "alert('使用者已加入此表單，請重新輸入')"
      end
@@ -83,15 +71,15 @@ class BoardsController < ApplicationController
   end
 
   def agree_invite 
-    @invitation = SearchUser.find(params[:id])
-    @reply = params[:agree] 
-    @board = Board.find(params[:board_id])
-    if @reply == "true"
-      @board.users << [current_user]
-      @board.update(visibility: "團隊")
-      @invitation.destroy
+    invitation = SearchUser.find(params[:id])
+    reply = params[:agree] 
+    board = Board.find(params[:board_id])
+    if reply == "true"
+      board.users << [current_user]
+      board.update(visibility: "團隊")
+      invitation.destroy
     else
-      @invitation.destroy
+      invitation.destroy
     end
     respond_to do |form|
       form.js

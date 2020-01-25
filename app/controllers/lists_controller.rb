@@ -7,9 +7,9 @@ class ListsController < ApplicationController
   end 
   
   def create 
-    @list = @board.lists.create(list_params)
-    @list_channel = {id: @list.id,title: @list.title, status: "list_create"}
-    BoardsChannel.broadcast_to(@board, @list_channel)
+    list = @board.lists.create(list_params)
+    list_channel = {id: list.id,title: list.title, status: "list_create"}
+    BoardsChannel.broadcast_to(@board, list_channel)
     render json:{status: "ok"}
   end 
 
