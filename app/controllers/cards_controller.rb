@@ -96,15 +96,15 @@ class CardsController < ApplicationController
   end
 
   def tagging
-    @card = Card.find(params[:id])
-    @tags = params[:cardTags].split(', ')
-    @tag_color = params[:tagColor]
-    @selected_tag = @tags.select{ |tag| !@card.tags.exists?(name: tag) }
-    if @selected_tag.map { |tag| @card.tags.exists?(name: tag) == false }  
-      @append_tag = @selected_tag.map { |tag| @card.tags.create(name: tag, color: @tag_color)} 
+    card = Card.find(params[:id])
+    tags = params[:cardTags].split(', ')
+    tag_color = params[:tagColor]
+    selected_tag = tags.select{ |tag| !card.tags.exists?(name: tag) }
+    if selected_tag.map { |tag| card.tags.exists?(name: tag) == false }  
+      append_tag = selected_tag.map { |tag| card.tags.create(name: tag, color: tag_color)} 
     else 
     end 
-    render json: @append_tag
+    render json: append_tag
   end 
 
   private
