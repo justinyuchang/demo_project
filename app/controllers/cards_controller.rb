@@ -28,7 +28,7 @@ class CardsController < ApplicationController
       assignee = card.users.select{|user| user == user}
       render json: {status: "ok", assignee: assignee} 
     else
-      @card.users.delete(user) if @user
+      card.users.delete(user) if user
       render json: user
     end
   end 
