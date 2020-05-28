@@ -6,7 +6,7 @@ ruby '2.6.3'
 #專案用套件
 gem 'devise', '~> 4.2'
 gem 'figaro', '~> 1.1', '>= 1.1.1'
-gem 'kaminari', '~> 1.1', '>= 1.1.1'
+gem 'kaminari', '~> 1.2'
 gem 'omniauth', '~> 1.9'
 gem 'omniauth-google-oauth2', '~> 0.8.0'
 gem 'activerecord-session_store', '~> 1.1', '>= 1.1.3'
